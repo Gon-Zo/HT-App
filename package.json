@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-native": "0.62.2",
+    "react-native-svg": "^9.13.6"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -26,9 +27,10 @@
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.58.0",
-    "react-test-renderer": "16.11.0",
     "prettier": "^2.0.4",
-    "typescript": "^3.8.3"
+    "react-test-renderer": "16.11.0",
+    "typescript": "^3.8.3",
+    "victory-native": "^33.0.1"
   },
   "jest": {
     "preset": "react-native",
@@ -39,6 +41,12 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!victory|react-native-svg|react-native)"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }

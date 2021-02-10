@@ -25,6 +25,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import AreaChartExample from './TestChart';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -69,6 +70,7 @@ const App = () => {
               </Text>
             </View>
             <LearnMoreLinks />
+            <AreaChartExample/>
           </View>
         </ScrollView>
       </SafeAreaView>
