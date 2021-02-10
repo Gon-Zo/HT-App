@@ -2,12 +2,14 @@ import React from 'react';
 import Count from "../src/module/count/count";
 
 import {createStore , applyMiddleware} from 'redux';
-// @ts-ignore
 import {Provider} from 'react-redux';
 import rootReducer from './shared/reducer';
+// // @ts-ignore
+// import logger from 'redux-logger';
+import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
 
 /*
 https://www.naver.com/include/newsstand/press_info_data.json
