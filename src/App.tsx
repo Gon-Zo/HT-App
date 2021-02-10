@@ -1,5 +1,5 @@
 import React from 'react';
-import Count from "./module/count";
+import Count from "../src/module/count/count";
 
 import {createStore , applyMiddleware} from 'redux';
 // @ts-ignore
