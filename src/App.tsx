@@ -17,10 +17,6 @@ const defaultMiddlewares = [
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...defaultMiddlewares)));
 
-/*
-https://www.naver.com/include/newsstand/press_info_data.json
- */
-
 const App = () => {
     return (
         <Provider store={store}>
