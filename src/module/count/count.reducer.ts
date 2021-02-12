@@ -45,12 +45,12 @@ export default (state = initialState, action: any): CountState => {
                 },
             };
         case SUCCESS(ACTION_TYPES.FETCH_NAVER_DATA):
-            console.log('success');
+            console.log('success', action.payload.data);
             return {
                 ...state,
             };
         case FAILURE(ACTION_TYPES.FETCH_NAVER_DATA):
-            console.log('failure');
+            console.log('failure' , action.payload.data);
             return {
                 ...state,
             };
