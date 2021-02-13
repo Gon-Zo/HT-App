@@ -18,3 +18,5 @@ const defaultMiddlewares = [
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...defaultMiddlewares)));
 
 export default store;
+
+
