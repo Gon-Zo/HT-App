@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {Button, SafeAreaView, StatusBar, Text, View} from "react-native";
 import {IRootState} from "../../shared/reducer";
 import {axiosTest, downByNumber, initByNumber, upByNumber} from './count.reducer';
+import {getByTest} from '../price/price.reducer';
 
 const Count = () => {
 
@@ -27,7 +28,7 @@ const Count = () => {
     }
 
     const _initByNumber = () => {
-        dispatch(axiosTest());
+        dispatch(getByTest());
         dispatch(initByNumber());
     };
 
