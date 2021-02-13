@@ -1,4 +1,5 @@
 {
   "name": "Ht_Project",
-  "displayName": "부동산"
+  "displayName": "부동산",
+  "version" : "0.0.1-snapshot"
 }
