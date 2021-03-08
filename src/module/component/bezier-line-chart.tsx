@@ -2,11 +2,8 @@ import React from 'react';
 import {Dimensions, Text} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 
-const HTBezierLineChart = () => {
-    return (
-        <React.Fragment>
-            <LineChart
-                data={{
+/*
+                    {
                     labels: ['January', 'February', 'March', 'April'],
                     datasets: [
                         {
@@ -20,7 +17,14 @@ const HTBezierLineChart = () => {
                             ],
                         },
                     ],
-                }}
+                }
+ */
+
+const HTBezierLineChart = (props: any) => {
+    return (
+        <React.Fragment>
+            <LineChart
+                data={props.data}
                 width={Dimensions.get('window').width - 16}
                 height={220}
                 yAxisLabel={'Rs'}

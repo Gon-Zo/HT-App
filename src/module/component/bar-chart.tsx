@@ -2,20 +2,24 @@ import {Dimensions, Text} from 'react-native';
 import {BarChart} from 'react-native-chart-kit';
 import React from 'react';
 
-const HTBarChart = () => {
+/*
+{
+    labels:
+        ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [
+    {
+        data: [20, 45, 28, 80, 99, 43],
+    },
+],
+}
+*/
+
+const HTBarChart = (props : any) => {
     return (
         <React.Fragment>
             {/*// @ts-ignore*/}
             <BarChart
-                data={{
-                    labels:
-                        ['January', 'February', 'March', 'April', 'May', 'June'],
-                    datasets: [
-                        {
-                            data: [20, 45, 28, 80, 99, 43],
-                        },
-                    ],
-                }}
+                data={props.data}
                 width={Dimensions.get('window').width - 16}
                 height={220}
                 yAxisLabel={'Rs'}
