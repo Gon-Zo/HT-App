@@ -2,11 +2,8 @@ import {Dimensions, Text} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
 import React from 'react';
 
-const HTPieChart = () => {
-    return (
-        <React.Fragment>
-            <PieChart
-                data={[
+/*
+                    [
                     {
                         name: 'Seoul',
                         population: 21500000,
@@ -35,7 +32,14 @@ const HTPieChart = () => {
                         legendFontColor: '#7F7F7F',
                         legendFontSize: 15,
                     },
-                ]}
+                ]
+ */
+
+const HTPieChart = (props: any) => {
+    return (
+        <React.Fragment>
+            <PieChart
+                data={props.data}
                 width={Dimensions.get('window').width - 16}
                 height={220}
                 chartConfig={{

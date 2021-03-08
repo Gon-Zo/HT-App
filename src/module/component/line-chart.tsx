@@ -2,11 +2,8 @@ import {LineChart} from 'react-native-chart-kit';
 import {Dimensions} from 'react-native';
 import React from 'react';
 
-const HTLineChart = (props: any) => {
-    return (
-        <React.Fragment>
-            <LineChart
-                data={{
+/*
+                    {
                     labels:
                         ['January', 'February', 'March', 'April', 'May', 'June'],
                     datasets: [
@@ -15,7 +12,14 @@ const HTLineChart = (props: any) => {
                             strokeWidth: 2,
                         },
                     ],
-                }}
+                }
+ */
+
+const HTLineChart = (props: any) => {
+    return (
+        <React.Fragment>
+            <LineChart
+                data={props.data}
                 width={Dimensions.get('window').width - 16}
                 height={220}
                 chartConfig={{
