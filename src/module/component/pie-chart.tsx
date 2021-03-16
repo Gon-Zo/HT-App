@@ -7,7 +7,7 @@ const HTPieChart = (props: any) => {
         <React.Fragment>
             <PieChart
                 data={props.data}
-                width={Dimensions.get('window').width - 16}
+                width={Dimensions.get('window').width}
                 height={220}
                 chartConfig={{
                     backgroundColor: '#1cc910',
