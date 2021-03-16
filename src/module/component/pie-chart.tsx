@@ -1,4 +1,4 @@
-import {Dimensions, Text} from 'react-native';
+import {Dimensions} from 'react-native';
 import {PieChart} from 'react-native-chart-kit';
 import React from 'react';
 
