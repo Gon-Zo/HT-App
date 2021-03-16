@@ -32,7 +32,7 @@ const MainBarChart = (props: any) => {
 
     return (
         <React.Fragment>
-            <TextBox text={"지역별 바차트"}/>
+            <TextBox text={'지역별 바차트'}/>
             {
                 isPayload && <HTBarChart data={payload}/>
             }
