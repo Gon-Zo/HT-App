@@ -2,9 +2,6 @@ import {Dimensions, Text} from 'react-native';
 import {ProgressChart} from 'react-native-chart-kit';
 import React from 'react';
 
-/*
-[0.4, 0.6, 0.8]
- */
 const HTProgressChart = (props: any) => {
     return (
         <React.Fragment>
