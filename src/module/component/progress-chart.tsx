@@ -31,4 +31,4 @@ const HTProgressChart = (props: any) => {
     );
 };
 
-export default HTProgressChart
+export default HTProgressChart;
