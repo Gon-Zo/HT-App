@@ -2,7 +2,10 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import ScrollerLayout from '../../shared/assest/scroller-layout';
 
-const Search = (props: any) => {
+interface ISearchProps {
+}
+
+const Search = (props: ISearchProps) => {
 
     return (
         <ScrollerLayout>

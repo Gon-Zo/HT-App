@@ -1,16 +1,24 @@
 import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 
-const ScrollerLayout = (props: any) => {
+interface IScrollerLayout {
+    children: React.ReactNode
+}
+
+const ScrollerLayout = (props: IScrollerLayout) => {
+
+    const {children} = props
+
     return (
         <SafeAreaView style={{flex: 1}}>
             <ScrollView>
                 <View style={styles.container}>
-                    {props.children}
+                    {children}
                 </View>
             </ScrollView>
         </SafeAreaView>
     );
+
 };
 
 
