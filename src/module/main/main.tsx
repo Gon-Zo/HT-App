@@ -4,23 +4,27 @@ import MainPieChart from './main-pie-chart';
 import MainProgressChart from './main-progress-chart';
 import ScrollerLayout from '../../shared/assest/scroller-layout';
 import {Button} from 'react-native';
+import {NavigationProp} from '@react-navigation/native';
 
-// @ts-ignore
-const Main = (props: any) => {
+interface IMainProps {
+    navigation: NavigationProp<any>
+}
+
+const Main = (props: IMainProps) => {
+
+    const {navigation} = props;
 
     return (
         <ScrollerLayout>
-
             <Button
                 title="Go to Details"
-                onPress={() => props.navigation.navigate('Search')}
-            />
-
+                onPress={() => navigation.navigate('Search')}/>
             <MainBarChart/>
             <MainPieChart/>
             <MainProgressChart/>
         </ScrollerLayout>
     );
+
 };
 
 export default React.memo(Main);
