@@ -2,18 +2,24 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {actuatedNormalize} from '../../shared/utils/font-utils';
 
-const TextBox = (props: any) => {
+interface ITextBox {
+    text: string
+}
 
-    const [text, setText] = useState('');
+const TextBox = (props: ITextBox) => {
+
+    const {text} = props;
+
+    const [title, setTitle] = useState('');
 
     useEffect(() => {
-        const _text = props.text;
-        setText(_text);
-    }, [props.text]);
+        const _title = text;
+        setTitle(_title);
+    }, [text]);
 
     return (
         <View style={styles.textContainer}>
-            <Text style={styles.textBox}>{text}</Text>
+            <Text style={styles.textBox}>{title}</Text>
         </View>
     );
 };
