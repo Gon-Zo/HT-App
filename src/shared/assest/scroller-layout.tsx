@@ -1,7 +1,7 @@
 import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 
-const Layout = (props: any) => {
+const ScrollerLayout = (props: any) => {
     return (
         <SafeAreaView style={{flex: 1}}>
             <ScrollView>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Layout
+export default ScrollerLayout
