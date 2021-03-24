@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Main from '../../module/main/main';
 import 'react-native-gesture-handler';
 import Search from '../../module/search/search';
-import {IHtNavigation, IRightButton} from './ht-navigation.interface';
+import {IHtNavigation} from './ht-navigation.interface';
 
 const Stack = createStackNavigator();
 
