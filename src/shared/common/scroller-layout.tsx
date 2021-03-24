@@ -1,9 +1,6 @@
 import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-
-interface IScrollerLayout {
-    children: React.ReactNode
-}
+import {IScrollerLayout} from './interface/common.interface';
 
 const ScrollerLayout = (props: IScrollerLayout) => {
 
@@ -20,7 +17,6 @@ const ScrollerLayout = (props: IScrollerLayout) => {
     );
 
 };
-
 
 const styles = StyleSheet.create({
     container: {

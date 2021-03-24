@@ -10,7 +10,6 @@ interface IMainProps {
     navigation: NavigationProp<any>
 }
 
-
 const Main = (props: IMainProps) => {
 
     const {navigation} = props;
@@ -19,7 +18,7 @@ const Main = (props: IMainProps) => {
 
     useEffect(() => {
         navigation.setOptions(MAIN_HEADER_OPTIONS(_goToSearchView));
-    }, [navigation]);
+    }, []);
 
     return (
         <ScrollerLayout>
