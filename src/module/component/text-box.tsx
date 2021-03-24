@@ -1,10 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {actuatedNormalize} from '../../shared/utils/font-utils';
-
-interface ITextBox {
-    text: string
-}
+import {ITextBox} from './interface/component.interface';
 
 const TextBox = (props: ITextBox) => {
 
@@ -22,6 +19,7 @@ const TextBox = (props: ITextBox) => {
             <Text style={styles.textBox}>{title}</Text>
         </View>
     );
+
 };
 
 const styles = StyleSheet.create({

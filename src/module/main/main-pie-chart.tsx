@@ -1,5 +1,5 @@
 import React from 'react';
-import HTPieChart from '../component/pie-chart';
+import HTPieChart from '../component/chart/pie-chart';
 import TextBox from '../component/text-box';
 
 const temp = [

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import HTBarChart from '../component/bar-chart';
+import HTBarChart from '../component/chart/bar-chart';
 import TextBox from '../component/text-box';
 
 const temp = [
