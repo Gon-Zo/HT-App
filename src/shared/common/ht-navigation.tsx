@@ -1,37 +1,27 @@
 import React from 'react';
-import {NavigationContainer, NavigationProp} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Main from '../../module/main/main';
-import 'react-native-gesture-handler';
-import Search from '../../module/search/search';
-import {IHtNavigation} from './ht-navigation.interface';
+import {IHtNavigation} from './interface/common.interface';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import StackMainNavigation from './stack-main-navigation';
+import {Text, View} from 'react-native';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const SettingsScreen = () =>{
+    return (
+        <View>
+            <Text>TEST</Text>
+        </View>
+    )
+}
 
 const HtNavigation = (props: IHtNavigation) => {
-
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Main"
-                    component={Main}
-                />
-                <Stack.Screen name="Search"
-                              component={Search}
-                              options={
-                                  {
-                                      headerStyle: {
-                                          backgroundColor: '#f4511e',
-                                      },
-                                      headerTintColor: '#fff',
-                                      headerTitle : "검색",
-                                      headerTitleStyle: {
-                                          fontWeight: 'bold',
-                                      },
-                                  }
-                              }/>
-            </Stack.Navigator>
+            <Tab.Navigator>
+                <Tab.Screen name="Home" component={StackMainNavigation} />
+                <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
         </NavigationContainer>
     );
 };

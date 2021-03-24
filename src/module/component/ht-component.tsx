@@ -1,6 +1,6 @@
 import {Button, Image} from 'react-native';
-import {IRightButton} from '../../shared/common/ht-navigation.interface';
 import React from 'react';
+import {IRightButton} from '../../shared/common/interface/common.interface';
 
 export const LogoImage = () => {
     return (
