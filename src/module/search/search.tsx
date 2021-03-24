@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import ScrollerLayout from '../../shared/assest/scroller-layout';
+import ScrollerLayout from '../../shared/common/scroller-layout';
 
 interface ISearchProps {
 }
