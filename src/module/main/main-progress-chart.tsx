@@ -1,6 +1,6 @@
 import React from 'react';
 import TextBox from '../component/text-box';
-import HTProgressChart from '../component/progress-chart';
+import HTProgressChart from '../component/chart/progress-chart';
 
 const temp = [0.4, 0.6, 0.8];
 

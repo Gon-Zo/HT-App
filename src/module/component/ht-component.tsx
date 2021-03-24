@@ -18,7 +18,6 @@ export const RightButton = (props: IRightButton) => {
 
 };
 
-
 export const MAIN_HEADER_OPTIONS = (onPress: Function) => {
     return {
         headerTitleAlign: 'left',
