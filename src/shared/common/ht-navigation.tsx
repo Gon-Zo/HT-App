@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import StackMainNavigation from './stack-main-navigation';
 import {Text, View} from 'react-native';
 import ScrollerLayout from './scroller-layout';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,10 +23,34 @@ const HtNavigation = (props: IHtNavigation) => {
     return (
         <NavigationContainer>
             <Tab.Navigator>
-                <Tab.Screen name="홈" component={StackMainNavigation}/>
-                <Tab.Screen name="지역" component={TempView}/>
-                <Tab.Screen name="내주변" component={TempView}/>
-                <Tab.Screen name="My 세팅" component={TempView}/>
+                <Tab.Screen name="홈"
+                            component={StackMainNavigation}
+                            options={{
+                                tabBarIcon: ({focused, color, size}) =>
+                                    <Icon name="home" size={size} color={color}/>,
+                            }}
+                />
+                <Tab.Screen name="지역"
+                            component={TempView}
+                            options={{
+                                tabBarIcon: ({focused, color, size}) =>
+                                    <Icon name="map-marker" size={size} color={color}/>,
+                            }}
+                />
+                <Tab.Screen name="내주변"
+                            component={TempView}
+                            options={{
+                                tabBarIcon: ({focused, color, size}) =>
+                                    <Icon name="map-o" size={size} color={color}/>,
+                            }}
+                />
+                <Tab.Screen name="My 세팅"
+                            component={TempView}
+                            options={{
+                                tabBarIcon: ({focused, color, size}) =>
+                                    <Icon name="ellipsis-h" size={size} color={color}/>,
+                            }}
+                />
             </Tab.Navigator>
         </NavigationContainer>
     );
