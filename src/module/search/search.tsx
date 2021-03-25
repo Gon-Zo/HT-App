@@ -3,9 +3,10 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {NavigationProp} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ParamListBase} from '@react-navigation/routers';
 
 interface ISearchProps {
-    navigation: NavigationProp<any>
+    navigation: NavigationProp<ParamListBase>
 }
 
 const Search = (props: ISearchProps) => {
