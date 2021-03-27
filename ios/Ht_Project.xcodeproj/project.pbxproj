@@ -122,6 +122,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		078C3A48260CCAFD00DEF92C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* Ht_Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +168,6 @@
 				127915F0613F962E31C51698 /* Pods-Ht_Project-tvOSTests.debug.xcconfig */,
 				53C9C57BF1138066D8F19BF3 /* Pods-Ht_Project-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +181,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				078C3A48260CCAFD00DEF92C /* Fonts */,
 				13B07FAE1A68108700A75B9A /* Ht_Project */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* Ht_ProjectTests */,

@@ -3,11 +3,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Main from '../../module/main/main';
 import 'react-native-gesture-handler';
 import Search from '../../module/search/search';
-import {IHtNavigation} from './interface/common.interface';
+import {IStackMainNavigation} from './main.interface';
 
 const Stack = createStackNavigator();
 
-const StackMainNavigation = (props: IHtNavigation) => {
+const StackMainNavigation = (props: IStackMainNavigation) => {
     return (
         <Stack.Navigator>
             <Stack.Screen

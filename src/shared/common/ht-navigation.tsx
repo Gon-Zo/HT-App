@@ -1,11 +1,10 @@
 import React from 'react';
-import {IHtNavigation} from './interface/common.interface';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import StackMainNavigation from './stack-main-navigation';
 import {Text, View} from 'react-native';
 import ScrollerLayout from './scroller-layout';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import StackMainNavigation from '../../module/main/stack-main-navigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +18,7 @@ const TempView = () => {
     );
 };
 
-const HtNavigation = (props: IHtNavigation) => {
+const HtNavigation = (props: any) => {
     return (
         <NavigationContainer>
             <Tab.Navigator>
