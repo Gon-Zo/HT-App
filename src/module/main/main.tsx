@@ -11,14 +11,14 @@ const Main = (props: IMainProps) => {
 
     const {navigation} = props;
 
-    const _goToSearchView = () => navigation.navigate('Search');
+    const goToSearchView = () => navigation.navigate('Search');
 
     useEffect(() => {
         navigation.setOptions(
             {
                 headerTitleAlign: 'left',
                 headerTitle: ((props: any) => (<LogoImage/>)),
-                headerRight: ((props: any) => <RightButton onPress={_goToSearchView}/>),
+                headerRight: ((props: any) => <RightButton onPress={goToSearchView}/>),
             },
         );
     }, []);
