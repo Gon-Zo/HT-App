@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, View} from 'react-native';
 import ScrollerLayout from './scroller-layout';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import StackMainNavigation from '../../module/main/stack-main-navigation';
+import MainNavigation from '../../module/main/stack-main-navigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ const HtNavigation = (props: any) => {
         <NavigationContainer>
             <Tab.Navigator>
                 <Tab.Screen name="홈"
-                            component={StackMainNavigation}
+                            component={MainNavigation}
                             options={{
                                 tabBarIcon: ({focused, color, size}) =>
                                     <Icon name="home" size={size} color={color}/>,
