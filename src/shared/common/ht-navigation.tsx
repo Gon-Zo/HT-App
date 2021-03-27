@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, View} from 'react-native';
 import ScrollerLayout from './scroller-layout';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import MainNavigation from '../../module/main/stack-main-navigation';
+import MainNavigation from '../../module/main/main-navigation';
 import AreaNavigation from '../../module/area/area-navigation';
 
 const Tab = createBottomTabNavigator();
