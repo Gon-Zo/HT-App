@@ -40,7 +40,7 @@ const Search = (props: ISearchProps) => {
                             navigation.dangerouslyGetParent().setOptions({
                                 tabBarVisible: true,
                             });
-                            navigation.navigate('Main');
+                            navigation.goBack();
                         }}>
                         <Icon name={'angle-left'} size={30} color={'#000'}/>
                     </TouchableOpacity>
