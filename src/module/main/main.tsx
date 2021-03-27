@@ -3,8 +3,9 @@ import MainBarChart from './main-bar-chart';
 import MainPieChart from './main-pie-chart';
 import MainProgressChart from './main-progress-chart';
 import ScrollerLayout from '../../shared/common/scroller-layout';
-import {MAIN_HEADER_OPTIONS} from '../component/ht-component';
 import {IMainProps} from './main.interface';
+import {Button, Image} from 'react-native';
+import {IRightButton} from '../../shared/common/interface/common.interface';
 
 const Main = (props: IMainProps) => {
 
@@ -13,7 +14,13 @@ const Main = (props: IMainProps) => {
     const _goToSearchView = () => navigation.navigate('Search');
 
     useEffect(() => {
-        navigation.setOptions(MAIN_HEADER_OPTIONS(_goToSearchView));
+        navigation.setOptions(
+            {
+                headerTitleAlign: 'left',
+                headerTitle: ((props: any) => (<LogoImage/>)),
+                headerRight: ((props: any) => <RightButton onPress={_goToSearchView}/>),
+            },
+        );
     }, []);
 
     return (
@@ -24,6 +31,21 @@ const Main = (props: IMainProps) => {
         </ScrollerLayout>
     );
 
+};
+
+const LogoImage = () => {
+    return (
+        <Image
+            source={require('../../assest/img/logo.jpg')}
+            style={{width: 50, height: 50}}/>
+    );
+};
+
+const RightButton = (props: IRightButton) => {
+    const {onPress} = props;
+    return (
+        <Button title={'test'} onPress={() => onPress()}/>
+    );
 };
 
 export default React.memo(Main);
