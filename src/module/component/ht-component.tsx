@@ -15,13 +15,19 @@ export const RightButton = (props: IRightButton) => {
     return (
         <Button title={'test'} onPress={() => onPress()}/>
     );
-
 };
 
-export const MAIN_HEADER_OPTIONS = (onPress: Function) => {
+export const MAIN_HEADER_OPTIONS: any = (onPress: Function) => {
     return {
         headerTitleAlign: 'left',
         headerTitle: ((props: any) => (<LogoImage/>)),
         headerRight: ((props: any) => <RightButton onPress={onPress}/>),
     };
 };
+
+
+export const AREA_HEADER_OPTIONS : any = () =>{
+    return {
+
+    }
+}
