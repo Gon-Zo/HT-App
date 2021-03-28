@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
-import ScrollerLayout from '../../shared/common/scroller-layout';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, SafeAreaView} from 'react-native';
 import {IAreaProps} from './area.interface';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import AreaList from './area-list';
 
 const Area = (props: IAreaProps) => {
 
     const {navigation} = props;
 
-    const goToSearchView = () => navigation.navigate("Search")
+    const goToSearchView = () => navigation.navigate('Search');
 
     useEffect(() => {
         navigation.setOptions({
@@ -24,12 +24,11 @@ const Area = (props: IAreaProps) => {
     }, []);
 
     return (
-        <ScrollerLayout>
-            <View>
-                <Text>Area</Text>
-            </View>
-        </ScrollerLayout>
+        <SafeAreaView style={{flex: 1}}>
+            <AreaList/>
+        </SafeAreaView>
     );
 };
+
 
 export default Area;
