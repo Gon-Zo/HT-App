@@ -1,31 +1,37 @@
-import React, {useState} from 'react';
-import {FlatList, StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
-import {actuatedNormalize} from '../../shared/utils/font-utils';
+import React, {useEffect, useState} from 'react';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {IAreaData} from './area.interface';
+import {AreaItem, SubAreaItem} from './area-item';
+import {AREA_DATA} from './area-data';
 
 const AreaList = () => {
 
-    const areaData = [
-        {key: '서울', active: false},
-        {key: '경기', active: false},
-        {key: '인천', active: false},
-        {key: '강원', active: false},
-        {key: '제주', active: false},
-        {key: '대전', active: false},
-        {key: '충북', active: false},
-        {key: '충남/세종', active: false},
-        {key: '부산', active: false},
-        {key: '울산', active: false},
-        {key: '경남', active: false},
-        {key: '대구', active: false},
-    ];
+    const [items, setItems] = useState<IAreaData[]>([]);
+
+    const onSwitch = (index: number) => {
+        const _items = items.map((payload) => {
+            const _payload = JSON.parse(JSON.stringify(payload));
+            _payload.active = false;
+            return _payload;
+        });
+        _items[index].active = !_items[index].active;
+        setItems(_items);
+    };
+
+    useEffect(() => {
+        setItems(JSON.parse(JSON.stringify(AREA_DATA)));
+    }, []);
 
     return (
         <View style={styles.container}>
             <View style={styles.areaList}>
                 <FlatList
-                    data={areaData}
+                    data={items}
                     keyExtractor={({key}, index) => index.toString()}
-                    renderItem={({item}) => <AreaItem item={item}/>}
+                    renderItem={({item, index}) =>
+                        <AreaItem index={index}
+                                  item={item}
+                                  onSwitch={onSwitch}/>}
                 />
             </View>
             <View style={{flex: 0.7, backgroundColor: 'orange'}}>
@@ -44,50 +50,14 @@ const AreaList = () => {
                         {key: '경남'},
                         {key: '대구'},
                     ]}
-                    renderItem={({item}) => <Text> {item.key} </Text>}
-                />
+                    renderItem={({item, index}) =>
+                        <SubAreaItem item={item}
+                                     index={index}/>
+                    }/>
             </View>
 
 
         </View>
-    );
-
-};
-
-interface IAreaItemProps {
-    item: any
-}
-
-const AreaItem = (props: IAreaItemProps) => {
-
-    const item = props.item;
-
-    const [status, setStatus] = useState<boolean>(false);
-
-    const [itemStyle, setItemStyle] = useState<StyleProp<ViewStyle>[]>([styles.item]);
-
-    const onSwitch = () => {
-        setStatus(!status);
-        console.log('>>>>>>>>>>> status', status);
-        if (status == false) {
-            const tempItemStyle = itemStyle;
-            const activeStyle: StyleProp<ViewStyle> = {backgroundColor: '#f00'};
-            tempItemStyle.push(activeStyle);
-            setItemStyle(tempItemStyle);
-        } else {
-            const tempItemStyle = itemStyle;
-            tempItemStyle.pop();
-            setItemStyle(tempItemStyle);
-        }
-    };
-
-    return (
-        <TouchableOpacity
-            activeOpacity={1}
-            style={itemStyle}
-            onPress={onSwitch}>
-            <Text style={styles.itemText}>{item.key}</Text>
-        </TouchableOpacity>
     );
 
 };
@@ -100,24 +70,6 @@ const styles = StyleSheet.create({
     areaList: {
         flex: 0.3,
         backgroundColor: '#ECEFF1',
-    },
-    item: {
-        margin: 3,
-        marginRight: 0,
-        marginLeft: 0,
-        height: 50,
-        backgroundColor: '#F5F5F5',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderTopColor: '#f00',
-        borderBottomColor: '#f00',
-    },
-    itemText: {
-        fontSize: actuatedNormalize(13),
-        fontWeight: '600',
     },
 });
 
