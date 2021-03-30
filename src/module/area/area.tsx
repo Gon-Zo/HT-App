@@ -13,6 +13,9 @@ const Area = (props: IAreaProps) => {
     useEffect(() => {
         navigation.setOptions({
             headerTitle: '지역',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
             headerRight: ((props: any) =>
                     <TouchableOpacity activeOpacity={1}
                                       style={{right: 10}}
