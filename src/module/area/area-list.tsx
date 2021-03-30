@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {IAreaData} from './area.interface';
+import {IAreaData, IAreaSubData} from './area.interface';
 import {AreaItem, SubAreaItem} from './area-item';
 import {AREA_DATA} from './area-data';
 
@@ -8,18 +8,25 @@ const AreaList = () => {
 
     const [items, setItems] = useState<IAreaData[]>([]);
 
+    const [subItems, setSubItems] = useState<IAreaSubData[]>([]);
+
     const onSwitch = (index: number) => {
         const _items = items.map((payload) => {
             const _payload = JSON.parse(JSON.stringify(payload));
             _payload.active = false;
             return _payload;
         });
-        _items[index].active = !_items[index].active;
+        const _selectItem = _items[index];
+        _selectItem.active = !_selectItem.active;
         setItems(_items);
+        setSubItems(_selectItem.list);
     };
 
     useEffect(() => {
+        // @ts-ignore
+        const _subItems = AREA_DATA.find((payload: IAreaData) => payload.active).list;
         setItems(JSON.parse(JSON.stringify(AREA_DATA)));
+        setSubItems(_subItems);
     }, []);
 
     return (
@@ -34,22 +41,9 @@ const AreaList = () => {
                                   onSwitch={onSwitch}/>}
                 />
             </View>
-            <View style={{flex: 0.7, backgroundColor: 'orange'}}>
+            <View style={styles.subList}>
                 <FlatList
-                    data={[
-                        {key: '서울'},
-                        {key: '경기'},
-                        {key: '인천'},
-                        {key: '강원'},
-                        {key: '제주'},
-                        {key: '대전'},
-                        {key: '충북'},
-                        {key: '충남/세종'},
-                        {key: '부산'},
-                        {key: '울산'},
-                        {key: '경남'},
-                        {key: '대구'},
-                    ]}
+                    data={subItems}
                     renderItem={({item, index}) =>
                         <SubAreaItem item={item}
                                      index={index}/>
@@ -70,6 +64,10 @@ const styles = StyleSheet.create({
     areaList: {
         flex: 0.3,
         backgroundColor: '#ECEFF1',
+    },
+    subList: {
+        flex: 0.7,
+        backgroundColor: '#fff',
     },
 });
 

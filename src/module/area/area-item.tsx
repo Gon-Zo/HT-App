@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import {actuatedNormalize} from '../../shared/utils/font-utils';
 import {IAreaItemProps, IAreaSubItemProps} from './area.interface';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import {moderateScale, verticalScale} from 'react-native-size-matters' ;
 
 export const AreaItem = (props: IAreaItemProps) => {
 
@@ -18,52 +20,21 @@ export const AreaItem = (props: IAreaItemProps) => {
     useEffect(() => {
 
         const _itemStyle = JSON.parse(JSON.stringify(itemStyle));
+
         const _textStyle = JSON.parse(JSON.stringify(textStyle));
 
         _itemStyle.push(styles.item);
         _textStyle.push(styles.itemText);
 
-        setItemStyle(_itemStyle);
-        setTextStyle(_textStyle);
-
-    }, []);
-
-    useEffect(() => {
-
-        const _itemStyle = JSON.parse(JSON.stringify(itemStyle));
-        const _textStyle = JSON.parse(JSON.stringify(textStyle));
-
-        const itemStyleSize = itemStyle.length;
-
-        if (active == true && itemStyleSize != 0) {
-
-            _itemStyle.push(styles.item);
-            _textStyle.push(styles.itemText);
-
+        if (active == true) {
             _itemStyle.push({backgroundColor: '#fff'});
             _textStyle.push({color: '#000'});
-
-        } else if (active == true && itemStyleSize == 0) {
-
-            _itemStyle.push(styles.item);
-            _textStyle.push(styles.itemText);
-
-        } else if (active == false && itemStyleSize != 0) {
-            _itemStyle.pop();
-            _textStyle.pop();
-        } else {
-            _itemStyle.push(styles.item);
-            _textStyle.push(styles.itemText);
         }
-
-        console.log('>>>>> item', key);
-
-        console.log('>>>>>>>> style', _itemStyle);
 
         setItemStyle(_itemStyle);
         setTextStyle(_textStyle);
 
-    }, [props.item.active]);
+    }, [active]);
 
     return (
         <TouchableOpacity
@@ -77,11 +48,15 @@ export const AreaItem = (props: IAreaItemProps) => {
 };
 
 export const SubAreaItem = (props: IAreaSubItemProps) => {
+
     const {key} = props.item;
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            activeOpacity={1}
+            style={styles.subItem}>
             <Text>{key}</Text>
+            <FontAwesome5Icon name={'chevron-right'} style={styles.subIcon}/>
         </TouchableOpacity>
     );
 };
@@ -91,7 +66,7 @@ const styles = StyleSheet.create({
         margin: 1.5,
         marginRight: 0,
         marginLeft: 0,
-        height: 50,
+        height: verticalScale(40),
         backgroundColor: '#F5F5F5',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -101,5 +76,17 @@ const styles = StyleSheet.create({
         fontSize: actuatedNormalize(13),
         color: '#868585',
         fontWeight: '600',
+    },
+    subItem: {
+        height: verticalScale(40),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        left: moderateScale(30),
+        borderBottomColor: '#868585',
+        borderBottomWidth: .3,
+    },
+    subIcon: {
+        right: moderateScale(50),
     },
 });
