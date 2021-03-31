@@ -22,6 +22,7 @@ const TempView = () => {
 const HtNavigation = (props: any) => {
     return (
         <NavigationContainer>
+            {/*<Tab.Navigator tabBar={(props: BottomTabBarProps<any>) => <MyTabBar {...props}/>}>*/}
             <Tab.Navigator>
                 <Tab.Screen name="홈"
                             component={MainNavigation}
