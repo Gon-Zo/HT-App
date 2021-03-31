@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {IAreaData, IAreaSubData} from './area.interface';
+import {IAreaData, IAreaProps, IAreaSubData} from './area.interface';
 import {AreaItem, SubAreaItem} from './area-item';
 import {AREA_DATA} from './area-data';
+import {setByDetailTitle} from './area.reducer';
+import {useDispatch} from 'react-redux';
 
-const AreaList = () => {
+const AreaList = (props: IAreaProps) => {
+
+    const dispatch = useDispatch();
+
+    const {navigation} = props;
 
     const [items, setItems] = useState<IAreaData[]>([]);
 
@@ -20,6 +26,11 @@ const AreaList = () => {
         _selectItem.active = !_selectItem.active;
         setItems(_items);
         setSubItems(_selectItem.list);
+    };
+
+    const onPress = (key: string) => {
+        dispatch(setByDetailTitle(key));
+        navigation.navigate("AreaDetail")
     };
 
     useEffect(() => {
@@ -46,7 +57,9 @@ const AreaList = () => {
                     data={subItems}
                     renderItem={({item, index}) =>
                         <SubAreaItem item={item}
-                                     index={index}/>
+                                     index={index}
+                                     onPress={onPress}
+                        />
                     }/>
             </View>
 
