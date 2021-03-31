@@ -1,14 +1,12 @@
 import React, {useEffect} from 'react';
-import {TouchableOpacity, SafeAreaView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {IAreaProps} from './area.interface';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import AreaList from './area-list';
+import {SearchButton} from '../component/ht-button';
 
 const Area = (props: IAreaProps) => {
 
     const {navigation} = props;
-
-    const goToSearchView = () => navigation.navigate('Search');
 
     useEffect(() => {
         navigation.setOptions({
@@ -16,21 +14,16 @@ const Area = (props: IAreaProps) => {
             headerTitleStyle: {
                 fontWeight: 'bold',
             },
-            headerRight: ((props: any) =>
-                    <TouchableOpacity activeOpacity={1}
-                                      style={{right: 10}}
-                                      onPress={goToSearchView}>
-                        <FontAwesome5Icon name={'search'} size={20}/>
-                    </TouchableOpacity>
-            ),
+            headerRight: (() => <SearchButton navigation={navigation}/>),
         });
     }, []);
 
     return (
         <SafeAreaView style={{flex: 1}}>
-            <AreaList/>
+            <AreaList navigation={navigation}/>
         </SafeAreaView>
     );
+
 };
 
 

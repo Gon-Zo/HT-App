@@ -12,7 +12,8 @@ export interface IAreaItemProps {
 
 export interface IAreaSubItemProps {
     item: IAreaSubData,
-    index: number
+    index: number,
+    onPress: Function
 }
 
 export interface IAreaData {

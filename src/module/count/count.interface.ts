@@ -1,7 +1,7 @@
 export interface LocalData {
     load: boolean,
     error: any,
-    data: number
+    data: any
 }
 
 export type ILocalData = LocalData
