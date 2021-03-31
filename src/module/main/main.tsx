@@ -6,12 +6,13 @@ import ScrollerLayout from '../../shared/common/scroller-layout';
 import {IMainProps} from './main.interface';
 import {Button, Image} from 'react-native';
 import {IRightButton} from '../../shared/common/interface/common.interface';
+import {NAV} from '../../shared/utils/navigation-utils';
 
 const Main = (props: IMainProps) => {
 
     const {navigation} = props;
 
-    const goToSearchView = () => navigation.navigate('Search');
+    const goToSearchView = () => navigation.navigate(NAV.SEARCH);
 
     useEffect(() => {
         navigation.setOptions(

@@ -3,6 +3,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ParamListBase} from '@react-navigation/routers';
+import {NAV} from '../../shared/utils/navigation-utils';
 
 export interface ISearchButtonProps {
     navigation: NavigationProp<any>
@@ -16,7 +17,7 @@ export const SearchButton = (props: ISearchButtonProps) => {
 
     const {navigation} = props;
 
-    const goToSearchView = () => navigation.navigate('Search');
+    const goToSearchView = () => navigation.navigate(NAV.SEARCH);
 
     return (
         <TouchableOpacity activeOpacity={1}
