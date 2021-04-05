@@ -6,6 +6,7 @@ import ScrollerLayout from './scroller-layout';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MainNavigation from '../../module/main/main-navigation';
 import AreaNavigation from '../../module/area/area-navigation';
+import AroundNavigation from '../../module/around/around-navigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ const HtNavigation = (props: any) => {
                             }}
                 />
                 <Tab.Screen name="내주변"
-                            component={TempView}
+                            component={AroundNavigation}
                             options={{
                                 tabBarIcon: ({focused, color, size}) =>
                                     <Icon name="map-o" size={size} color={color}/>,
