@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, shallowEqual} from 'react-redux';
 import {IRootState} from '../../shared/reducer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {IAreaProps} from './area.interface';
@@ -24,7 +24,7 @@ const AreaDetail = (props: IAreaProps) => {
         return {
             detailTitle: state.area.detailTitle,
         };
-    });
+    }, shallowEqual);
 
     const {load, error, data} = detailTitle;
 
@@ -49,7 +49,7 @@ const AreaDetail = (props: IAreaProps) => {
                     activeOpacity={1}
                     onPress={() => navigation.navigate('Area')}>
                     <Icon name="map-marker" size={20}/>
-                    <Text style={{paddingLeft: 5 , fontWeight : "bold" , fontSize : 15}}>
+                    <Text style={{paddingLeft: 5, fontWeight: 'bold', fontSize: 15}}>
                         {data}
                     </Text>
                 </TouchableOpacity>
@@ -67,7 +67,6 @@ const AreaDetail = (props: IAreaProps) => {
                     <Text style={{paddingLeft: 5}}>03.30 ~ 03.21</Text>
                 </View>
             </View>
-
 
         </ScrollerLayout>
     );
