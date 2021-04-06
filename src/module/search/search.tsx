@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {NavigationProp} from '@react-navigation/native';
 import {ParamListBase} from '@react-navigation/routers';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import {BackButton} from '../component/ht-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface ISearchProps {
     navigation: NavigationProp<ParamListBase>
@@ -38,16 +38,29 @@ const Search = (props: ISearchProps) => {
         <ScrollerLayout>
             <View style={{
                 width: 400,
-                backgroundColor: '#f00',
+                backgroundColor: 'rgba( 0 , 0, 0, 0.05)',
+                flexDirection: 'row',
                 justifyContent: 'space-between',
+                padding: 5,
+                paddingLeft: 15,
+                margin: 10,
+                borderWidth : 1,
+                borderColor : 'rgba( 0 , 0, 0, 0.15)',
+                borderRadius : 5
             }}>
                 <TextInput
                     style={styles.input}
                     value={text}
                     onChangeText={setText}
-                    placeholder="useless placeholder"
+                    placeholder="지역명으로 찾아보세요"
                 />
-                <FontAwesome5Icon name={'search'} size={24}/>
+                <TouchableOpacity style={{
+                    flex: 0.15,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <Icon name={'ios-search'} size={25}/>
+                </TouchableOpacity>
             </View>
         </ScrollerLayout>
     );
@@ -56,10 +69,9 @@ const Search = (props: ISearchProps) => {
 
 const styles = StyleSheet.create({
     input: {
+        flex: 1,
         height: 40,
-        margin: 12,
-        borderWidth: 1,
-        width: 300,
+        fontSize: 16,
     },
 });
 
