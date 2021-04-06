@@ -1,7 +1,16 @@
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp , RouteProp} from '@react-navigation/native';
+
+export type StackParamList = {
+    Area: undefined,
+    Search: undefined,
+    AreaDetail: {
+        key : string
+    }
+}
 
 export interface IAreaProps {
-    navigation: NavigationProp<any>
+    navigation: NavigationProp<StackParamList, 'AreaDetail'>
+    route: RouteProp<StackParamList, 'AreaDetail'>
 }
 
 export interface IAreaItemProps {

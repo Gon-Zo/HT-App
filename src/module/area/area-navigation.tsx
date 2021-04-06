@@ -3,16 +3,16 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Area from './area';
 import Search from '../search/search';
 import AreaDetail from './area-detail';
-import {NAV} from '../../shared/utils/navigation-utils';
+import {StackParamList} from './area.interface';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<StackParamList>();
 
 const AreaNavigation = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name={NAV.AREA} component={Area}/>
-            <Stack.Screen name={NAV.SEARCH} component={Search}/>
-            <Stack.Screen name={NAV.AREA_DETAIL} component={AreaDetail}/>
+            <Stack.Screen name={"Area"} component={Area}/>
+            <Stack.Screen name={"Search"} component={Search}/>
+            <Stack.Screen name={"AreaDetail"} component={AreaDetail}/>
         </Stack.Navigator>
     );
 };

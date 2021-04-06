@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {IAreaData, IAreaProps, IAreaSubData} from './area.interface';
 import {AreaItem, SubAreaItem} from './area-item';
 import {AREA_DATA} from './area-data';
-import {setByDetailTitle} from './area.reducer';
-import {useDispatch} from 'react-redux';
 
 const AreaList = (props: IAreaProps) => {
-
-    const dispatch = useDispatch();
 
     const {navigation} = props;
 
@@ -29,8 +25,7 @@ const AreaList = (props: IAreaProps) => {
     };
 
     const onPress = (key: string) => {
-        dispatch(setByDetailTitle(key));
-        navigation.navigate("AreaDetail")
+        navigation.navigate('AreaDetail', {key: key});
     };
 
     useEffect(() => {

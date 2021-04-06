@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {useSelector, shallowEqual} from 'react-redux';
-import {IRootState} from '../../shared/reducer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {IAreaProps} from './area.interface';
 import {AreaDetailButton, BackButton} from '../component/ht-button';
 
 const AreaDetail = (props: IAreaProps) => {
 
-    const {navigation} = props;
+    const {navigation, route} = props;
+
+    const {key} = route.params;
 
     useEffect(() => {
         navigation.setOptions(
@@ -20,17 +20,8 @@ const AreaDetail = (props: IAreaProps) => {
             });
     }, []);
 
-    const {detailTitle} = useSelector((state: IRootState) => {
-        return {
-            detailTitle: state.area.detailTitle,
-        };
-    }, shallowEqual);
-
-    const {load, error, data} = detailTitle;
-
     return (
         <ScrollerLayout>
-
             <View style={{
                 flexDirection: 'row',
                 flex: 1,
@@ -50,7 +41,7 @@ const AreaDetail = (props: IAreaProps) => {
                     onPress={() => navigation.navigate('Area')}>
                     <Icon name="map-marker" size={20}/>
                     <Text style={{paddingLeft: 5, fontWeight: 'bold', fontSize: 15}}>
-                        {data}
+                        {key}
                     </Text>
                 </TouchableOpacity>
                 <View style={{
