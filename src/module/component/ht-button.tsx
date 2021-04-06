@@ -23,7 +23,7 @@ export const SearchButton = (props: ISearchButtonProps) => {
         <TouchableOpacity activeOpacity={1}
                           style={styles.searchBtn}
                           onPress={goToSearchView}>
-            <Icon name={'md-search-outline'}
+            <Icon name={'search-outline'}
                   size={25}/>
         </TouchableOpacity>
     );
