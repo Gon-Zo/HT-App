@@ -1,14 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import ScrollerLayout from '../../shared/common/scroller-layout';
-import {NavigationProp} from '@react-navigation/native';
-import {ParamListBase} from '@react-navigation/routers';
 import {BackButton} from '../component/ht-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-interface ISearchProps {
-    navigation: NavigationProp<ParamListBase>
-}
+import {ISearchProps} from './search.interface';
 
 const Search = (props: ISearchProps) => {
 
