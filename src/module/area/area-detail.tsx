@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {IAreaDetailProps, IAreaProps} from './area.interface';
+import {IAreaDetailProps} from './area.interface';
 import {AreaDetailButton, BackButton} from '../component/ht-button';
 
 const AreaDetail = (props: IAreaDetailProps) => {
