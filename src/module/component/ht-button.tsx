@@ -1,17 +1,46 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {NavigationProp} from '@react-navigation/native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {ParamListBase} from '@react-navigation/routers';
 import {NAV} from '../../shared/utils/navigation-utils';
+import {IBackButtonProps, ISearchButtonProps} from './interface/component.interface';
 
-export interface ISearchButtonProps {
-    navigation: NavigationProp<any>
-}
+export const SearchIconButton = (props: ISearchButtonProps) => {
 
-interface IBackButtonProps {
-    navigation: NavigationProp<ParamListBase>
-}
+    const {navigation} = props;
+
+    const goToSearchView = () => navigation.navigate(NAV.SEARCH);
+
+    return (
+        <TouchableOpacity
+            style={{
+                backgroundColor: 'rgba( 0 , 0, 0, 0.05)',
+                width: 250,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: 10,
+                marginRight: 20,
+                borderWidth: 1,
+                borderColor: 'rgba( 0 , 0, 0, 0.15)',
+                borderRadius: 5,
+            }}
+            onPress={goToSearchView}>
+            <Text style={{
+                color: 'rgba( 0 , 0, 0, 0.5)',
+            }}>어디에 집을 구하지?</Text>
+            <Icon name={'search-outline'} size={23}/>
+        </TouchableOpacity>
+    );
+};
+
+
+export const LogoImage = () => {
+    return (
+        <Image
+            source={require('../../assest/img/logo.jpg')}
+            style={{width: 50, height: 50}}/>
+    );
+};
 
 export const SearchButton = (props: ISearchButtonProps) => {
 
@@ -23,8 +52,7 @@ export const SearchButton = (props: ISearchButtonProps) => {
         <TouchableOpacity activeOpacity={1}
                           style={styles.searchBtn}
                           onPress={goToSearchView}>
-            <Icon name={'search-outline'}
-                  size={25}/>
+            <Icon name={'search-outline'} size={25}/>
         </TouchableOpacity>
     );
 };
@@ -55,7 +83,9 @@ export const AreaDetailButton = (props: ISearchButtonProps) => {
 };
 
 export const BackButton = (props: IBackButtonProps) => {
+
     const {navigation} = props;
+
     return (
         <TouchableOpacity
             activeOpacity={1}
@@ -70,6 +100,7 @@ export const BackButton = (props: IBackButtonProps) => {
             <Icon name={'chevron-back'} size={30} color={'#000'}/>
         </TouchableOpacity>
     );
+
 };
 
 const styles = StyleSheet.create({

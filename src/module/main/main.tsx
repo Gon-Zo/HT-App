@@ -4,9 +4,8 @@ import MainPieChart from './main-pie-chart';
 import MainProgressChart from './main-progress-chart';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {IMainProps} from './main.interface';
-import {Button, Image, View} from 'react-native';
-import {IRightButton} from '../../shared/common/interface/common.interface';
 import {NAV} from '../../shared/utils/navigation-utils';
+import {LogoImage, SearchIconButton} from '../component/ht-button';
 
 const Main = (props: IMainProps) => {
 
@@ -19,7 +18,10 @@ const Main = (props: IMainProps) => {
             {
                 headerTitleAlign: 'left',
                 headerTitle: ((props: any) => (<LogoImage/>)),
-                headerRight: ((props: any) => <RightButton onPress={goToSearchView}/>),
+                headerRight: ((props: any) => <SearchIconButton navigation={navigation}/>),
+                headerStyle : {
+                    height: 110
+                }
             },
         );
     }, []);
@@ -32,21 +34,6 @@ const Main = (props: IMainProps) => {
         </ScrollerLayout>
     );
 
-};
-
-const LogoImage = () => {
-    return (
-        <Image
-            source={require('../../assest/img/logo.jpg')}
-            style={{width: 50, height: 50}}/>
-    );
-};
-
-const RightButton = (props: IRightButton) => {
-    const {onPress} = props;
-    return (
-        <Button title={'test'} onPress={() => onPress()}/>
-    );
 };
 
 export default React.memo(Main);
