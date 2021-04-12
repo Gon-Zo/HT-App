@@ -1,7 +1,4 @@
 import React, {useEffect} from 'react';
-import MainBarChart from './main-bar-chart';
-import MainPieChart from './main-pie-chart';
-import MainProgressChart from './main-progress-chart';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {IMainProps} from './main.interface';
 import {LogoImage, SearchIconButton} from '../component/ht-button';
@@ -25,9 +22,6 @@ const Main = (props: IMainProps) => {
 
     return (
         <ScrollerLayout>
-            <MainBarChart/>
-            <MainPieChart/>
-            <MainProgressChart/>
         </ScrollerLayout>
     );
 
