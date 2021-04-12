@@ -17,6 +17,9 @@ const AreaDetail = (props: IAreaDetailProps) => {
                 headerTitle: '지역별',
                 headerLeft: (props: any) => (<BackButton navigation={navigation}/>),
                 headerRight: (() => <AreaDetailButton navigation={navigation}/>),
+                headerStyle : {
+                    height: 110
+                },
             });
     }, []);
 

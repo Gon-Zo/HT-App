@@ -14,6 +14,9 @@ const Area = (props: IAreaProps) => {
             headerTitleStyle: {
                 fontWeight: 'bold',
             },
+            headerStyle : {
+                height: 110
+            },
             headerRight: (() => <SearchButton navigation={navigation}/>),
         });
     }, []);
