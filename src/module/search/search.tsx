@@ -21,10 +21,13 @@ const Search = (props: ISearchProps) => {
         navigation.setOptions(
             {
                 headerTitle: '검색',
+                headerLeft: (props: any) => (<BackButton navigation={navigation}/>),
                 headerTitleStyle: {
                     fontWeight: 'bold',
                 },
-                headerLeft: (props: any) => (<BackButton navigation={navigation}/>),
+                headerStyle : {
+                    height: 110
+                },
             });
 
     }, []);
@@ -39,9 +42,9 @@ const Search = (props: ISearchProps) => {
                 padding: 5,
                 paddingLeft: 15,
                 margin: 10,
-                borderWidth : 1,
-                borderColor : 'rgba( 0 , 0, 0, 0.15)',
-                borderRadius : 5
+                borderWidth: 1,
+                borderColor: 'rgba( 0 , 0, 0, 0.15)',
+                borderRadius: 5,
             }}>
                 <TextInput
                     style={styles.input}

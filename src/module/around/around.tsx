@@ -15,6 +15,9 @@ const Around = (props: IAroundProps) => {
                 fontWeight: 'bold',
             },
             headerRight: (() => <SearchButton navigation={navigation}/>),
+            headerStyle : {
+                height: 110
+            },
             // // @ts-ignore
             // header: ({scene, previous, navigation}) => {
             //     return (
