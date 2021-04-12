@@ -4,14 +4,11 @@ import MainPieChart from './main-pie-chart';
 import MainProgressChart from './main-progress-chart';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {IMainProps} from './main.interface';
-import {NAV} from '../../shared/utils/navigation-utils';
 import {LogoImage, SearchIconButton} from '../component/ht-button';
 
 const Main = (props: IMainProps) => {
 
     const {navigation} = props;
-
-    const goToSearchView = () => navigation.navigate(NAV.SEARCH);
 
     useEffect(() => {
         navigation.setOptions(
