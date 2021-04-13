@@ -20,6 +20,23 @@ const lineData = {
     ],
 };
 
+const lineData2 = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [
+        {
+            data: [
+                Math.random() * 50,
+                Math.random() * 50,
+                Math.random() * 50,
+                Math.random() * 50,
+                Math.random() * 50,
+                Math.random() * 50,
+            ],
+        },
+    ],
+};
+
+
 const Main = (props: IMainProps) => {
 
     const {navigation} = props;
@@ -39,7 +56,8 @@ const Main = (props: IMainProps) => {
 
     return (
         <ScrollerLayout>
-            <HtLineChart data={lineData}/>
+            <HtLineChart data={lineData} isBezier={false}/>
+            <HtLineChart data={lineData2} isBezier={true}/>
         </ScrollerLayout>
     );
 

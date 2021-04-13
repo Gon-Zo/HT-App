@@ -1,10 +1,12 @@
 import React from 'react';
 import {LineChart} from 'react-native-chart-kit';
 import {Dimensions} from 'react-native';
+import {ILineChartProps} from './chart.interface';
 
-const HtLineChart = (props: any) => {
+const HtLineChart = (props: ILineChartProps) => {
 
-    const data = props.data;
+    const {data, isBezier} = props;
+
     return (
         <React.Fragment>
             <LineChart
@@ -22,6 +24,7 @@ const HtLineChart = (props: any) => {
                         strokeWidth: 2, // optional, default 3
                     }
                 }
+                bezier={isBezier}
                 style={{
                     marginVertical: 8,
                 }}/>
