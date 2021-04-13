@@ -13,15 +13,16 @@ const Main = (props: IMainProps) => {
                 headerTitleAlign: 'left',
                 headerTitle: ((props: any) => (<LogoImage/>)),
                 headerRight: ((props: any) => <SearchIconButton navigation={navigation}/>),
-                headerStyle : {
-                    height: 110
-                }
+                headerStyle: {
+                    height: 110,
+                },
             },
         );
     }, []);
 
     return (
         <ScrollerLayout>
+
         </ScrollerLayout>
     );
 

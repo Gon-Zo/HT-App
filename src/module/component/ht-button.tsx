@@ -12,6 +12,7 @@ export const SearchIconButton = (props: ISearchButtonProps) => {
 
     return (
         <TouchableOpacity
+            activeOpacity={1}
             style={{
                 backgroundColor: 'rgba( 0 , 0, 0, 0.05)',
                 width: 250,
