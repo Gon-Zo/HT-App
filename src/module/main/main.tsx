@@ -2,6 +2,23 @@ import React, {useEffect} from 'react';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {IMainProps} from './main.interface';
 import {LogoImage, SearchIconButton} from '../component/ht-button';
+import HtLineChart from '../component/chart/ht-line-chart';
+
+const lineData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [
+        {
+            data: [
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+            ],
+        },
+    ],
+};
 
 const Main = (props: IMainProps) => {
 
@@ -22,7 +39,7 @@ const Main = (props: IMainProps) => {
 
     return (
         <ScrollerLayout>
-
+            <HtLineChart data={lineData}/>
         </ScrollerLayout>
     );
 
