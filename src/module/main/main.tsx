@@ -3,39 +3,11 @@ import ScrollerLayout from '../../shared/common/scroller-layout';
 import {IMainProps} from './main.interface';
 import {LogoImage, SearchIconButton} from '../component/ht-button';
 import HtLineChart from '../component/chart/ht-line-chart';
-
-const lineData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [
-        {
-            data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-            ],
-        },
-    ],
-};
-
-const lineData2 = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [
-        {
-            data: [
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50,
-                Math.random() * 50,
-            ],
-        },
-    ],
-};
-
+import {barchartData, lineData, lineData2, pieData, progressData, stackChartData} from '../component/chart/demo-data';
+import HtProgressChart from '../component/chart/ht-progress-chart';
+import HtBarChart from '../component/chart/ht-bar-chart';
+import HtStackChart from '../component/chart/ht-stack-chart';
+import HtPieChart from '../component/chart/ht-pie-chart';
 
 const Main = (props: IMainProps) => {
 
@@ -56,8 +28,12 @@ const Main = (props: IMainProps) => {
 
     return (
         <ScrollerLayout>
+            <HtPieChart data={pieData}/>
+            <HtStackChart data={stackChartData}/>
+            <HtBarChart data={barchartData}/>
             <HtLineChart data={lineData} isBezier={false}/>
             <HtLineChart data={lineData2} isBezier={true}/>
+            <HtProgressChart data={progressData}/>
         </ScrollerLayout>
     );
 
