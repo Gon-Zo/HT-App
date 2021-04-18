@@ -9,6 +9,7 @@ import HtBarChart from '../component/chart/ht-bar-chart';
 import HtStackChart from '../component/chart/ht-stack-chart';
 import HtPieChart from '../component/chart/ht-pie-chart';
 import HtResponsiveLineChart from '../component/chart/ht-responsive-line-chart';
+import HtMultipleLineChart from '../component/chart/ht-multiple-line-chart';
 
 const Main = (props: IMainProps) => {
 
@@ -29,7 +30,7 @@ const Main = (props: IMainProps) => {
 
     return (
         <ScrollerLayout>
-
+            <HtMultipleLineChart/>
             <HtResponsiveLineChart/>
             <HtPieChart data={pieData}/>
             <HtStackChart data={stackChartData}/>
