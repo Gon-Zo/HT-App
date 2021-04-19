@@ -25,7 +25,7 @@ const AreaList = (props: IAreaProps) => {
     };
 
     const onPress = (key: string) => {
-        navigation.navigate('AreaDetail', {key: key});
+        navigation.navigate('AreaRegion', {key: key});
     };
 
     useEffect(() => {
@@ -53,8 +53,7 @@ const AreaList = (props: IAreaProps) => {
                     renderItem={({item, index}) =>
                         <SubAreaItem item={item}
                                      index={index}
-                                     onPress={onPress}
-                        />
+                                     onPress={onPress}/>
                     }/>
             </View>
 
