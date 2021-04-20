@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {IAreaRegionProps} from './area.interface';
 import {AreaDetailButton, BackButton} from '../component/ht-button';
 import HtTable from '../component/ht-table';
+import HtTab from '../component/ht-tap';
 
 const AreaRegion = (props: IAreaRegionProps) => {
 
@@ -21,12 +22,12 @@ const AreaRegion = (props: IAreaRegionProps) => {
                 },
             });
     }, []);
-
     return (
         <React.Fragment>
+            <HtTab/>
             <HtTable/>
             <Button title={'test'} onPress={() => {
-                navigation.navigate("AreaDetail")
+                navigation.navigate('AreaDetail');
             }}/>
         </React.Fragment>
     );
