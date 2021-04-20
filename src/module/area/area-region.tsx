@@ -26,6 +26,7 @@ const AreaRegion = (props: IAreaRegionProps) => {
         <React.Fragment>
             <HtTable/>
             <Button title={'test'} onPress={() => {
+                navigation.navigate("AreaDetail")
             }}/>
         </React.Fragment>
     );
