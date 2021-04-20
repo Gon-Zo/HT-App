@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {GestureResponderEvent, Text, TouchableOpacity, View} from 'react-native';
 
 interface ITabItemProps {
     text: string,
-    onPress: Function
+    index: number,
+    onPress: Function,
+    active : boolean
 }
 
 const TabItem = (props: ITabItemProps) => {
 
-    const {text, onPress} = props;
+    const {text, onPress, index} = props;
 
     return (
         <TouchableOpacity
@@ -22,7 +24,7 @@ const TabItem = (props: ITabItemProps) => {
                 borderBottomColor: 'gray',
                 borderBottomWidth: 3,
             }}
-            onPress={(event) => onPress(event)}
+            onPress={(event) => onPress(index)}
         >
             <Text style={{
                 fontSize: 17,
@@ -31,19 +33,27 @@ const TabItem = (props: ITabItemProps) => {
     );
 };
 
+const TAB_DATA = [
+    {"text" : "아파트" , active : false},
+    {"text" : "연립다세대" , active : false},
+    {"text" : "단독주택" , active : false}
+]
+
 const HtTab = (props: any) => {
 
-    const _onPress = (event : GestureResponderEvent) => {
-        console.log(">>>>>>>>" , event.target)
+    const _onPress = (index: number) => {
+        console.log('>>>>>>>>', index);
     };
 
     return (
         <View style={{
             flexDirection: 'row',
         }}>
-            <TabItem text={'아파트'} onPress={_onPress}/>
-            <TabItem text={'연립다세대'} onPress={_onPress}/>
-            <TabItem text={'단독주택'} onPress={_onPress}/>
+            {
+                TAB_DATA.map((data: any, index: number) => (
+                    <TabItem text={data.text} onPress={_onPress} index={index} active={data.active}/>
+                ))
+            }
         </View>
     );
 };
