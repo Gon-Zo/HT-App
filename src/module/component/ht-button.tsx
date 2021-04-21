@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {NAV} from '../../shared/utils/navigation-utils';
-import {IBackButtonProps, ISearchButtonProps} from './interface/component.interface';
+import {IBackButtonProps, ISearchButtonProps} from './component.interface';
 
 export const SearchIconButton = (props: ISearchButtonProps) => {
 

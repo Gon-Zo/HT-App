@@ -1,19 +1,14 @@
-import React, {useState} from 'react';
-import {GestureResponderEvent, Text, TouchableOpacity, View} from 'react-native';
-
-interface ITabItemProps {
-    text: string,
-    index: number,
-    onPress: Function,
-    active : boolean
-}
+import React, {useEffect, useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import {IHtTab, ITabItemProps} from './component.interface';
 
 const TabItem = (props: ITabItemProps) => {
 
-    const {text, onPress, index} = props;
+    const {text, onPress, index, active} = props;
 
     return (
         <TouchableOpacity
+            activeOpacity={1}
             style={{
                 flexDirection: 'column',
                 flex: 1,
@@ -21,7 +16,7 @@ const TabItem = (props: ITabItemProps) => {
                 marginLeft: 3,
                 paddingRight: 3,
                 alignItems: 'center',
-                borderBottomColor: 'gray',
+                borderBottomColor: active ? 'red' : 'gray',
                 borderBottomWidth: 3,
             }}
             onPress={(event) => onPress(index)}
@@ -33,16 +28,32 @@ const TabItem = (props: ITabItemProps) => {
     );
 };
 
-const TAB_DATA = [
-    {"text" : "아파트" , active : false},
-    {"text" : "연립다세대" , active : false},
-    {"text" : "단독주택" , active : false}
-]
+const HtTab = (props: IHtTab) => {
 
-const HtTab = (props: any) => {
+    const {data} = props;
+
+    const [payload, setPayload] = useState([]);
+
+    useEffect(() => {
+        createByTabData(0, data);
+    }, []);
 
     const _onPress = (index: number) => {
-        console.log('>>>>>>>>', index);
+        // @ts-ignore
+        createByTabData(index, payload);
+    };
+
+    const createByTabData = (index: number, payload: []) => {
+        const _payload = payload.map((data, _index) => {
+            const _copy = JSON.parse(JSON.stringify(data));
+            const isActive = _index == index;
+            return {
+                ..._copy,
+                active: isActive,
+            };
+        });
+        // @ts-ignore
+        setPayload(_payload);
     };
 
     return (
@@ -50,13 +61,16 @@ const HtTab = (props: any) => {
             flexDirection: 'row',
         }}>
             {
-                TAB_DATA.map((data: any, index: number) => (
-                    <TabItem text={data.text} onPress={_onPress} index={index} active={data.active}/>
+                payload.map((data: any, index: number) => (
+                    <TabItem key={index}
+                             text={data.text}
+                             onPress={_onPress}
+                             index={index}
+                             active={data.active}/>
                 ))
             }
         </View>
     );
 };
-
 
 export default HtTab;

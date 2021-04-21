@@ -1,10 +1,15 @@
 import React, {useEffect} from 'react';
-import {Button, Text, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Button} from 'react-native';
 import {IAreaRegionProps} from './area.interface';
 import {AreaDetailButton, BackButton} from '../component/ht-button';
 import HtTable from '../component/ht-table';
 import HtTab from '../component/ht-tap';
+
+const TAB_DATA = [
+    {'text': '아파트', active: false},
+    {'text': '연립다세대', active: false},
+    {'text': '단독주택', active: false},
+];
 
 const AreaRegion = (props: IAreaRegionProps) => {
 
@@ -24,7 +29,8 @@ const AreaRegion = (props: IAreaRegionProps) => {
     }, []);
     return (
         <React.Fragment>
-            <HtTab/>
+            {/*// @ts-ignore*/}
+            <HtTab data={TAB_DATA}/>
             <HtTable/>
             <Button title={'test'} onPress={() => {
                 navigation.navigate('AreaDetail');
@@ -32,52 +38,6 @@ const AreaRegion = (props: IAreaRegionProps) => {
         </React.Fragment>
     );
 
-};
-
-const FilterComponent = (props: any) => {
-
-    const key = props.key;
-
-    const navigation = props.navigation;
-
-    return (
-        <View style={{
-            flexDirection: 'row',
-            flex: 1,
-        }}>
-            <TouchableOpacity
-                style={{
-                    flexDirection: 'row',
-                    flex: 1,
-                    alignItems: 'center',
-                    padding: 10,
-                    marginRight: 5,
-                    borderColor: '#cac8c8',
-                    borderWidth: 1.5,
-                    borderRadius: 5,
-                }}
-                activeOpacity={1}
-                onPress={() => navigation.navigate('Area')}>
-                <Icon name="map-marker" size={20}/>
-                <Text style={{paddingLeft: 5, fontWeight: 'bold', fontSize: 15}}>
-                    {key}
-                </Text>
-            </TouchableOpacity>
-            <View style={{
-                flexDirection: 'row',
-                flex: 1,
-                alignItems: 'center',
-                padding: 10,
-                marginLeft: 5,
-                borderColor: '#cac8c8',
-                borderWidth: 1.5,
-                borderRadius: 5,
-            }}>
-                <Icon name="calendar-o" size={24}/>
-                <Text style={{paddingLeft: 5}}>03.30 ~ 03.21</Text>
-            </View>
-        </View>
-    );
 };
 
 export default AreaRegion;
