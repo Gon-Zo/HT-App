@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {actuatedNormalize} from '../../shared/utils/font-utils';
-import {ITextBox} from './interface/component.interface';
+import {ITextBox} from './component.interface';
 
 const TextBox = (props: ITextBox) => {
 

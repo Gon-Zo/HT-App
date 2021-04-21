@@ -19,3 +19,16 @@ export interface IBackButtonProps {
     navigation: NavigationProp<ParamListBase>
 }
 
+export interface IHtTab {
+    data: []
+}
+
+export interface ITabItemProps {
+    text: string,
+    index: number,
+    onPress: Function,
+    active: boolean
+}
+
+
+

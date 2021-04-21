@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {ICustomTabProps} from './interface/component.interface';
+import {ICustomTabProps} from './component.interface';
 
 const MyTabBar = (props: ICustomTabProps) => {
 
