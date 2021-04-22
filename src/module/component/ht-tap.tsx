@@ -13,16 +13,16 @@ const TabItem = (props: ITabItemProps) => {
                 flexDirection: 'column',
                 flex: 1,
                 padding: 10,
-                marginLeft: 3,
-                paddingRight: 3,
                 alignItems: 'center',
-                borderBottomColor: active ? 'red' : 'gray',
-                borderBottomWidth: 3,
+                backgroundColor: '#fff',
+                borderBottomWidth: 1.5,
+                borderBottomColor: active ? 'blue' : 'transparent',
             }}
             onPress={(event) => onPress(index)}
         >
             <Text style={{
                 fontSize: 17,
+                color : active ? "blue" : "rgba(0,0,0,.5)"
             }}>{text}</Text>
         </TouchableOpacity>
     );
