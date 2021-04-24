@@ -1,30 +1,42 @@
 import React, {useEffect, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {IHtTab, ITabItemProps} from './component.interface';
+import styled from 'styled-components/native';
 
-const TabItem = (props: ITabItemProps) => {
+interface ITapWrap {
+    active: boolean
+}
+
+const TapWrap = styled.View`
+flex-direction: row;
+`;
+
+const TapItemWrap = styled.TouchableOpacity`
+flex-direction: column;
+flex : 1;
+align-items: center;
+background-color: #fff;
+border-bottom-width: 1.5px;
+padding : 10px;
+borderBottomColor: ${(props: ITapWrap) => props.active ? 'blue' : 'transparent'}
+`;
+
+const TapItemText = styled.Text`
+fontSize: 17px;
+color: ${(props: ITapWrap) => props.active ? 'blue' : 'rgba(0,0,0,.5)'},
+`;
+
+const TapItem = (props: ITabItemProps) => {
 
     const {text, onPress, index, active} = props;
 
     return (
-        <TouchableOpacity
+        <TapItemWrap
             activeOpacity={1}
-            style={{
-                flexDirection: 'column',
-                flex: 1,
-                padding: 10,
-                alignItems: 'center',
-                backgroundColor: '#fff',
-                borderBottomWidth: 1.5,
-                borderBottomColor: active ? 'blue' : 'transparent',
-            }}
-            onPress={(event) => onPress(index)}
-        >
-            <Text style={{
-                fontSize: 17,
-                color : active ? "blue" : "rgba(0,0,0,.5)"
-            }}>{text}</Text>
-        </TouchableOpacity>
+            active={active}
+            onPress={(event) => onPress(index)}>
+            <TapItemText active={active}>{text}</TapItemText>
+        </TapItemWrap>
     );
 };
 
@@ -57,19 +69,17 @@ const HtTab = (props: IHtTab) => {
     };
 
     return (
-        <View style={{
-            flexDirection: 'row',
-        }}>
+        <TapWrap>
             {
                 payload.map((data: any, index: number) => (
-                    <TabItem key={index}
+                    <TapItem key={index}
                              text={data.text}
                              onPress={_onPress}
                              index={index}
                              active={data.active}/>
                 ))
             }
-        </View>
+        </TapWrap>
     );
 };
 
