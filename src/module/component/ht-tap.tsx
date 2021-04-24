@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
 import {IHtTab, ITabItemProps} from './component.interface';
 import styled from 'styled-components/native';
 
