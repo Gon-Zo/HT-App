@@ -1,29 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {IHtTab, ITabItemProps} from './component.interface';
-import styled from 'styled-components/native';
-
-interface ITapWrap {
-    active: boolean
-}
-
-const TapWrap = styled.View`
-flex-direction: row;
-`;
-
-const TapItemWrap = styled.TouchableOpacity`
-flex-direction: column;
-flex : 1;
-align-items: center;
-background-color: #fff;
-border-bottom-width: 1.5px;
-padding : 10px;
-borderBottomColor: ${(props: ITapWrap) => props.active ? 'blue' : 'transparent'}
-`;
-
-const TapItemText = styled.Text`
-fontSize: 17px;
-color: ${(props: ITapWrap) => props.active ? 'blue' : 'rgba(0,0,0,.5)'},
-`;
+import {TapItemWrap, TapItemText, TapWrap} from './styled/ht-tap.styled';
 
 const TapItem = (props: ITabItemProps) => {
 
