@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {IHtTab, ITabItemProps} from './component.interface';
-import {TapItemWrap, TapItemText, TapWrap} from './ht-tap.styled';
+import {TapItemWrap, TapItemText, TapWrap} from './component.styled';
 
 const TapItem = (props: ITabItemProps) => {
 
