@@ -39,3 +39,8 @@ export interface IAreaData {
 export interface IAreaSubData {
     key: string
 }
+
+export interface IChartComponentStyledProps {
+    height: number,
+    width: number
+}

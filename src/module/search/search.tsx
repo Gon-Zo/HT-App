@@ -4,6 +4,7 @@ import ScrollerLayout from '../../shared/common/scroller-layout';
 import {BackButton} from '../component/public/ht-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ISearchProps} from './search.interface';
+import {SearchViewWrap, SearchTextInput, SearchButton} from './search.styled';
 
 const Search = (props: ISearchProps) => {
 
@@ -25,8 +26,8 @@ const Search = (props: ISearchProps) => {
                 headerTitleStyle: {
                     fontWeight: 'bold',
                 },
-                headerStyle : {
-                    height: 110
+                headerStyle: {
+                    height: 110,
                 },
             });
 
@@ -34,43 +35,16 @@ const Search = (props: ISearchProps) => {
 
     return (
         <ScrollerLayout>
-            <View style={{
-                width: 400,
-                backgroundColor: 'rgba( 0 , 0, 0, 0.05)',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                padding: 5,
-                paddingLeft: 15,
-                margin: 10,
-                borderWidth: 1,
-                borderColor: 'rgba( 0 , 0, 0, 0.15)',
-                borderRadius: 5,
-            }}>
-                <TextInput
-                    style={styles.input}
-                    value={text}
-                    onChangeText={setText}
-                    placeholder="지역명으로 찾아보세요"
-                />
-                <TouchableOpacity style={{
-                    flex: 0.15,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
+            <SearchViewWrap>
+                <SearchTextInput value={text}
+                                 onChangeText={setText}
+                                 placeholder="지역명으로 찾아보세요"/>
+                <SearchButton>
                     <Icon name={'ios-search'} size={25}/>
-                </TouchableOpacity>
-            </View>
+                </SearchButton>
+            </SearchViewWrap>
         </ScrollerLayout>
     );
-
 };
-
-const styles = StyleSheet.create({
-    input: {
-        flex: 1,
-        height: 40,
-        fontSize: 16,
-    },
-});
 
 export default React.memo(Search);

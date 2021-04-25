@@ -18,7 +18,7 @@ borderBottomColor: ${(props: IHtTapStyleProps) => props.active ? 'blue' : 'trans
 
 export const TapItemText = styled.Text`
 fontSize: 17px;
-color: ${(props: IHtTapStyleProps) => props.active ? 'blue' : 'rgba(0,0,0,.5)'},
+color : ${(props: IHtTapStyleProps) => props.active ? 'blue' : 'rgba(0,0,0,.5)'};
 `;
 
 export const SearchIconButtonWrap = styled.TouchableOpacity`
