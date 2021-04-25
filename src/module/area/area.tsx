@@ -3,6 +3,7 @@ import {SafeAreaView} from 'react-native';
 import {IAreaProps} from './area.interface';
 import AreaList from './area-list';
 import {SearchButton} from '../component/public/ht-button';
+import {AreaSafeAreaView} from './area.styled';
 
 const Area = (props: IAreaProps) => {
 
@@ -14,17 +15,17 @@ const Area = (props: IAreaProps) => {
             headerTitleStyle: {
                 fontWeight: 'bold',
             },
-            headerStyle : {
-                height: 110
+            headerStyle: {
+                height: 110,
             },
             headerRight: (() => <SearchButton navigation={navigation}/>),
         });
     }, []);
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <AreaSafeAreaView>
             <AreaList navigation={navigation}/>
-        </SafeAreaView>
+        </AreaSafeAreaView>
     );
 
 };
