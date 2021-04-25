@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {IHtTapStyleProps} from './ht-tap.interface';
+import {IHtTapStyleProps} from './component.interface';
 
 export const TapWrap = styled.View`
 flex-direction: row;

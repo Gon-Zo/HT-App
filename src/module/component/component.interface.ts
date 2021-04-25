@@ -30,5 +30,6 @@ export interface ITabItemProps {
     active: boolean
 }
 
-
-
+export interface IHtTapStyleProps {
+    active: boolean
+}
