@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {actuatedNormalize} from '../../shared/utils/font-utils';
+import React, {useEffect, useState} from 'react';
 import {ITextBox} from './component.interface';
+import {TextBoxWrap, TextBoxText} from './component.styled';
 
 const TextBox = (props: ITextBox) => {
 
@@ -10,28 +9,17 @@ const TextBox = (props: ITextBox) => {
     const [title, setTitle] = useState('');
 
     useEffect(() => {
-        const _title = text;
-        setTitle(_title);
+        setTitle(text);
     }, [text]);
 
     return (
-        <View style={styles.textContainer}>
-            <Text style={styles.textBox}>{title}</Text>
-        </View>
+        <TextBoxWrap>
+            <TextBoxText>
+                {title}
+            </TextBoxText>
+        </TextBoxWrap>
     );
 
 };
-
-const styles = StyleSheet.create({
-    textContainer: {
-        alignSelf: 'stretch',
-    },
-    textBox: {
-        textAlign: 'left',
-        fontWeight: 'bold',
-        fontSize: actuatedNormalize(15),
-    },
-});
-
 
 export default TextBox;
