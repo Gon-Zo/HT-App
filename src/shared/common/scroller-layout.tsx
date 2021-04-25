@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {IScrollerLayout} from './interface/common.interface';
+import {IScrollerLayout} from './shared.interface';
 import {ScrollerAreaWrap, ScrollerViewWrap} from './shared.styled';
 
 const ScrollerLayout = (props: IScrollerLayout) => {
