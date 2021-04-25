@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import ScrollerLayout from '../../shared/common/scroller-layout';
-import {BackButton} from '../component/ht-button';
+import {BackButton} from '../component/public/ht-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {ISearchProps} from './search.interface';
 

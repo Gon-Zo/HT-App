@@ -26,7 +26,7 @@ export const SearchIconButton = (props: ISearchButtonProps) => {
 
 export const LogoImage = () => {
     return (
-        <LogoImageWrap source={require('../../assest/img/logo.jpg')}/>
+        <LogoImageWrap source={require('../../../assest/img/logo.jpg')}/>
     );
 };
 

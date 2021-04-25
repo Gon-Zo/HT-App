@@ -55,8 +55,8 @@ left: 10px;
 `;
 
 export const LogoImageWrap = styled.Image`
-width: 50;
-height: 50;
+width: 50px;
+height: 50px;
 `;
 
 export const TextBoxWrap = styled.View`
