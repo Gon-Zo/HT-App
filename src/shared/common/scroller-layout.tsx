@@ -1,38 +1,21 @@
-import React from 'react'
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import React from 'react';
+import {ScrollView} from 'react-native';
 import {IScrollerLayout} from './interface/common.interface';
+import {ScrollerAreaWrap, ScrollerViewWrap} from './shared.styled';
 
 const ScrollerLayout = (props: IScrollerLayout) => {
 
-    const {children} = props
+    const {children} = props;
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <ScrollerAreaWrap>
             <ScrollView>
-                <View style={styles.container}>
+                <ScrollerViewWrap>
                     {children}
-                </View>
+                </ScrollerViewWrap>
             </ScrollView>
-        </SafeAreaView>
+        </ScrollerAreaWrap>
     );
-
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
-        padding: 10,
-    },
-    header: {
-        textAlign: 'center',
-        fontSize: 18,
-        padding: 16,
-        marginTop: 16,
-    },
-});
-
-export default ScrollerLayout
+export default ScrollerLayout;
