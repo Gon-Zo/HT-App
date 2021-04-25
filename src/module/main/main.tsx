@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {IMainProps} from './main.interface';
-import {LogoImage, SearchIconButton} from '../component/ht-button';
+import {LogoImage, SearchIconButton} from '../component/public/ht-button';
 import HtLineChart from '../component/chart/ht-line-chart';
 import {barchartData, lineData, lineData2, pieData, progressData, stackChartData} from '../component/chart/demo-data';
 import HtProgressChart from '../component/chart/ht-progress-chart';

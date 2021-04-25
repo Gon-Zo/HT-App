@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {Button} from 'react-native';
 import {IAreaRegionProps} from './area.interface';
-import {AreaDetailButton, BackButton} from '../component/ht-button';
-import HtTable from '../component/ht-table';
-import HtTab from '../component/ht-tap';
+import {AreaDetailButton, BackButton} from '../component/public/ht-button';
+import HtTable from '../component/public/ht-table';
+import HtTab from '../component/public/ht-tap';
 
 const TAB_DATA = [
     {'text': '아파트', active: false},

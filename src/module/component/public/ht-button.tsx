@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {NAV} from '../../shared/utils/navigation-utils';
+import {NAV} from '../../../shared/utils/navigation-utils';
 import {IBackButtonProps, ISearchButtonProps} from './component.interface';
 import {
     SearchIconButtonWrap,

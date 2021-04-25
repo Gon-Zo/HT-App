@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import ScrollerLayout from '../../shared/common/scroller-layout';
 import {Text, View} from 'react-native';
 import {IAroundProps} from './around.interface';
-import {SearchButton} from '../component/ht-button';
+import {SearchButton} from '../component/public/ht-button';
 
 const Around = (props: IAroundProps) => {
 

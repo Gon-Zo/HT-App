@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {IAreaProps} from './area.interface';
 import AreaList from './area-list';
-import {SearchButton} from '../component/ht-button';
+import {SearchButton} from '../component/public/ht-button';
 
 const Area = (props: IAreaProps) => {
 

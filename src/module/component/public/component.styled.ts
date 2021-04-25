@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import {IHtTapStyleProps} from './component.interface';
-import {actuatedNormalize} from '../../shared/utils/font-utils';
+import {actuatedNormalize} from '../../../shared/utils/font-utils';
 
 export const TapWrap = styled.View`
 flex-direction: row;
