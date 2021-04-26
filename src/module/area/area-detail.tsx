@@ -6,11 +6,13 @@ import {BackButton} from '../component/public/ht-button';
 
 const AreaDetail = (props: IAreaDetailProps) => {
 
-    const {navigation} = props;
+    const {navigation , route} = props;
+
+    const {title} = route.params
 
     useEffect(() => {
         navigation.setOptions({
-            headerTitle: '아파트명',
+            headerTitle: title,
             headerLeft: (props: any) => (<BackButton navigation={navigation}/>),
             headerStyle: {
                 height: 110,

@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {Button} from 'react-native';
 import {IAreaRegionProps} from './area.interface';
 import {AreaDetailButton, BackButton} from '../component/public/ht-button';
 import HtTable from '../component/public/ht-table';
@@ -19,7 +18,7 @@ const AreaRegion = (props: IAreaRegionProps) => {
     useEffect(() => {
         navigation.setOptions(
             {
-                headerTitle: '지역별',
+                headerTitle: key,
                 headerLeft: (props: any) => (<BackButton navigation={navigation}/>),
                 headerRight: (() => <AreaDetailButton navigation={navigation}/>),
                 headerStyle: {
@@ -27,14 +26,17 @@ const AreaRegion = (props: IAreaRegionProps) => {
                 },
             });
     }, []);
+
+    const _onPressByTable = (title: string) => {
+        navigation.navigate('AreaDetail', {title: title});
+    };
+
+
     return (
         <React.Fragment>
             {/*// @ts-ignore*/}
             <HtTab data={TAB_DATA}/>
-            <HtTable/>
-            <Button title={'test'} onPress={() => {
-                navigation.navigate('AreaDetail');
-            }}/>
+            <HtTable onPress={_onPressByTable}/>
         </React.Fragment>
     );
 
