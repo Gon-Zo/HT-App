@@ -9,8 +9,12 @@ export type StackParamList = {
     AreaDetail: undefined
 }
 
+export interface IAreaDetailProps {
+    navigation : NavigationProp<StackParamList , 'AreaDetail'>
+}
+
 export interface IAreaProps {
-    navigation: NavigationProp<any>
+    navigation: NavigationProp<StackParamList , 'Area'>
 }
 
 export interface IAreaRegionProps {

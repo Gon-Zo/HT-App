@@ -20,6 +20,7 @@ const AreaChartComponent = (props: IAreaChartComponentProps) => {
 
     useEffect(() => {
         setIsShow(open)
+        setHeight(open ? 235 : 35);
     }, []);
 
     const _onClick = () => {
