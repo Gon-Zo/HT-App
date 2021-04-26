@@ -6,11 +6,14 @@ export type StackParamList = {
     AreaRegion: {
         key: string
     },
-    AreaDetail: undefined
+    AreaDetail: {
+        title : string
+    }
 }
 
 export interface IAreaDetailProps {
-    navigation : NavigationProp<StackParamList , 'AreaDetail'>
+    navigation : NavigationProp<StackParamList , 'AreaDetail'>,
+    route: RouteProp<StackParamList, 'AreaDetail'>
 }
 
 export interface IAreaProps {
