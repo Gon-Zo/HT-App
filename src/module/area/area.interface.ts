@@ -44,3 +44,8 @@ export interface IChartComponentStyledProps {
     height: number,
     width: number
 }
+
+export interface IAreaChartComponentProps {
+    text: string,
+    open: boolean
+}

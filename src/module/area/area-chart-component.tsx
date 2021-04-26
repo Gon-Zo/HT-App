@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import HtResponsiveLineChart from '../component/chart/ht-responsive-line-chart';
 import {
@@ -8,11 +8,19 @@ import {
     ChartComponentWrap,
 } from './area.styled';
 import {Dimensions} from 'react-native';
+import {IAreaChartComponentProps} from './area.interface';
 
-export const ChartComponent = (props: any) => {
-    const text = props.text;
+const AreaChartComponent = (props: IAreaChartComponentProps) => {
+
+    const {text , open} = props;
+
     const [isShow, setIsShow] = useState(false);
+
     const [height, setHeight] = useState(35);
+
+    useEffect(() => {
+        setIsShow(open)
+    }, []);
 
     const _onClick = () => {
         setIsShow(!isShow);
@@ -22,8 +30,7 @@ export const ChartComponent = (props: any) => {
     return (
         <ChartComponentWrap
             height={height}
-            width={Dimensions.get('window').width}
-        >
+            width={Dimensions.get('window').width}>
             <ChartComponentTextWrap onPress={_onClick}>
                 <ChartComponentText>{text}</ChartComponentText>
                 <ChartComponentButton onPress={_onClick}>
@@ -35,4 +42,7 @@ export const ChartComponent = (props: any) => {
             }
         </ChartComponentWrap>
     );
+
 };
+
+export default AreaChartComponent;

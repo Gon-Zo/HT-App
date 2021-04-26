@@ -8,7 +8,7 @@ flex: 1;
 export const ChartComponentWrap = styled.View`
 margin-top: 10px;
 margin-bottom: 10px;
-height : ${(props : IChartComponentStyledProps)=> props.height}px;
+height : ${(props: IChartComponentStyledProps) => props.height}px;
 width : ${(props: IChartComponentStyledProps) => props.width}px;
 `;
 
@@ -25,5 +25,5 @@ padding-left: 10px;
 `;
 
 export const ChartComponentButton = styled.TouchableOpacity`
-flex : 1;
+flex : .1;
 `;
