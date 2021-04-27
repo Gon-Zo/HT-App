@@ -18,12 +18,6 @@ const Around = (props: IAroundProps) => {
             headerStyle : {
                 height: 110
             },
-            // // @ts-ignore
-            // header: ({scene, previous, navigation}) => {
-            //     return (
-            //         <HtHeader data={{scene, previous, navigation}}/>
-            //     );
-            // },
         });
     }, []);
 
