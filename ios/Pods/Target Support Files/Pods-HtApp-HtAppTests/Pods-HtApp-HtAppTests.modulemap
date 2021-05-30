@@ -1,0 +1,6 @@
+module Pods_HtApp_HtAppTests {
+  umbrella header "Pods-HtApp-HtAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
