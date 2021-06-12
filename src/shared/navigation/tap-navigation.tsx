@@ -1,18 +1,52 @@
 import React, {memo} from "react";
 import 'react-native-gesture-handler';
 import Home from "../../entity/home";
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Area from "../../entity/area";
 import Around from "../../entity/around";
+
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 
 const Tap = createBottomTabNavigator()
 
 const TapNavigation = (props: any) => {
     return (
         <Tap.Navigator>
-            <Tap.Screen name={"Home"} component={Home}/>
-            <Tap.Screen name={"Area"} component={Area}/>
-            <Tap.Screen name={"Around"} component={Around}/>
+            <Tap.Screen name={"홈"}
+                        component={Home}
+                        options={{
+                            tabBarIcon: ({focused, color, size}) => {
+                                return <FontAwesomeIcon
+                                    color={color}
+                                    icon={['fas', "home"]}
+                                    size={size}/>;
+                            }
+                        }}
+            />
+            <Tap.Screen name={"지역"}
+                        component={Area}
+                        options={{
+                            tabBarIcon: ({focused, color, size}) => {
+                                return <FontAwesomeIcon
+                                    color={color}
+                                    icon={["far", "map"]}
+                                    size={size}/>;
+                            }
+                        }}
+            />
+            <Tap.Screen name={"내주변"}
+                        component={Around}
+                        options={{
+                            tabBarIcon: ({focused, color, size}) => {
+                                return <FontAwesomeIcon
+                                    color={color}
+                                    icon={["fas", "map-marker-alt"]}
+                                    size={size}
+                                />
+                            }
+                        }}
+            />
         </Tap.Navigator>
     )
 }
