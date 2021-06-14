@@ -6,6 +6,8 @@ import {NavigationProp} from '@react-navigation/native';
 
 // import {LineChart} from 'react-native-charts-wrapper'
 
+import {VictoryBar} from "victory-native";
+
 type HomeProps = {
     navigation: NavigationProp<any>
 }
@@ -25,6 +27,8 @@ const Home = (props: HomeProps) => {
                     // Modal Screen
                     navigation.navigate("Modal")
                 }}/>
+
+                <VictoryBar/>
 
                 {/*<LineChart data={{dataSets: [{label: "demo", values: [{y: 1}, {y: 2}, {y: 1}]}]}}*/}
                 {/*/>*/}
