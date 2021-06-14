@@ -1,9 +1,6 @@
 import React, {memo} from 'react'
 import {VictoryChart, VictoryLine, VictoryTheme} from "victory-native";
-
-type LineChartProps = {}
-
-type LineChartState = {}
+import {LineChartProps} from "./chart.interface";
 
 const data = [
     {x: 1, y: 2},
@@ -14,6 +11,9 @@ const data = [
 ]
 
 const LineChart = (props: LineChartProps) => {
+
+    const {} = props
+
     return (
         <VictoryChart
             theme={VictoryTheme.material}
@@ -25,7 +25,7 @@ const LineChart = (props: LineChartProps) => {
                 }}
                 animate={{
                     duration: 2000,
-                    onLoad: { duration: 1000 }
+                    onLoad: {duration: 1000}
                 }}
                 data={data}
             />
