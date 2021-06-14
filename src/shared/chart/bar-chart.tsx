@@ -50,6 +50,10 @@ const BarChart = (props: BarChartProps) => {
                 tickFormat={(x) => (`$${x / 1000}k`)}
             />
             <VictoryBar
+                animate={{
+                    duration: 2000,
+                    onLoad: { duration: 1000 }
+                }}
                 labelComponent={<VictoryTooltip
                     renderInPortal={false}/>}
                 data={data}
