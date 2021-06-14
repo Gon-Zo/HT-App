@@ -1,12 +1,6 @@
 import React, {memo, useEffect, useState} from 'react'
 import {Bar, VictoryBar, VictoryChart, VictoryTheme, VictoryTooltip, VictoryAxis,} from "victory-native";
-
-type BarChartProps = {}
-
-type BarChartState = {
-    tickFormat: any[]
-    tickValue: any[]
-}
+import {BarChartProps, BarChartState} from "./chart.interface";
 
 const data = [
     {quarter: 1, earnings: 13000, label: "Quarter 1"},
@@ -52,7 +46,7 @@ const BarChart = (props: BarChartProps) => {
             <VictoryBar
                 animate={{
                     duration: 2000,
-                    onLoad: { duration: 1000 }
+                    onLoad: {duration: 1000}
                 }}
                 labelComponent={<VictoryTooltip
                     renderInPortal={false}/>}
