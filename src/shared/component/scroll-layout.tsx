@@ -1,7 +1,7 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
 import {IScrollerLayout} from "./component.interface";
-import {ScrollerAreaWrap, ScrollerViewWrap} from './component.style';
+import {ScrollerAreaWrap} from './component.style';
+import {ScrollView} from "react-native";
 
 const ScrollLayout = (props: IScrollerLayout) => {
 
@@ -9,10 +9,8 @@ const ScrollLayout = (props: IScrollerLayout) => {
 
     return (
         <ScrollerAreaWrap>
-            <ScrollView>
-                <ScrollerViewWrap>
-                    {children}
-                </ScrollerViewWrap>
+            <ScrollView stickyHeaderIndices={[1]}>
+                {children}
             </ScrollView>
         </ScrollerAreaWrap>
     );
