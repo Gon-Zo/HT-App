@@ -1,14 +1,16 @@
 import React, {memo} from 'react'
-import ScrollLayout from "../../shared/component/scroll-layout";
-import {Text, View} from "react-native";
+import {AreaSafeAreaView} from './area.style';
+import AreaList from "./area-list";
+import {IAreaProps} from "./area.interface";
 
-const Area = (props: any) => {
+const Area = (props: IAreaProps) => {
+
+    const {navigation} = props
+
     return (
-        <ScrollLayout>
-            <View>
-                <Text>Area Screen</Text>
-            </View>
-        </ScrollLayout>
+        <AreaSafeAreaView>
+            <AreaList navigation={navigation}/>
+        </AreaSafeAreaView>
     )
 }
 
