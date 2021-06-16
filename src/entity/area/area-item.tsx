@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import {actuatedNormalize} from '../../shared/utils/font-utils';
 import {IAreaItemProps, IAreaSubItemProps} from './area.interface';
-// import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import {moderateScale, verticalScale} from 'react-native-size-matters' ;
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 
 export const AreaItem = (props: IAreaItemProps) => {
 
@@ -58,7 +58,7 @@ export const SubAreaItem = (props: IAreaSubItemProps) => {
             style={styles.subItem}
             onPress={() => onPress(key)}>
             <Text>{key}</Text>
-            {/*<FontAwesome5Icon name={'chevron-right'} style={styles.subIcon}/>*/}
+            <FontAwesomeIcon icon={['fas', 'chevron-right']} style={styles.subIcon}/>
         </TouchableOpacity>
     );
 };

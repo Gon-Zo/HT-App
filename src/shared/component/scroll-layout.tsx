@@ -5,11 +5,11 @@ import {ScrollView} from "react-native";
 
 const ScrollLayout = (props: IScrollerLayout) => {
 
-    const {children} = props;
+    const {children, stickyList} = props;
 
     return (
         <ScrollerAreaWrap>
-            <ScrollView stickyHeaderIndices={[1]}>
+            <ScrollView stickyHeaderIndices={stickyList}>
                 {children}
             </ScrollView>
         </ScrollerAreaWrap>
