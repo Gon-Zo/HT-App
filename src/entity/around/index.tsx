@@ -4,7 +4,8 @@ import {Text, View} from "react-native";
 
 const Around = (props: any) => {
     return (
-        <ScrollLayout>
+        <ScrollLayout
+            stickyList={[]}>
             <View>
                 <Text>
                     Around Screen

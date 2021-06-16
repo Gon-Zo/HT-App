@@ -3,6 +3,7 @@ import {IChartComponentStyledProps} from './area.interface';
 
 export const AreaSafeAreaView = styled.SafeAreaView`
 flex: 1;
+background-color: #fff;
 `;
 
 export const ChartComponentWrap = styled.View`

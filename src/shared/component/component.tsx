@@ -2,6 +2,26 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 
+type HeaderProps = {
+    title : string
+}
+
+export const HeaderComponent = (props: HeaderProps) => {
+    const {title} = props
+    return (
+        <View style={styled.headerWrap}>
+            <View style={[styled.emptyBox, {backgroundColor: "#fff"}]}>
+                <Text style={{
+                    color : "#000",
+                    fontSize : 18
+                }}>
+                    {title}
+                </Text>
+            </View>
+        </View>
+    )
+}
+
 export const LogoComponent = (props: any) => {
 
     return (
@@ -96,5 +116,7 @@ const styled = StyleSheet.create({
     emptyBox: {
         flex: 1,
         flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
     }
 })

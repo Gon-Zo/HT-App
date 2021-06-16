@@ -15,7 +15,7 @@ const Home = (props: HomeProps) => {
     }
 
     return (
-        <ScrollLayout>
+        <ScrollLayout stickyList={[1]}>
             <LogoComponent/>
             <SearchButton onPress={goSearch}/>
             <LineChart/>

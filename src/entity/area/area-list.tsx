@@ -62,7 +62,6 @@ const AreaList = (props: IAreaProps) => {
     );
 
 };
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
