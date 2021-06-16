@@ -52,7 +52,7 @@ const styled = StyleSheet.create({
     searchBox: {
         flex: 1,
         margin: 10,
-        backgroundColor: "rgba( 0 , 0, 0, 0.1)",
+        backgroundColor: "rgba( 0 , 0, 0, 0.05)",
         borderRadius: 10,
         flexDirection: "row"
     },
@@ -63,7 +63,7 @@ const styled = StyleSheet.create({
     },
     placeholderBox: {
         flex: 1,
-        backgroundColor: "rgba( 0 , 0, 0, 0.05)",
+        backgroundColor: "rgba( 0 , 0, 0, 0.03)",
         alignItems: "flex-start",
         justifyContent: "center",
         marginTop: 5,
