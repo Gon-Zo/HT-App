@@ -11,10 +11,10 @@ export type StackParamList = {
     }
 }
 
-export interface IAreaDetailProps {
-    navigation : NavigationProp<StackParamList , 'AreaDetail'>,
-    route: RouteProp<StackParamList, 'AreaDetail'>
-}
+// export interface IAreaDetailProps {
+//     navigation : NavigationProp<StackParamList , 'AreaDetail'>,
+//     route: RouteProp<StackParamList, 'AreaDetail'>
+// }
 
 export interface IAreaProps {
     navigation: NavigationProp<StackParamList , 'Area'>
@@ -25,34 +25,34 @@ export interface IAreaRegionProps {
     route: RouteProp<StackParamList, 'AreaRegion'>
 }
 
-export interface IAreaItemProps {
-    item: IAreaData
-    index: number
-    onSwitch: Function
-}
+// export interface IAreaItemProps {
+//     item: IAreaData
+//     index: number
+//     onSwitch: Function
+// }
+//
+// export interface IAreaSubItemProps {
+//     item: IAreaSubData,
+//     index: number,
+//     onPress: Function
+// }
 
-export interface IAreaSubItemProps {
-    item: IAreaSubData,
-    index: number,
-    onPress: Function
-}
+// export interface IAreaData {
+//     key: string,
+//     active: boolean,
+//     list: string[]
+// }
 
-export interface IAreaData {
-    key: string,
-    active: boolean,
-    list: string[]
-}
-
-export interface IAreaSubData {
-    key: string
-}
+// export interface IAreaSubData {
+//     key: string
+// }
 
 export interface IChartComponentStyledProps {
     height: number,
     width: number
 }
 
-export interface IAreaChartComponentProps {
-    text: string,
-    open: boolean
-}
+// export interface IAreaChartComponentProps {
+//     text: string,
+//     open: boolean
+// }

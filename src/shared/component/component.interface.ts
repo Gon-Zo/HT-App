@@ -1,11 +1,12 @@
 import React from 'react';
 import {NavigationHelpers, NavigationProp, ParamListBase, TabNavigationState} from '@react-navigation/native';
 import {BottomTabDescriptorMap, BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/src/types';
+import AreaList from "./area-list";
 
 
 export interface IScrollerLayout {
     children: React.ReactNode
-    stickyList : number[]
+    stickyList: number[]
 }
 
 export interface ITextBox {
@@ -39,4 +40,30 @@ export interface ITabItemProps {
 
 export interface IHtTapStyleProps {
     active: boolean
+}
+
+export type IAreaState = {
+    key: string,
+    active: boolean,
+    list: string[]
+}
+
+export type IAreaSubState = {
+    key: string
+}
+
+export interface IAreaListProps {
+    onPress: (key : string) => void
+}
+
+export interface IAreaSubItemProps {
+    item: IAreaSubState,
+    index: number,
+    onPress: Function
+}
+
+export interface IAreaItemProps {
+    item: IAreaState
+    index: number
+    onSwitch: Function
 }

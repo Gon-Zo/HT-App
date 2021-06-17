@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {AreaSafeAreaView} from './area.style';
-import AreaList from "./area-list";
+import AreaList from "../../shared/component/area-list";
 import {IAreaProps} from "./area.interface";
 
 const Area = (props: IAreaProps) => {
@@ -13,9 +13,13 @@ const Area = (props: IAreaProps) => {
         })
     },[])
 
+    const onPress = (key: string) => {
+        navigation.navigate('AreaRegion', {key: key});
+    };
+
     return (
         <AreaSafeAreaView>
-            <AreaList navigation={navigation}/>
+            <AreaList onPress={onPress}/>
         </AreaSafeAreaView>
     )
 }
