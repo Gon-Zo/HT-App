@@ -2,10 +2,10 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {IBackButtonProps} from "./component.interface";
-import { BackButtonWrap } from "./component.style";
+import {BackButtonWrap} from "./component.style";
 
 type HeaderProps = {
-    title : string
+    title: string
 }
 
 export const HeaderComponent = (props: HeaderProps) => {
@@ -14,8 +14,8 @@ export const HeaderComponent = (props: HeaderProps) => {
         <View style={styled.headerWrap}>
             <View style={[styled.emptyBox, {backgroundColor: "#fff"}]}>
                 <Text style={{
-                    color : "#000",
-                    fontSize : 18
+                    color: "#000",
+                    fontSize: 18
                 }}>
                     {title}
                 </Text>
@@ -76,7 +76,7 @@ export const BackButton = (props: IBackButtonProps) => {
                 });
                 navigation.goBack();
             }}>
-            <FontAwesomeIcon icon={['fas' , 'chevron-left']} size={20} color={'#000'}/>
+            <FontAwesomeIcon icon={['fas', 'chevron-left']} size={20} color={'#000'}/>
         </BackButtonWrap>
     );
 };

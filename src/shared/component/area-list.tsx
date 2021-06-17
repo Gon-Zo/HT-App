@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {IAreaData, IAreaProps, IAreaSubData} from './area.interface';
 import {AreaItem, SubAreaItem} from './area-item';
 import {AREA_DATA} from "./area-data";
+import {IAreaListProps, IAreaState, IAreaSubState} from "./component.interface";
 
-const AreaList = (props: IAreaProps) => {
+const AreaList = (props: IAreaListProps) => {
 
-    const {navigation} = props;
+    const {onPress} = props;
 
-    const [items, setItems] = useState<IAreaData[]>([]);
+    const [items, setItems] = useState<IAreaState[]>([]);
 
-    const [subItems, setSubItems] = useState<IAreaSubData[]>([]);
+    const [subItems, setSubItems] = useState<IAreaSubState[]>([]);
 
     const onSwitch = (index: number) => {
         const _items = items.map((payload) => {
@@ -22,10 +22,6 @@ const AreaList = (props: IAreaProps) => {
         _selectItem.active = !_selectItem.active;
         setItems(_items);
         setSubItems(_selectItem.list);
-    };
-
-    const onPress = (key: string) => {
-        navigation.navigate('AreaRegion', {key: key});
     };
 
     useEffect(() => {
@@ -60,8 +56,8 @@ const AreaList = (props: IAreaProps) => {
 
         </View>
     );
-
 };
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
