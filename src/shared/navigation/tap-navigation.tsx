@@ -1,12 +1,12 @@
 import React, {memo} from "react";
 import 'react-native-gesture-handler';
 import Home from "../../entity/home";
-import Area from "../../entity/area";
 import Around from "../../entity/around";
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
+import AreaNavigation from "./area-navigation";
 
 const Tap = createBottomTabNavigator()
 
@@ -25,7 +25,7 @@ const TapNavigation = (props: any) => {
                         }}
             />
             <Tap.Screen name={"지역"}
-                        component={Area}
+                        component={AreaNavigation}
                         options={{
                             tabBarIcon: ({focused, color, size}) => {
                                 return <FontAwesomeIcon
