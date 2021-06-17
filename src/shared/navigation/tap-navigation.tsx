@@ -7,6 +7,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import AreaNavigation from "./area-navigation";
+import Dashboard from "../../entity/dashboard";
 
 const Tap = createBottomTabNavigator()
 
@@ -20,6 +21,17 @@ const TapNavigation = (props: any) => {
                                 return <FontAwesomeIcon
                                     color={color}
                                     icon={['fas', "home"]}
+                                    size={size}/>;
+                            }
+                        }}
+            />
+            <Tap.Screen name={"대시보드"}
+                        component={Dashboard}
+                        options={{
+                            tabBarIcon: ({focused, color, size}) => {
+                                return <FontAwesomeIcon
+                                    color={color}
+                                    icon={['fas', "chart-line"]}
                                     size={size}/>;
                             }
                         }}
