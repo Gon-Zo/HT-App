@@ -1,6 +1,8 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {IBackButtonProps} from "./component.interface";
+import { BackButtonWrap } from "./component.style";
 
 type HeaderProps = {
     title : string
@@ -62,7 +64,22 @@ export const SearchButton = (props: any) => {
     )
 }
 
-
+export const BackButton = (props: IBackButtonProps) => {
+    const {navigation} = props;
+    return (
+        <BackButtonWrap
+            activeOpacity={1}
+            onPress={() => {
+                // @ts-ignore
+                navigation.dangerouslyGetParent().setOptions({
+                    tabBarVisible: true,
+                });
+                navigation.goBack();
+            }}>
+            <FontAwesomeIcon icon={['fas' , 'chevron-left']} size={20} color={'#000'}/>
+        </BackButtonWrap>
+    );
+};
 const styled = StyleSheet.create({
     // search - button - component
     searchWrap: {
