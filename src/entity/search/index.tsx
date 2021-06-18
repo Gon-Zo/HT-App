@@ -1,5 +1,5 @@
 import React, {memo, useEffect} from 'react'
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
+import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import {NavigationProp} from "@react-navigation/native";
 import {BackButton} from "../../shared/component/component";
 import styled from "styled-components/native";
@@ -41,12 +41,10 @@ const Search = (props: ISearchProps) => {
 
             <View style={{
                 flex: .3,
-                backgroundColor: "#00f"
             }}>
                 <View style={
                     {
                         flex: .7,
-                        backgroundColor: "#f00",
                         justifyContent: "center"
                     }
                 }>
@@ -55,9 +53,29 @@ const Search = (props: ISearchProps) => {
                 <View style={
                     {
                         flex: 1,
-                        backgroundColor: "#ff0"
+                        backgroundColor: "#ff0",
+                        flexDirection: "row",
+                        // margin : 20
                     }
                 }>
+
+                    <View style={
+                        {
+                            flex: 1,
+                            backgroundColor: "#ff0",
+                            flexDirection: "row",
+                            margin: 20
+                        }
+                    }>
+                        <FontAwesomeIcon icon={['fas', 'search']} style={{
+                            alignSelf: "center",
+                            backgroundColor : "#00f"
+                        }}/>
+                        <TextInput style={{
+                            backgroundColor: "#f00",
+                            flex: 1
+                        }}/>
+                    </View>
 
                 </View>
 
@@ -86,16 +104,16 @@ const Search = (props: ISearchProps) => {
                 }>
                     <FontAwesomeIcon style={
                         {
-                            marginRight : 5
+                            marginRight: 5
                         }
-                    } size={10} icon={['fas', 'circle']}/>
+                    } size={8} icon={['fas', 'circle']}/>
                     <FontAwesomeIcon
                         style={
                             {
-                                marginRight : 5
+                                marginRight: 5
                             }
                         }
-                        size={10} icon={['fas', 'circle']}/>
+                        size={8} icon={['fas', 'circle']}/>
                 </View>
 
             </SearchContentWrap>
