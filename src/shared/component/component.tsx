@@ -71,9 +71,9 @@ export const BackButton = (props: IBackButtonProps) => {
             activeOpacity={1}
             onPress={() => {
                 // @ts-ignore
-                navigation.dangerouslyGetParent().setOptions({
-                    tabBarVisible: true,
-                });
+                // navigation.dangerouslyGetParent().setOptions({
+                //     tabBarVisible: true,
+                // });
                 navigation.goBack();
             }}>
             <FontAwesomeIcon icon={['fas', 'chevron-left']} size={20} color={'#000'}/>
