@@ -145,7 +145,6 @@
 				2EBD81BFE5435246733C25AF /* Pods-HtApp-HtAppTests.debug.xcconfig */,
 				B04EFF592200D3FE954AD635 /* Pods-HtApp-HtAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C87PFVK6K4;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HtApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C87PFVK6K4;
 				INFOPLIST_FILE = HtApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
