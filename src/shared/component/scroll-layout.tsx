@@ -16,4 +16,5 @@ const ScrollLayout = (props: IScrollerLayout) => {
     );
 };
 
+// @ts-ignore
 export default ScrollLayout;
