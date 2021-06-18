@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavigationHelpers, NavigationProp, ParamListBase, TabNavigationState} from '@react-navigation/native';
 import {BottomTabDescriptorMap, BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/src/types';
-import AreaList from "./area-list";
 
 
 export interface IScrollerLayout {

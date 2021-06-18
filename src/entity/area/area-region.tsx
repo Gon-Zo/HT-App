@@ -28,6 +28,7 @@ const AreaRegion = (props: IAreaRegionProps) => {
         <React.Fragment>
             <AreaTab data={TAB_DATA}/>
 
+            {/*// @ts-ignore*/}
             <ScrollLayout stickyList={[]}>
 
                 {/*<View style={styled.cardWrap}>*/}
