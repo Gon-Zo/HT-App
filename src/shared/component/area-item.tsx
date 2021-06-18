@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
-import {actuatedNormalize} from '../utils/font-utils';
 import {moderateScale, verticalScale} from 'react-native-size-matters' ;
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {IAreaItemProps, IAreaSubItemProps} from "./component.interface";
+import {actuatedNormalize} from "../utils/layout.utils";
 
 export const AreaItem = (props: IAreaItemProps) => {
 
