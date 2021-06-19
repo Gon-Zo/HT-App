@@ -2,7 +2,6 @@ import React from 'react';
 import {NavigationHelpers, NavigationProp, ParamListBase, TabNavigationState} from '@react-navigation/native';
 import {BottomTabDescriptorMap, BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/src/types';
 
-
 export interface IScrollerLayout {
     children: React.ReactNode
     stickyList: number[]
@@ -65,4 +64,8 @@ export interface IAreaItemProps {
     item: IAreaState
     index: number
     onSwitch: Function
+}
+
+export interface IHeaderComponentProps {
+    title : string
 }

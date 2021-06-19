@@ -1,22 +1,20 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {IBackButtonProps} from "./component.interface";
+import {IBackButtonProps, IHeaderComponentProps} from "./component.interface";
 import {BackButtonWrap} from "./component.style";
 
-type HeaderProps = {
-    title: string
-}
-
-export const HeaderComponent = (props: HeaderProps) => {
+export const HeaderComponent = (props: IHeaderComponentProps) => {
     const {title} = props
     return (
         <View style={styled.headerWrap}>
             <View style={[styled.emptyBox, {backgroundColor: "#fff"}]}>
-                <Text style={{
-                    color: "#000",
-                    fontSize: 18
-                }}>
+                <Text style={
+                    {
+                        color: "#000",
+                        fontSize: 18
+                    }
+                }>
                     {title}
                 </Text>
             </View>
@@ -38,7 +36,7 @@ export const LogoComponent = (props: any) => {
     )
 }
 
-export const SearchButton = (props: any) => {
+export const SearchUiButton = (props: any) => {
 
     const {onPress} = props
 
@@ -70,16 +68,13 @@ export const BackButton = (props: IBackButtonProps) => {
         <BackButtonWrap
             activeOpacity={1}
             onPress={() => {
-                // @ts-ignore
-                // navigation.dangerouslyGetParent().setOptions({
-                //     tabBarVisible: true,
-                // });
                 navigation.goBack();
             }}>
             <FontAwesomeIcon icon={['fas', 'chevron-left']} size={20} color={'#000'}/>
         </BackButtonWrap>
     );
 };
+
 const styled = StyleSheet.create({
     // search - button - component
     searchWrap: {
