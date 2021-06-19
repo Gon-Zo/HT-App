@@ -3,7 +3,7 @@ import ScrollLayout from "../../shared/component/scroll-layout";
 import {HomeProps} from "./home.interface";
 import LineChart from "../../shared/chart/line-chart";
 import BarChart from "../../shared/chart/bar-chart";
-import {LogoComponent, SearchButton} from "../../shared/component/component";
+import {LogoComponent, SearchUiButton} from "../../shared/component/component";
 
 
 const Home = (props: HomeProps) => {
@@ -17,7 +17,7 @@ const Home = (props: HomeProps) => {
     return (
         <ScrollLayout stickyList={[1]}>
             <LogoComponent/>
-            <SearchButton onPress={goSearch}/>
+            <SearchUiButton onPress={goSearch}/>
             <LineChart/>
             <BarChart/>
         </ScrollLayout>
