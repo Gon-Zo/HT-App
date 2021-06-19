@@ -13,7 +13,13 @@ const Tap = createBottomTabNavigator()
 
 const TapNavigation = (props: any) => {
     return (
-        <Tap.Navigator>
+        <Tap.Navigator tabBarOptions={
+            {
+                style : {
+                    height : 90
+                }
+            }
+        }>
             <Tap.Screen name={"홈"}
                         component={Home}
                         options={{
