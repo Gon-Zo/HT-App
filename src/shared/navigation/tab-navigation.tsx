@@ -11,15 +11,19 @@ import DashboardNavigation from "./dashboard-navigation";
 
 const Tap = createBottomTabNavigator()
 
-const TapNavigation = (props: any) => {
+const TabNavigation = (props: any) => {
     return (
-        <Tap.Navigator tabBarOptions={
-            {
-                style : {
-                    height : 90
+        <Tap.Navigator
+            lazy={true}
+            detachInactiveScreens={true}
+            tabBarOptions={
+                {
+                    activeTintColor: 'tomato',
+                    inactiveTintColor: 'gray',
+                    showLabel: false
                 }
             }
-        }>
+        >
             <Tap.Screen name={"홈"}
                         component={Home}
                         options={{
@@ -29,8 +33,7 @@ const TapNavigation = (props: any) => {
                                     icon={['fas', "home"]}
                                     size={size}/>;
                             }
-                        }}
-            />
+                        }}/>
             <Tap.Screen name={"대시보드"}
                         component={DashboardNavigation}
                         options={{
@@ -40,8 +43,7 @@ const TapNavigation = (props: any) => {
                                     icon={['fas', "chart-line"]}
                                     size={size}/>;
                             }
-                        }}
-            />
+                        }}/>
             <Tap.Screen name={"지역"}
                         component={AreaNavigation}
                         options={{
@@ -51,8 +53,7 @@ const TapNavigation = (props: any) => {
                                     icon={["far", "map"]}
                                     size={size}/>;
                             }
-                        }}
-            />
+                        }}/>
             <Tap.Screen name={"내주변"}
                         component={Around}
                         options={{
@@ -63,10 +64,9 @@ const TapNavigation = (props: any) => {
                                     size={size}
                                 />
                             }
-                        }}
-            />
+                        }}/>
         </Tap.Navigator>
     )
 }
 
-export default memo(TapNavigation)
+export default memo(TabNavigation)
