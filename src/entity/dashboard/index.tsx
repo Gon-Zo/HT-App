@@ -10,7 +10,7 @@ const Dashboard = (props: IDashboardProps) => {
     useEffect(() => {
 
         navigation.setOptions({
-            headerTitle : "대시보드"
+            headerTitle : "대시보드",
         })
 
     }, [])

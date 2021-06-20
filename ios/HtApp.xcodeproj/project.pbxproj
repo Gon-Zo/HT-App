@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* HtAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HtAppTests.m */; };
+		07F19C84267F67770056FA5A /* NanumSquare_acEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F19C80267F67770056FA5A /* NanumSquare_acEB.ttf */; };
+		07F19C85267F67770056FA5A /* NanumSquare_acR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F19C81267F67770056FA5A /* NanumSquare_acR.ttf */; };
+		07F19C86267F67770056FA5A /* NanumSquare_acB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F19C82267F67770056FA5A /* NanumSquare_acB.ttf */; };
+		07F19C87267F67770056FA5A /* NanumSquare_acL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07F19C83267F67770056FA5A /* NanumSquare_acL.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -30,6 +34,10 @@
 		00E356EE1AD99517003FC87E /* HtAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HtAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HtAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HtAppTests.m; sourceTree = "<group>"; };
+		07F19C80267F67770056FA5A /* NanumSquare_acEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquare_acEB.ttf; path = Fonts/NanumSquare_acEB.ttf; sourceTree = "<group>"; };
+		07F19C81267F67770056FA5A /* NanumSquare_acR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquare_acR.ttf; path = Fonts/NanumSquare_acR.ttf; sourceTree = "<group>"; };
+		07F19C82267F67770056FA5A /* NanumSquare_acB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquare_acB.ttf; path = Fonts/NanumSquare_acB.ttf; sourceTree = "<group>"; };
+		07F19C83267F67770056FA5A /* NanumSquare_acL.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = NanumSquare_acL.ttf; path = Fonts/NanumSquare_acL.ttf; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* HtApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HtApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HtApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HtApp/AppDelegate.m; sourceTree = "<group>"; };
@@ -83,6 +91,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		07F19C7F267F66E70056FA5A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* HtApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +131,11 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				07F19C82267F67770056FA5A /* NanumSquare_acB.ttf */,
+				07F19C80267F67770056FA5A /* NanumSquare_acEB.ttf */,
+				07F19C83267F67770056FA5A /* NanumSquare_acL.ttf */,
+				07F19C81267F67770056FA5A /* NanumSquare_acR.ttf */,
+				07F19C7F267F66E70056FA5A /* Fonts */,
 				13B07FAE1A68108700A75B9A /* HtApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* HtAppTests */,
@@ -242,6 +262,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F19C84267F67770056FA5A /* NanumSquare_acEB.ttf in Resources */,
+				07F19C85267F67770056FA5A /* NanumSquare_acR.ttf in Resources */,
+				07F19C86267F67770056FA5A /* NanumSquare_acB.ttf in Resources */,
+				07F19C87267F67770056FA5A /* NanumSquare_acL.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

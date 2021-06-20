@@ -14,8 +14,6 @@ const Tap = createBottomTabNavigator()
 const TabNavigation = (props: any) => {
     return (
         <Tap.Navigator
-            lazy={true}
-            detachInactiveScreens={true}
             tabBarOptions={
                 {
                     activeTintColor: 'tomato',
