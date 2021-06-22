@@ -2,6 +2,13 @@ import React from 'react';
 import {NavigationHelpers, NavigationProp, ParamListBase, TabNavigationState} from '@react-navigation/native';
 import {BottomTabDescriptorMap, BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/src/types';
 
+export interface IBaseReducer {
+    load: boolean,
+    error: any,
+    data: any
+}
+
+
 export interface IScrollerLayout {
     children: React.ReactNode
     stickyList: number[]
