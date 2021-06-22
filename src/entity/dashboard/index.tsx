@@ -2,8 +2,12 @@ import React, {useEffect} from 'react'
 import {IDashboardProps} from "./dashboard.interface";
 import AreaList from "../../shared/component/area-list";
 import {DashBoardSafeAreaView} from "./dashboard.style";
+import {useDispatch} from "react-redux";
+import {getAreaCodes} from "./dashboard.reducer";
 
 const Dashboard = (props: IDashboardProps) => {
+
+    const dispatch = useDispatch()
 
     const {navigation} = props
 
@@ -12,6 +16,8 @@ const Dashboard = (props: IDashboardProps) => {
         navigation.setOptions({
             headerTitle : "대시보드",
         })
+
+        dispatch(getAreaCodes())
 
     }, [])
 
