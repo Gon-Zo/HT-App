@@ -54,8 +54,7 @@ export default (state = initialState , action : any) : DashboardState => {
 }
 
 export const getAreaCodes = () =>{
-    const apiUri = `http://ec2-3-36-132-243.ap-northeast-2.compute.amazonaws.com:7000/api/area-code`;
-    // const apiUri = "https://www.naver.com/include/newsstand/press_info_data.json"
+    const apiUri = "http://3.36.132.243:7000/api/area-code"
     return async (dispatch : any , getState : any) =>{
         await dispatch({type : ACTION_TYPES.FETCH_AREA_CODES , payload : axios.get(apiUri)})
     }

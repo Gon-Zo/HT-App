@@ -2,8 +2,9 @@ import React, {useEffect} from 'react'
 import {IDashboardProps} from "./dashboard.interface";
 import AreaList from "../../shared/component/area-list";
 import {DashBoardSafeAreaView} from "./dashboard.style";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getAreaCodes} from "./dashboard.reducer";
+import {IRootState} from "../../shared/reducer";
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -14,7 +15,7 @@ const Dashboard = (props: IDashboardProps) => {
     useEffect(() => {
 
         navigation.setOptions({
-            headerTitle : "대시보드",
+            headerTitle: "대시보드",
         })
 
         dispatch(getAreaCodes())
@@ -28,9 +29,16 @@ const Dashboard = (props: IDashboardProps) => {
         navigation.navigate("DashboardDetail", params)
     }
 
+    const {areaCodeList} = useSelector((state: IRootState) => {
+        return {
+            areaCodeList: state.dashboard.areaCodes.data
+        }
+    },)
+
     return (
         <DashBoardSafeAreaView>
-            <AreaList onPress={onPress}/>
+            <AreaList areaCodeList={areaCodeList}
+                      onPress={onPress}/>
         </DashBoardSafeAreaView>
     )
 }

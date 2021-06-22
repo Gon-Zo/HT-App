@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {AreaSafeAreaView} from './area.style';
 import AreaList from "../../shared/component/area-list";
 import {IAreaProps} from "./area.interface";
+import {AREA_DATA} from "../../shared/component/area-data";
 
 const Area = (props: IAreaProps) => {
 
@@ -19,7 +20,8 @@ const Area = (props: IAreaProps) => {
 
     return (
         <AreaSafeAreaView>
-            <AreaList onPress={onPress}/>
+            <AreaList areaCodeList={AREA_DATA}
+                onPress={onPress}/>
         </AreaSafeAreaView>
     )
 }

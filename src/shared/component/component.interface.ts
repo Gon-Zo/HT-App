@@ -59,6 +59,7 @@ export type IAreaSubState = {
 
 export interface IAreaListProps {
     onPress: (key : string) => void
+    areaCodeList : any[]
 }
 
 export interface IAreaSubItemProps {
