@@ -38,8 +38,8 @@ export const actuatedNormalize = (size: number) => {
 
 const HEADER_TITLE_STYLE: Animated.WithAnimatedValue<StyleProp<TextStyle>> = {
     fontFamily: "NanumSquare_acB",
-    fontWeight: '800',
-    fontSize: 20
+    fontWeight: '600',
+    fontSize: 18
 }
 
 export const SCREEN_OPTION = {
