@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AreaItem, SubAreaItem} from './area-item';
-import {AREA_DATA} from "./area-data";
 import {IAreaListProps, IAreaState, IAreaSubState} from "./component.interface";
 
 const AreaList = (props: IAreaListProps) => {
@@ -25,11 +24,37 @@ const AreaList = (props: IAreaListProps) => {
     };
 
     useEffect(() => {
+
+        const {areaCodeList} = props
+
+        const items = areaCodeList.map((payload: any, index: number) => {
+
+            const key = payload.title
+
+            const active = index == 0
+
+            const list: IAreaSubState = payload.childList.map((child: any, j: number) => {
+                return {
+                    key: child.title
+                }
+            })
+
+            if (active) {
+                // @ts-ignore
+                setSubItems(list)
+            }
+
+            return {
+                key,
+                active,
+                list
+            }
+        })
+
         // @ts-ignore
-        const _subItems = AREA_DATA.find((payload: IAreaData) => payload.active).list;
-        setItems(JSON.parse(JSON.stringify(AREA_DATA)));
-        setSubItems(_subItems);
-    }, []);
+        setItems(items)
+
+    }, [props.areaCodeList])
 
     return (
         <View style={styles.container}>
