@@ -1,6 +1,5 @@
 import React from 'react';
-import {NavigationHelpers, NavigationProp, ParamListBase, TabNavigationState} from '@react-navigation/native';
-import {BottomTabDescriptorMap, BottomTabNavigationEventMap} from '@react-navigation/bottom-tabs/src/types';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 
 export interface IBaseReducer {
     load: boolean,
@@ -8,24 +7,9 @@ export interface IBaseReducer {
     data: any
 }
 
-
 export interface IScrollerLayout {
     children: React.ReactNode
     stickyList: number[]
-}
-
-export interface ITextBox {
-    text: string
-}
-
-export interface ICustomTabProps {
-    state: TabNavigationState<ParamListBase>;
-    descriptors: BottomTabDescriptorMap;
-    navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
-}
-
-export interface ISearchButtonProps {
-    navigation: NavigationProp<any>
 }
 
 export interface IBackButtonProps {
@@ -47,33 +31,33 @@ export interface IHtTapStyleProps {
     active: boolean
 }
 
-export type IAreaState = {
+export type IAreaParentsCode = {
     key: string,
     active: boolean,
-    list: string[]
+    list: Array<IAreaChildCode>
 }
 
-export type IAreaSubState = {
+export type IAreaChildCode = {
     key: string
 }
 
 export interface IAreaListProps {
-    onPress: (key : string) => void
-    areaCodeList : any[]
+    onPress: (key: string) => void
+    areaCodeList: any[]
 }
 
 export interface IAreaSubItemProps {
-    item: IAreaSubState,
+    item: IAreaChildCode,
     index: number,
     onPress: Function
 }
 
 export interface IAreaItemProps {
-    item: IAreaState
+    item: IAreaParentsCode
     index: number
     onSwitch: Function
 }
 
 export interface IHeaderComponentProps {
-    title : string
+    title: string
 }

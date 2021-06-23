@@ -15,7 +15,9 @@ export const AreaItem = (props: IAreaItemProps) => {
 
     const [textStyle, setTextStyle] = useState<StyleProp<ViewStyle>>([]);
 
-    const onSwitch = () => props.onSwitch(index);
+    const onSwitch = () => {
+        props.onSwitch(index);
+    }
 
     useEffect(() => {
 
@@ -32,6 +34,7 @@ export const AreaItem = (props: IAreaItemProps) => {
         }
 
         setItemStyle(_itemStyle);
+
         setTextStyle(_textStyle);
 
     }, [active]);
@@ -57,7 +60,7 @@ export const SubAreaItem = (props: IAreaSubItemProps) => {
             activeOpacity={1}
             style={styles.subItem}
             onPress={() => onPress(key)}>
-            <Text>{key}</Text>
+            <Text style={styles.subText}>{key}</Text>
             <FontAwesomeIcon icon={['fas', 'chevron-right']} style={styles.subIcon}/>
         </TouchableOpacity>
     );
@@ -73,6 +76,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        fontFamily : "NanumSquare_acEB"
     },
     itemText: {
         fontSize: actuatedNormalize(13),
@@ -87,6 +91,9 @@ const styles = StyleSheet.create({
         left: moderateScale(30),
         borderBottomColor: '#868585',
         borderBottomWidth: .3,
+    },
+    subText : {
+        fontFamily : "NanumSquare_acR"
     },
     subIcon: {
         right: moderateScale(50),

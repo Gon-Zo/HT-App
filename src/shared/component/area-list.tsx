@@ -1,59 +1,65 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {AreaItem, SubAreaItem} from './area-item';
-import {IAreaListProps, IAreaState, IAreaSubState} from "./component.interface";
+import {IAreaListProps, IAreaParentsCode, IAreaChildCode} from "./component.interface";
+import {toInitAreaCodes} from "./component.service";
 
 const AreaList = (props: IAreaListProps) => {
 
     const {onPress} = props;
 
-    const [items, setItems] = useState<IAreaState[]>([]);
+    const [items, setItems] = useState<Array<IAreaParentsCode>>([]);
 
-    const [subItems, setSubItems] = useState<IAreaSubState[]>([]);
+    const [subItems, setSubItems] = useState<Array<IAreaChildCode>>([]);
 
     const onSwitch = (index: number) => {
-        const _items = items.map((payload) => {
-            const _payload = JSON.parse(JSON.stringify(payload));
-            _payload.active = false;
-            return _payload;
-        });
-        const _selectItem = _items[index];
-        _selectItem.active = !_selectItem.active;
-        setItems(_items);
-        setSubItems(_selectItem.list);
+        const initAreaCodeList = items.map(toInitAreaCodes);
+
+        const selectAreaCode: IAreaParentsCode = initAreaCodeList[index];
+
+        selectAreaCode.active = !selectAreaCode.active;
+
+        setItems(initAreaCodeList);
+
+        const isEmpty = selectAreaCode.list.length == 0;
+
+        if (isEmpty) {
+            onPress(selectAreaCode.key)
+            setSubItems([])
+        } else {
+            setSubItems(selectAreaCode.list)
+        }
     };
 
     useEffect(() => {
-
         const {areaCodeList} = props
 
-        const items = areaCodeList.map((payload: any, index: number) => {
+        if (typeof areaCodeList == "undefined") return;
+
+        const items: Array<IAreaParentsCode> = areaCodeList.map((payload: any, index: number) => {
 
             const key = payload.title
 
             const active = index == 0
 
-            const list: IAreaSubState = payload.childList.map((child: any, j: number) => {
-                return {
-                    key: child.title
-                }
-            })
+            const list: Array<IAreaChildCode> = payload.childList
+                .map((child: any, j: number) => {
+                    return {
+                        key: child.title
+                    }
+                })
 
             if (active) {
-                // @ts-ignore
                 setSubItems(list)
             }
 
             return {
-                key,
-                active,
-                list
+                key: key,
+                active: active,
+                list: list
             }
         })
-
-        // @ts-ignore
         setItems(items)
-
     }, [props.areaCodeList])
 
     return (
@@ -77,8 +83,6 @@ const AreaList = (props: IAreaListProps) => {
                                      onPress={onPress}/>
                     }/>
             </View>
-
-
         </View>
     );
 };
