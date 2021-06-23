@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import {moderateScale, verticalScale} from 'react-native-size-matters' ;
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
-import {IAreaItemProps, IAreaSubItemProps} from "./component.interface";
+import {IAreaCodeSubItemProps, IAreaCodeItemProps} from "./component.interface";
 import {actuatedNormalize} from "../utils/layout.utils";
 
-export const AreaItem = (props: IAreaItemProps) => {
+export const AreaCodeItem = (props: IAreaCodeItemProps) => {
 
     const {key, active} = props.item;
 
@@ -49,7 +49,7 @@ export const AreaItem = (props: IAreaItemProps) => {
     );
 };
 
-export const SubAreaItem = (props: IAreaSubItemProps) => {
+export const AreaCodeSubItem = (props: IAreaCodeSubItemProps) => {
 
     const {item, index, onPress} = props;
 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily : "NanumSquare_acEB"
+        fontFamily: "NanumSquare_acEB"
     },
     itemText: {
         fontSize: actuatedNormalize(13),
@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#868585',
         borderBottomWidth: .3,
     },
-    subText : {
-        fontFamily : "NanumSquare_acR"
+    subText: {
+        fontFamily: "NanumSquare_acR"
     },
     subIcon: {
         right: moderateScale(50),
