@@ -2,26 +2,36 @@ import React, {useEffect} from 'react'
 import {AreaSafeAreaView} from './area.style';
 import AreaList from "../../shared/component/area-list";
 import {IAreaProps} from "./area.interface";
-import {AREA_DATA} from "../../shared/component/area-data";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import {IRootState} from "../../shared/reducer";
+import {getAreaCodes} from "./area.reducer";
 
 const Area = (props: IAreaProps) => {
 
     const {navigation} = props
 
-    useEffect(()=>{
-        navigation.setOptions({
-            headerTitle : "지역"
-        })
-    },[])
+    const dispatch = useDispatch()
 
-    const onPress = (key: string) => {
-        navigation.navigate('AreaRegion', {key: key});
+    useEffect(() => {
+        navigation.setOptions({
+            headerTitle: "지역"
+        })
+        dispatch(getAreaCodes())
+    }, [])
+
+    const onPress = (select: any) => {
+        navigation.navigate('AreaRegion', select);
     };
+
+    const {areaCodeList} = useSelector(({area}: IRootState) => {
+        return {
+            areaCodeList: area.areaCodes.data
+        }
+    }, shallowEqual)
 
     return (
         <AreaSafeAreaView>
-            <AreaList areaCodeList={AREA_DATA}
-                onPress={onPress}/>
+            <AreaList areaCodeList={areaCodeList} onPress={onPress}/>
         </AreaSafeAreaView>
     )
 }
