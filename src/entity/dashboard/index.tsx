@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {IDashboardProps} from "./dashboard.interface";
 import AreaList from "../../shared/component/area-list";
 import {DashBoardSafeAreaView} from "./dashboard.style";
-import {useDispatch, useSelector} from "react-redux";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {getAreaCodes} from "./dashboard.reducer";
 import {IRootState} from "../../shared/reducer";
 
@@ -30,12 +30,11 @@ const Dashboard = (props: IDashboardProps) => {
         return {
             areaCodeList: state.dashboard.areaCodes.data
         }
-    },)
+    }, shallowEqual)
 
     return (
         <DashBoardSafeAreaView>
-            <AreaList areaCodeList={areaCodeList}
-                      onPress={onPress}/>
+            <AreaList areaCodeList={areaCodeList} onPress={onPress}/>
         </DashBoardSafeAreaView>
     )
 }

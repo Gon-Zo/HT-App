@@ -4,7 +4,9 @@ export type StackParamList = {
     Area: undefined,
     Search: undefined,
     AreaRegion: {
-        key: string
+        key: string,
+        index : number,
+        code : string
     },
     AreaDetail: {
         title: string

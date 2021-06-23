@@ -1,48 +1,46 @@
 import axios from 'axios'
-
-// @ts-ignore
 import {IBaseReducer} from "../../shared/component/component.interface";
 import {FAILURE, REQUEST, SUCCESS} from "../../shared/utils/action-utils";
 
 const ACTION_TYPES = {
-    FETCH_AREA_CODES : "dashboard/FETCH_AREA_CODES"
+    FETCH_AREA_CODES: "area/FETCH_AREA_CODES"
 }
 
 const initialState = {
-   areaCodes : {}  as IBaseReducer
+    areaCodes: {} as IBaseReducer
 }
 
-export type DashboardState = Readonly<typeof initialState>
+export type AreaState = Readonly<typeof initialState>
 
-export default (state = initialState , action : any) : DashboardState => {
+export default (state = initialState, action: any): AreaState => {
     switch (action.type) {
-        case SUCCESS(ACTION_TYPES.FETCH_AREA_CODES):{
+        case SUCCESS(ACTION_TYPES.FETCH_AREA_CODES): {
             return {
                 ...state,
                 areaCodes: {
-                    load : false,
-                    error : null,
-                    data : action.payload.data
+                    load: false,
+                    error: null,
+                    data: action.payload.data
                 }
             }
         }
-        case REQUEST(ACTION_TYPES.FETCH_AREA_CODES):{
+        case REQUEST(ACTION_TYPES.FETCH_AREA_CODES) : {
             return {
                 ...state,
                 areaCodes: {
-                    load : true,
-                    error : null,
-                    data : []
+                    load: true,
+                    error: null,
+                    data: []
                 }
             }
         }
-        case FAILURE(ACTION_TYPES.FETCH_AREA_CODES):{
+        case FAILURE(ACTION_TYPES.FETCH_AREA_CODES) : {
             return {
                 ...state,
                 areaCodes: {
-                    load : false,
-                    error : action.payload,
-                    data : []
+                    load: false,
+                    error: action.payload,
+                    data: []
                 }
             }
         }
