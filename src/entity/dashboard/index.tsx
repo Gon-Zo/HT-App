@@ -22,11 +22,8 @@ const Dashboard = (props: IDashboardProps) => {
 
     }, [])
 
-    const onPress = (key: string) => {
-        const params = {
-            key
-        }
-        navigation.navigate("DashboardDetail", params)
+    const onPress = (select: any) => {
+        navigation.navigate("DashboardDetail", select)
     }
 
     const {areaCodeList} = useSelector((state: IRootState) => {

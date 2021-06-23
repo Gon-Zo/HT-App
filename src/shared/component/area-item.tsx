@@ -59,7 +59,7 @@ export const SubAreaItem = (props: IAreaSubItemProps) => {
         <TouchableOpacity
             activeOpacity={1}
             style={styles.subItem}
-            onPress={() => onPress(key)}>
+            onPress={() => onPress(item)}>
             <Text style={styles.subText}>{key}</Text>
             <FontAwesomeIcon icon={['fas', 'chevron-right']} style={styles.subIcon}/>
         </TouchableOpacity>

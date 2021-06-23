@@ -3,7 +3,9 @@ import {NavigationProp, RouteProp} from "@react-navigation/native";
 export type DashboardStack = {
     Dashboard: undefined,
     DashboardDetail: {
-        key: string
+        key: string,
+        index : number,
+        code : string
     }
 }
 

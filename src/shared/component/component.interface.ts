@@ -34,15 +34,19 @@ export interface IHtTapStyleProps {
 export type IAreaParentsCode = {
     key: string,
     active: boolean,
+    index : number,
+    code : string,
     list: Array<IAreaChildCode>
 }
 
 export type IAreaChildCode = {
-    key: string
+    key: string,
+    index : number,
+    code : string,
 }
 
 export interface IAreaListProps {
-    onPress: (key: string) => void
+    onPress: (select : any) => void
     areaCodeList: any[]
 }
 
