@@ -6,7 +6,7 @@ const DashboardDetail = (props: IDashboardDetailProps) => {
 
     const {navigation, route} = props
 
-    const {key} = route.params
+    const {key, index, code} = route.params
 
     useEffect(() => {
 

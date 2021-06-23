@@ -24,7 +24,7 @@ const AreaList = (props: IAreaListProps) => {
         const isEmpty = selectAreaCode.list.length == 0;
 
         if (isEmpty) {
-            onPress(selectAreaCode.key)
+            onPress(selectAreaCode)
             setSubItems([])
         } else {
             setSubItems(selectAreaCode.list)
@@ -32,34 +32,46 @@ const AreaList = (props: IAreaListProps) => {
     };
 
     useEffect(() => {
+
         const {areaCodeList} = props
 
         if (typeof areaCodeList == "undefined") return;
 
-        const items: Array<IAreaParentsCode> = areaCodeList.map((payload: any, index: number) => {
+        const items: Array<IAreaParentsCode> = areaCodeList
+            .map((areaCode: any, i: number) => {
 
-            const key = payload.title
+                const key = areaCode.title
 
-            const active = index == 0
+                const index = areaCode.index
 
-            const list: Array<IAreaChildCode> = payload.childList
-                .map((child: any, j: number) => {
-                    return {
-                        key: child.title
-                    }
-                })
+                const code = areaCode.code
 
-            if (active) {
-                setSubItems(list)
-            }
+                const active = i === 0
 
-            return {
-                key: key,
-                active: active,
-                list: list
-            }
-        })
+                const list: Array<IAreaChildCode> = areaCode.childList
+                    .map((child: any, j: number) => {
+                        return {
+                            key: child.title,
+                            index: child.index,
+                            code: child.code
+                        }
+                    })
+
+                if (active) {
+                    setSubItems(list)
+                }
+
+                return {
+                    key: key,
+                    active: active,
+                    index: index,
+                    code: code,
+                    list: list
+                }
+            })
+
         setItems(items)
+
     }, [props.areaCodeList])
 
     return (
