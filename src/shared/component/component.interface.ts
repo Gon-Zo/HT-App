@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import {AreaCodeItem, AreaCodeSubItem} from "./area-code-item";
 
 export interface IBaseReducer {
     load: boolean,
@@ -50,13 +51,13 @@ export interface IAreaListProps {
     areaCodeList: any[]
 }
 
-export interface IAreaSubItemProps {
+export interface IAreaCodeSubItemProps {
     item: IAreaChildCode,
     index: number,
     onPress: Function
 }
 
-export interface IAreaItemProps {
+export interface IAreaCodeItemProps {
     item: IAreaParentsCode
     index: number
     onSwitch: Function

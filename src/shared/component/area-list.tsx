@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import {AreaItem, SubAreaItem} from './area-item';
+import {AreaCodeItem, AreaCodeSubItem} from './area-code-item';
 import {IAreaListProps, IAreaParentsCode, IAreaChildCode} from "./component.interface";
 import {toInitAreaCodes} from "./component.service";
 
@@ -81,18 +81,18 @@ const AreaList = (props: IAreaListProps) => {
                     data={items}
                     keyExtractor={({key}, index) => index.toString()}
                     renderItem={({item, index}) =>
-                        <AreaItem index={index}
-                                  item={item}
-                                  onSwitch={onSwitch}/>}
+                        <AreaCodeItem index={index}
+                                      item={item}
+                                      onSwitch={onSwitch}/>}
                 />
             </View>
             <View style={styles.subList}>
                 <FlatList
                     data={subItems}
                     renderItem={({item, index}) =>
-                        <SubAreaItem item={item}
-                                     index={index}
-                                     onPress={onPress}/>
+                        <AreaCodeSubItem item={item}
+                                         index={index}
+                                         onPress={onPress}/>
                     }/>
             </View>
         </View>
