@@ -12,4 +12,6 @@ import {far} from '@fortawesome/free-regular-svg-icons'
 
 library.add(fas, far)
 
+import './src/config/axios-config'
+
 AppRegistry.registerComponent(appName, () => App);

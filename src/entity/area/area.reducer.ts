@@ -51,7 +51,7 @@ export default (state = initialState, action: any): AreaState => {
 }
 
 export const getAreaCodes = () =>{
-    const apiUri = "http://3.36.132.243:7000/api/area-code"
+    const apiUri = "/api/area-code"
     return async (dispatch : any , getState : any) =>{
         await dispatch({type : ACTION_TYPES.FETCH_AREA_CODES , payload : axios.get(apiUri)})
     }
