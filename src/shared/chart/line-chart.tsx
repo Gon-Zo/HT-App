@@ -17,7 +17,7 @@ const LineChart = (props: LineChartProps) => {
     return (
         <VictoryChart
             theme={VictoryTheme.material}
-        >
+            domainPadding={20}>
             <VictoryLine
                 style={{
                     data: {stroke: "#c43a31"},
