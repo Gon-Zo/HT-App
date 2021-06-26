@@ -2,7 +2,9 @@ export type LineChartProps = {}
 
 export type LineChartState = {}
 
-export type BarChartProps = {}
+export type BarChartProps = {
+    barData : []
+}
 
 export type BarChartState = {
     tickFormat: any[]
