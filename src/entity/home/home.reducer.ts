@@ -51,7 +51,7 @@ export default (state = initialState, action: any): HomeState => {
 export const getRealEstateList = () => {
     return async (dispatch: any, getState: any) => {
 
-        const apiUri = "http://3.36.132.243:7000/api/national-statistics/nationwide/number-transactions"
+        const apiUri = "/api/national-statistics/nationwide/number-transactions"
 
         // "?startDate=202010&endDate=202010&region=11000&isYear=false"
 
