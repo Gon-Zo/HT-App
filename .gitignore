@@ -9,3 +9,7 @@
 /ios/HtAppTests/
 /ios/Pods/
   
+
+
+#app
+./src/assets/secret.json
