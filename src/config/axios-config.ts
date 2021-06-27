@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://3.36.132.243:7000'
+// @ts-ignore
+import COMMON from '../assets/secret.json'
+
+axios.defaults.baseURL = COMMON.IP
 
 axios.defaults.timeout = 10000
 
