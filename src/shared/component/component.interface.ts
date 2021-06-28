@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
-import {AreaCodeItem, AreaCodeSubItem} from "./area-code-item";
+import {StyleProp, TextStyle} from "react-native";
 
 export interface IBaseReducer {
     load: boolean,
@@ -65,4 +65,9 @@ export interface IAreaCodeItemProps {
 
 export interface IHeaderComponentProps {
     title: string
+}
+
+export interface IAppTextProps {
+    title?: string,
+    style?: StyleProp<TextStyle>
 }
