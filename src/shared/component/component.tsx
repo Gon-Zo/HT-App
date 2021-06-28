@@ -1,8 +1,17 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {IBackButtonProps, IHeaderComponentProps} from "./component.interface";
+import {IAppTextProps, IBackButtonProps} from "./component.interface";
 import {BackButtonWrap} from "./component.style";
+
+export const AppText = (props : IAppTextProps)  =>{
+   const {title , style} = props
+    return (
+        <Text  style={[style , {fontFamily : "NanumSquare_acB"}]}>
+            {title}
+        </Text>
+    )
+}
 
 export const LogoComponent = (props: any) => {
 

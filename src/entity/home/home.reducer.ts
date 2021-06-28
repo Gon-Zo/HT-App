@@ -49,6 +49,7 @@ export default (state = initialState, action: any): HomeState => {
 
 
 export const getRealEstateList = () => {
+
     return async (dispatch: any, getState: any) => {
 
         const apiUri = "/api/national-statistics/nationwide/number-transactions"
@@ -68,5 +69,4 @@ export const getRealEstateList = () => {
             })
         })
     }
-
 }

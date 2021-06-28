@@ -1,14 +1,14 @@
 import React, {memo, useEffect} from 'react'
 import ScrollLayout from "../../shared/component/scroll-layout";
 import {HomeProps} from "./home.interface";
-import LineChart from "../../shared/chart/line-chart";
 import BarChart from "../../shared/chart/bar-chart";
-import {LogoComponent, SearchUiButton} from "../../shared/component/component";
-import PieChart from "../../shared/chart/pie-chart";
+import {AppText, LogoComponent, SearchUiButton} from "../../shared/component/component";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import {getRealEstateList} from "./home.reducer";
 import {IRootState} from "../../shared/reducer";
-
+import {Text, TouchableOpacity, View} from "react-native";
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
+import {HomeBarChart} from "./home.component";
 
 const Home = (props: HomeProps) => {
 
@@ -16,9 +16,10 @@ const Home = (props: HomeProps) => {
 
     const dispatch = useDispatch()
 
-    const {realEstateListData} = useSelector((state: IRootState) => {
+    const {realEstateListData, realEstateListLoad} = useSelector((state: IRootState) => {
         return {
-            realEstateListData: state.home.realEstateList.data
+            realEstateListData: state.home.realEstateList.data,
+            realEstateListLoad: state.home.realEstateList.load,
         }
     }, shallowEqual)
 
@@ -34,9 +35,9 @@ const Home = (props: HomeProps) => {
         <ScrollLayout stickyList={[1]}>
             <LogoComponent/>
             <SearchUiButton onPress={goSearch}/>
-            <BarChart barData={realEstateListData}/>
+            <HomeBarChart data={realEstateListData} load={realEstateListLoad}/>
             {/*<PieChart data={realEstateListData}/>*/}
-            <LineChart/>
+            {/*<LineChart/>*/}
         </ScrollLayout>
     )
 

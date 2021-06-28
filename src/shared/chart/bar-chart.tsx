@@ -1,4 +1,5 @@
-import React, {memo, useEffect, useState} from 'react'
+import React from 'react'
+import {BarChartProps} from "./chart.interface";
 import {
     VictoryBar,
     VictoryChart,
@@ -7,67 +8,36 @@ import {
     VictoryZoomContainer,
     VictoryLabel,
 } from "victory-native";
-import {BarChartProps, BarChartState} from "./chart.interface";
 
 const BarChart = (props: BarChartProps) => {
 
-    const {barData} = props
-
-    const [state, setState] = useState<BarChartState>({
-        tickFormat: [],
-        tickValue: []
-    })
-
-    useEffect(() => {
-
-        if (typeof barData == "undefined") return;
-
-        const tickFormat = barData.map(payload => payload['regionName'])
-
-        const tickValue = barData.map((payload: any, index: number) => index + 1)
-
-        const newState: BarChartState = {
-            tickValue,
-            tickFormat
-        }
-
-        setState(newState)
-
-    }, [barData])
-
-    if (Object.keys(state).length == 0) return null
-
-    if (typeof barData == "undefined") return null
+    const {barData, zoomDomain, tickFormat, x, y} = props
 
     return (
         <VictoryChart
             containerComponent={
-                <VictoryZoomContainer
-                    zoomDomain={
-                        {x: [1, 5]}
-                    }
-                />
+                <VictoryZoomContainer zoomDomain={zoomDomain}/>
             }
+            height={350}
             theme={VictoryTheme.material}
-            domainPadding={20}
+            // domainPadding={20}
         >
-            <VictoryAxis tickValues={state.tickValue}
-                         tickFormat={state.tickFormat}/>
+            <VictoryAxis tickValues={barData.tickValue}
+                         tickFormat={barData.tickFormat}/>
             <VictoryAxis
                 dependentAxis={true}
-                tickFormat={(x) => (`${x / 1000}천건`)}/>
-            <VictoryBar
-                labels={({datum}) => datum.y}
-                style={{labels: {fill: "red"}}}
-                labelComponent={<VictoryLabel dy={30}/>}
-                barRatio={3}
-                alignment="start"
-                data={barData}
-                x="regionName"
-                y="count"
+                tickFormat={tickFormat}/>
+            <VictoryBar labels={({datum}) => datum.y}
+                        style={{labels: {fill: "red"}}}
+                        labelComponent={<VictoryLabel dy={30}/>}
+                        barRatio={3}
+                        alignment="start"
+                        data={barData.data}
+                        x={x}
+                        y={y}
             />
         </VictoryChart>
     )
 }
 
-export default memo(BarChart)
+export default BarChart
