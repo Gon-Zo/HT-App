@@ -54,8 +54,6 @@ export const getRealEstateList = () => {
 
         const apiUri = "/api/national-statistics/nationwide/number-transactions"
 
-        // "?startDate=202010&endDate=202010&region=11000&isYear=false"
-
         const params = {
             startDate: '202105',
             endDate: '202105',
