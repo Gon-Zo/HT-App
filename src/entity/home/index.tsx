@@ -35,6 +35,15 @@ const Home = (props: HomeProps) => {
         <ScrollLayout stickyList={[1]}>
             <LogoComponent/>
             <SearchUiButton onPress={goSearch}/>
+            <View>
+                <Text>토지거래</Text>
+                <Text>순수토지거래</Text>
+                <Text>거축물거래</Text>
+                <Text>주택거래</Text>
+                <Text>아프트거래</Text>
+                <Text>주택매매거래</Text>
+                <Text>아파트매매거래</Text>
+            </View>
             <HomeBarChart data={realEstateListData} load={realEstateListLoad}/>
             {/*<PieChart data={realEstateListData}/>*/}
             {/*<LineChart/>*/}
