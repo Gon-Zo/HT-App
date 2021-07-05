@@ -45,8 +45,7 @@ const Home = (props: HomeProps) => {
                 <Text>아파트매매거래</Text>
             </View>
             <HomeBarChart data={realEstateListData} load={realEstateListLoad}/>
-            {/*<PieChart data={realEstateListData}/>*/}
-            {/*<LineChart/>*/}
+
         </ScrollLayout>
     )
 
