@@ -2,14 +2,21 @@
 /node_modules/
 
 # ios
-/ios/
+#/ios/
+#/ios/HtApp/
+#/ios/HtApp.xcodeproj/
+#/ios/HtApp.xcworkspace/
+#/ios/HtAppTests/
+#/ios/Pods/
+#  
+
+
+#app
+./src/assets/secret.json
+
+# ios
 /ios/HtApp/
 /ios/HtApp.xcodeproj/
 /ios/HtApp.xcworkspace/
 /ios/HtAppTests/
 /ios/Pods/
-  
-
-
-#app
-./src/assets/secret.json
