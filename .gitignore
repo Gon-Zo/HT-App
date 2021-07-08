@@ -5,8 +5,11 @@
 ./src/assets/secret.json
 
 # ios
-/ios/HtApp/
-/ios/HtApp.xcodeproj/
-/ios/HtApp.xcworkspace/
-/ios/HtAppTests/
+/ios/HT_App/
+/ios/HT_App.xcodeproj/
+/ios/HT_App.xcworkspace/
+/ios/HT_AppTests/
 /ios/Pods/
+
+# adroid
+/android/.gradle/
