@@ -2,7 +2,7 @@
 /node_modules/
 
 #app
-./src/assets/secret.json
+!./src/assets/secret.json
 
 # ios
 /ios/HT_App/
