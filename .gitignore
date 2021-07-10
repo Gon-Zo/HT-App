@@ -2,7 +2,6 @@
 /node_modules/
 
 #app
-./src/secret
 
 # ios
 /ios/HT_App/
@@ -13,3 +12,6 @@
 
 # adroid
 /android/.gradle/
+
+#code
+/secret/
