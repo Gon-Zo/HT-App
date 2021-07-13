@@ -14,7 +14,9 @@ const initialState = {
 export type CountState = Readonly<typeof initialState>;
 
 export default (state = initialState, action: any): CountState => {
+
     switch (action.type) {
+
         case ACTION_TYPES.UP_NUMBER : {
             return {
                 ...state,
@@ -25,6 +27,7 @@ export default (state = initialState, action: any): CountState => {
                 }
             }
         }
+
         case ACTION_TYPES.DOWN_NUMBER : {
             return {
                 ...state,
@@ -35,6 +38,7 @@ export default (state = initialState, action: any): CountState => {
                 }
             }
         }
+
         case ACTION_TYPES.SET_NUMBER: {
             return {
                 ...state,
@@ -45,9 +49,11 @@ export default (state = initialState, action: any): CountState => {
                 }
             }
         }
+
         default: {
             return state
         }
+
     }
 }
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {memo, useEffect} from 'react'
 import {useSelector, shallowEqual, useDispatch} from 'react-redux'
 import {Button, SafeAreaView, StatusBar, Text, View} from "react-native";
 import {IRootState} from "../../shared/reducer";
@@ -26,7 +26,7 @@ const Count = (props: any) => {
         <React.Fragment>
             <StatusBar barStyle={"dark-content"}/>
             <SafeAreaView>
-                <View style={{backgroundColor : "#fff"}}>
+                <View>
                     <Text>Count</Text>
                     <Button title={"-"} onPress={onDown}/>
                     <Text>{number}</Text>
@@ -37,4 +37,5 @@ const Count = (props: any) => {
     )
 }
 
-export default Count
+
+export default memo(Count)
