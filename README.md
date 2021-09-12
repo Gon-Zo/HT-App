@@ -1,6 +1,6 @@
 # Real-Estate Platform
 
-### start to ios
+### Start to IOS
 
 #### yarn build
 
@@ -29,7 +29,7 @@ yarn ios
 #### npm run ios
 
 ```bash
-npx react-native run ios
+npm ios
 ```
 
 ### Project Structure
