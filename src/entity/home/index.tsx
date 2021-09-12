@@ -24,7 +24,7 @@ const Home = (props: HomeProps) => {
     }, shallowEqual)
 
     useEffect(() => {
-        dispatch(getRealEstateList())
+        // dispatch(getRealEstateList())
     }, [])
 
     const goSearch = () => {

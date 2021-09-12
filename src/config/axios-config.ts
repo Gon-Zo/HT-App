@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 // @ts-ignore
-import COMMON from '../../secret/secret.json'
+// import COMMON from '../../secret/secret.json'
 
-axios.defaults.baseURL = COMMON.IP
+// axios.defaults.baseURL = COMMON.IP
 
 axios.defaults.timeout = 10000
 

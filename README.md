@@ -1,5 +1,37 @@
 # Real-Estate Platform
 
+### start to ios
+
+#### yarn build
+
+```bash
+yarn install
+```
+
+#### npm build
+
+```bash
+npm install
+```
+
+#### ios pod install
+
+```bash
+cd ios && pod update && cd ..
+```
+
+#### yarn run ios
+
+```bash
+yarn ios 
+```
+
+#### npm run ios
+
+```bash
+npx react-native run ios
+```
+
 ### Project Structure
 
 ```
@@ -16,16 +48,3 @@
     - reducer
     - utils
 ```
-
-### Use
-
-
-#### ios
-
-
-```bash
-cd ios && pod install 
-```
-
-```bash
-npx react-native run ios
