@@ -1,50 +1,51 @@
-# Real-Estate Platform
+# Real Estate Application
 
-### Start to IOS
+### Project Structure
 
-#### yarn build
+```
+├── __tests__
+├── android
+│   ├── app
+│   └── gradle
+├── ios
+│   ├── HT_App
+│   ├── HT_App.xcodeproj
+│   ├── HT_App.xcworkspace
+│   ├── HT_AppTests
+│   └── Pods
+└── src
+    ├── assets
+    ├── config
+    ├── entity
+    └── shared
+```
+
+### Runbook
+
+#### use to yarn
 
 ```bash
 yarn install
 ```
 
-#### npm build
-
 ```bash
-npm install
+cd ios && pod install && cd ..
 ```
-
-#### ios pod install
-
-```bash
-cd ios && pod update && cd ..
-```
-
-#### yarn run ios
 
 ```bash
 yarn ios 
 ```
 
-#### npm run ios
+#### use to npm
+
+```bash
+npm install
+```
+
+```bash
+cd ios && pod install && cd ..
+```
 
 ```bash
 npm ios
-```
-
-### Project Structure
-
-```
-- src
-  - assets
-    - fonts
-    - imsages
-  - config
-  - entity
-  - shared
-    - chart
-    - compoent
-    - naviagtion
-    - reducer
-    - utils
 ```
