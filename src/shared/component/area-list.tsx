@@ -13,6 +13,7 @@ const AreaList = (props: IAreaListProps) => {
     const [subItems, setSubItems] = useState<Array<IAreaChildCode>>([]);
 
     const onSwitch = (index: number) => {
+
         const initAreaCodeList = items.map(toInitAreaCodes);
 
         const selectAreaCode: IAreaParentsCode = initAreaCodeList[index];
@@ -29,6 +30,7 @@ const AreaList = (props: IAreaListProps) => {
         } else {
             setSubItems(selectAreaCode.list)
         }
+
     };
 
     useEffect(() => {
@@ -38,22 +40,23 @@ const AreaList = (props: IAreaListProps) => {
         if (typeof areaCodeList == "undefined") return;
 
         const items: Array<IAreaParentsCode> = areaCodeList
-            .map((areaCode: any, i: number) => {
+            .map((codeItem: any, num: number) => {
 
-                const key = areaCode.title
+                const key = codeItem['name']
 
-                const index = areaCode.index
+                const index = num;
 
-                const code = areaCode.code
+                const code = codeItem['code']
 
-                const active = i === 0
+                const active = num == 0
 
-                const list: Array<IAreaChildCode> = areaCode.childList
-                    .map((child: any, j: number) => {
+                const list = codeItem['subAreaCodeList']
+                    .map((subCodeItem: any, jum: number) => {
+
                         return {
-                            key: child.title,
-                            index: child.index,
-                            code: child.code
+                            key: subCodeItem['name'],
+                            index: jum,
+                            code: subCodeItem['code']
                         }
                     })
 
@@ -62,12 +65,13 @@ const AreaList = (props: IAreaListProps) => {
                 }
 
                 return {
-                    key: key,
-                    active: active,
-                    index: index,
-                    code: code,
-                    list: list
-                }
+                    key,
+                    active,
+                    index,
+                    code,
+                    list
+                } as IAreaParentsCode
+
             })
 
         setItems(items)

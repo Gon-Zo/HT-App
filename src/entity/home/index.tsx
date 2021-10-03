@@ -1,20 +1,11 @@
-import React, { memo, useEffect, useRef } from 'react'
+import React, { memo, useEffect } from 'react'
 import ScrollLayout from "../../shared/component/scroll-layout";
 import { HomeProps } from "./home.interface";
-import { AppText, LogoComponent, SearchUiButton } from "../../shared/component/component";
+import { LogoComponent, SearchUiButton } from "../../shared/component/component";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../shared/reducer";
-
-
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-} from "react-native-chart-kit";
-import { View, Text, Dimensions } from "react-native";
+import { View } from "react-native";
+import { VictoryAxis, VictoryChart, VictoryLine, VictoryPie, VictoryScatter } from "victory-native";
 
 const Home = (props: HomeProps) => {
 
@@ -43,54 +34,37 @@ const Home = (props: HomeProps) => {
             <SearchUiButton onPress={goSearch}/>
 
             <View>
-                <Text>Bezier Line Chart</Text>
-                <LineChart
-                    data={{
-                        labels: ["January", "February", "March", "April", "May", "June"],
-                        datasets: [
-                            {
-                                data: [
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100
-                                ]
-                            }
-                        ]
-                    }}
-                    width={Dimensions.get("window").width} // from react-native
-                    height={220}
-                    yAxisLabel="$"
-                    yAxisSuffix="k"
-                    yAxisInterval={1} // optional, defaults to 1
-                    chartConfig={{
-                        backgroundColor: "#e26a00",
-                        backgroundGradientFrom: "#fb8c00",
-                        backgroundGradientTo: "#ffa726",
-                        decimalPlaces: 2, // optional, defaults to 2dp
-                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        style: {
-                            borderRadius: 16
-                        },
-                        propsForDots: {
-                            r: "6",
-                            strokeWidth: "2",
-                            stroke: "#ffa726"
-                        }
-                    }}
-                    bezier
-                    style={{
-                        marginVertical: 8,
-                        borderRadius: 16
-                    }}
+                <VictoryPie
+                    colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
+                    cornerRadius={({datum}) => datum.y * 5}
+                    padding={100}
+                    data={[
+                        {x: 1, y: 2, label: "서울"},
+                        {x: 2, y: 3, label: "부산"},
+                        {x: 3, y: 5, label: "대구"}
+                    ]}
                 />
             </View>
 
+            <View>
+                <VictoryChart>
+                    <VictoryAxis/>
+                    <VictoryAxis dependentAxis/>
+                    <VictoryLine
+                        style={{data: {stroke: "orange"}}}
+                        y={(data) => Math.sin(2 * Math.PI * data.x)}
+                    />
+                    <VictoryScatter
+                        y={(data) => Math.sin(2 * Math.PI * data.x)}
+                        samples={25}
+                        size={5}
+                        style={{data: {fill: "tomato"}}}
+                    />
+                </VictoryChart>
+            </View>
         </ScrollLayout>
     )
+
 }
 
 export default memo(Home);

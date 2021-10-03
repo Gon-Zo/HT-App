@@ -48,3 +48,8 @@ npm ios
     - reducer
     - utils
 ```
+
+
+### About.
+
+[chart lib](https://formidable.com/open-source/victory/docs)

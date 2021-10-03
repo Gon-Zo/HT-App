@@ -37,7 +37,7 @@ export const actuatedNormalize = (size: number) => {
 };
 
 const HEADER_TITLE_STYLE: Animated.WithAnimatedValue<StyleProp<TextStyle>> = {
-    fontFamily: "NanumSquare_acB",
+    // fontFamily: "NanumSquare_acB",
     fontWeight: '600',
     fontSize: 18
 }

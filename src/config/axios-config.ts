@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 // @ts-ignore
-// import COMMON from '../../secret/secret.json'
+import COMMON from '../../secret/secret.json'
 
-// axios.defaults.baseURL = COMMON.IP
+axios.defaults.baseURL = COMMON.IP
 
-axios.defaults.timeout = 10000
+// axios.defaults.timeout = 50000
 
 axios.interceptors.request.use(request => {
     console.log('request', request);

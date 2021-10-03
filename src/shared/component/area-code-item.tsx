@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: "NanumSquare_acEB"
+        // fontFamily: "NanumSquare_acEB"
     },
     itemText: {
         fontSize: actuatedNormalize(13),
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: .3,
     },
     subText: {
-        fontFamily: "NanumSquare_acR"
+        // fontFamily: "NanumSquare_acR"
     },
     subIcon: {
         right: moderateScale(50),
