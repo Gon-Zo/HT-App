@@ -51,6 +51,8 @@ npm ios
 ```
 
 
-### About.
+### lib.
 
 [chart lib](https://formidable.com/open-source/victory/docs)
+[load view](https://github.com/mohebifar/react-native-loader)
+
