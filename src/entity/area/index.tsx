@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react'
-import {AreaSafeAreaView} from './area.style';
+import React, { useEffect } from 'react'
+import { AreaSafeAreaView } from './area.style';
 import AreaList from "../../shared/component/area-list";
-import {IAreaProps} from "./area.interface";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../../shared/reducer";
-import {getAreaCodes} from "./area.reducer";
+import { IAreaProps } from "./area.interface";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../../shared/reducer";
+import { getAreaCodes } from "../app-shared/app-shared.reducer";
 
 const Area = (props: IAreaProps) => {
 
@@ -23,9 +23,9 @@ const Area = (props: IAreaProps) => {
         navigation.navigate('AreaRegion', select);
     };
 
-    const {areaCodeList} = useSelector(({area}: IRootState) => {
+    const {areaCodeList} = useSelector((state: IRootState) => {
         return {
-            areaCodeList: area.areaCodes.data
+            areaCodeList: state.appShared.areaCodes.data
         }
     }, shallowEqual)
 
