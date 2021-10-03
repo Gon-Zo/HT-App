@@ -46,6 +46,10 @@ export type IAreaChildCode = {
     code : string,
 }
 
+export interface IAreaListWrapProps extends IAreaListProps {
+    areaCodeLoad: boolean
+}
+
 export interface IAreaListProps {
     onPress: (select : any) => void
     areaCodeList: any[]

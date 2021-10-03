@@ -1,8 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
-import {AreaCodeItem, AreaCodeSubItem} from './area-code-item';
-import {IAreaListProps, IAreaParentsCode, IAreaChildCode} from "./component.interface";
-import {toInitAreaCodes} from "./component.service";
+import React, { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { AreaCodeItem, AreaCodeSubItem } from './area-code-item';
+import { IAreaListProps, IAreaParentsCode, IAreaChildCode, IAreaListWrapProps } from "./component.interface";
+import { toInitAreaCodes } from "./component.service";
+// @ts-ignore
+import { Bubbles, DoubleBounce, Bars, Pulse } from 'react-native-loader'
+
 
 const AreaList = (props: IAreaListProps) => {
 
@@ -103,6 +106,31 @@ const AreaList = (props: IAreaListProps) => {
     );
 };
 
+const AreaListWrap = (props: IAreaListWrapProps) => {
+    const {areaCodeList, areaCodeLoad, onPress} = props
+
+    if (areaCodeLoad) return (
+        <View style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            // position: 'absolute',
+            // left: 0,
+            // top: 0,
+            // width : '100%'
+        }}>
+            {/*<Bubbles size={10} color="#FFF" />*/}
+            <Bars size={20} color="#ff6347"/>
+            {/*<Pulse size={10} color="#52AB42" />*/}
+            {/*<DoubleBounce size={10} color="#1CAFF6" />*/}
+        </View>
+    )
+
+    return (
+        <AreaList onPress={onPress} areaCodeList={areaCodeList}/>
+    )
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -118,4 +146,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AreaList;
+export default AreaListWrap;

@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
-import {IDashboardProps} from "./dashboard.interface";
-import AreaList from "../../shared/component/area-list";
-import {DashBoardSafeAreaView} from "./dashboard.style";
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
-import {IRootState} from "../../shared/reducer";
+import React, { useEffect } from 'react'
+import { IDashboardProps } from "./dashboard.interface";
+import AreaListWrap from "../../shared/component/area-list";
+import { DashBoardSafeAreaView } from "./dashboard.style";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../../shared/reducer";
 import { getAreaCodes } from "../app-shared/app-shared.reducer";
 
 const Dashboard = (props: IDashboardProps) => {
@@ -26,15 +26,16 @@ const Dashboard = (props: IDashboardProps) => {
         navigation.navigate("DashboardDetail", select)
     }
 
-    const {areaCodeList} = useSelector((state: IRootState) => {
+    const {areaCodeList, areaCodeLoad} = useSelector((state: IRootState) => {
         return {
-            areaCodeList: state.appShared.areaCodes.data
+            areaCodeList: state.appShared.areaCodes.data,
+            areaCodeLoad: state.appShared.areaCodes.load
         }
     }, shallowEqual)
 
     return (
         <DashBoardSafeAreaView>
-            <AreaList areaCodeList={areaCodeList} onPress={onPress}/>
+            <AreaListWrap areaCodeList={areaCodeList} areaCodeLoad={areaCodeLoad} onPress={onPress}/>
         </DashBoardSafeAreaView>
     )
 }

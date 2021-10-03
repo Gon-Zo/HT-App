@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { AreaSafeAreaView } from './area.style';
-import AreaList from "../../shared/component/area-list";
+import AreaListWrap from "../../shared/component/area-list";
 import { IAreaProps } from "./area.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../shared/reducer";
@@ -23,15 +23,16 @@ const Area = (props: IAreaProps) => {
         navigation.navigate('AreaRegion', select);
     };
 
-    const {areaCodeList} = useSelector((state: IRootState) => {
+    const {areaCodeList, areaCodeLoad} = useSelector((state: IRootState) => {
         return {
-            areaCodeList: state.appShared.areaCodes.data
+            areaCodeList: state.appShared.areaCodes.data,
+            areaCodeLoad: state.appShared.areaCodes.load
         }
     }, shallowEqual)
 
     return (
         <AreaSafeAreaView>
-            <AreaList areaCodeList={areaCodeList} onPress={onPress}/>
+            <AreaListWrap areaCodeLoad={areaCodeLoad} areaCodeList={areaCodeList} onPress={onPress}/>
         </AreaSafeAreaView>
     )
 }
