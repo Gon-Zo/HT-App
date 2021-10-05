@@ -83,13 +83,13 @@ const CardGroup = (props: any) => {
     return (
         <View style={
             {
-                marginTop : 10
+                marginTop: 10
             }
         }>
             <View>
                 <Text>아파트 전월세</Text>
             </View>
-            
+
             <View style={{
                 flexDirection: "row",
                 height: 150,
