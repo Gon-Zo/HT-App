@@ -5,7 +5,15 @@ import { LogoComponent, SearchUiButton } from "../../shared/component/component"
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../shared/reducer";
 import { View } from "react-native";
-import { VictoryAxis, VictoryChart, VictoryLine, VictoryPie, VictoryScatter } from "victory-native";
+import {
+    VictoryAxis,
+    VictoryChart,
+    VictoryHistogram,
+    VictoryLine,
+    VictoryPie,
+    VictoryScatter,
+    VictoryTheme
+} from "victory-native";
 
 const Home = (props: HomeProps) => {
 
@@ -34,20 +42,101 @@ const Home = (props: HomeProps) => {
             <SearchUiButton onPress={goSearch}/>
 
             <View>
+                <VictoryChart
+                    theme={VictoryTheme.material}
+                    domainPadding={{x: 20}}
+                    animate={{
+                        duration: 2000,
+                        onLoad: {duration: 1000}
+                    }}
+                >
+                    <VictoryHistogram style={{
+                                          // data: { fill: "#c43a31" }
+                                      }}
+                                      data={[
+                                          {x: 1},
+                                          {x: 2},
+                                          {x: 2},
+                                          {x: 4},
+                                          {x: 4},
+                                          {x: 5}
+                                      ]}
+                    />
+                </VictoryChart>
+            </View>
+
+            <View>
+                <VictoryChart
+                    theme={VictoryTheme.material}
+                    animate={{
+                        duration: 2000,
+                        onLoad: {duration: 1000}
+                    }}
+                >
+                    <VictoryLine
+                        style={{
+                            data: {stroke: "orange"},
+                            parent: {border: "1px solid #ccc"}
+                        }}
+                        data={[
+                            {x: 1, y: 2},
+                            {x: 2, y: 3},
+                            {x: 3, y: 5},
+                            {x: 4, y: 4},
+                            {x: 5, y: 7}
+                        ]}
+                    />
+                </VictoryChart>
+            </View>
+
+            <View>
+                <VictoryChart
+                    theme={VictoryTheme.material}
+                    domainPadding={{x: 20}}
+                    animate={{
+                        duration: 2000,
+                        onLoad: {duration: 1000}
+                    }}
+                >
+                    <VictoryHistogram horizontal
+                                      style={{
+                                          // data: { fill: "#c43a31" }
+                                      }}
+                                      data={[
+                                          {x: 1},
+                                          {x: 2},
+                                          {x: 2},
+                                          {x: 4},
+                                          {x: 4},
+                                          {x: 5}
+                                      ]}
+                    />
+                </VictoryChart>
+            </View>
+
+            <View>
                 <VictoryPie
                     colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
                     cornerRadius={({datum}) => datum.y * 5}
+                    theme={VictoryTheme.material}
                     padding={100}
                     data={[
                         {x: 1, y: 2, label: "서울"},
                         {x: 2, y: 3, label: "부산"},
+                        {x: 3, y: 5, label: "대구"},
+                        {x: 3, y: 5, label: "대구"},
+                        {x: 3, y: 5, label: "대구"},
                         {x: 3, y: 5, label: "대구"}
                     ]}
+                    animate={{
+                        duration: 2000,
+                        onLoad: {duration: 1000}
+                    }}
                 />
             </View>
 
             <View>
-                <VictoryChart>
+                <VictoryChart theme={VictoryTheme.material}>
                     <VictoryAxis/>
                     <VictoryAxis dependentAxis/>
                     <VictoryLine
