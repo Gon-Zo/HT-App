@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CardGroup from "../../shared/component/card-group";
 import DashboardTable from "../../shared/component/dashboard-table";
+import { Icon } from 'react-native-elements'
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -27,16 +28,18 @@ const Dashboard = (props: IDashboardProps) => {
     return (
         <DashBoardSafeAreaView>
 
-            <View
-                style={
+            <View style={
                     {
                         alignItems: "flex-end",
                         paddingRight: 10,
-                    }
-                }>
-                <TouchableOpacity onPress={goFilter}>
-                    <FontAwesomeIcon icon={['fas', 'filter']} size={17} color={'#000'}/>
-                </TouchableOpacity>
+                    }}>
+                <Icon
+                    size={25}
+                    name='filter-alt'
+                    type='material'
+                    color='#000'
+                    onPress={goFilter}
+                />
             </View>
 
             <ScrollView style={{
@@ -71,6 +74,7 @@ const Dashboard = (props: IDashboardProps) => {
                 {/*</View>*/}
 
                 <CardGroup/>
+
                 <DashboardTable/>
 
             </ScrollView>

@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Tooltip, Text } from 'react-native-elements';
 
 interface ICardGroupProps {
-
 }
 
 const CardGroup = (props: ICardGroupProps) => {
@@ -21,35 +21,27 @@ const CardGroup = (props: ICardGroupProps) => {
                 }>아파트 전월세</Text>
             </View>
 
-            <View style={{
-                flexDirection: "row",
-                height: 150,
-            }}>
-                <View style={
-                    [{
-                        backgroundColor: "tomato",
-                    }, styles.cardWrap]
-                }>
-                    <Text style={[styles.cardText]}>신동아블루아광화문의 꿈</Text>
+            <View style={{flexDirection: "row", height: 150,}}>
+                <View style={[{backgroundColor: "tomato",}, styles.cardWrap]}>
                     <Text style={[styles.cardText]}>월세: 300</Text>
                     <Text style={[styles.cardText]}>보증금: 60,000</Text>
                 </View>
-                <View style={[{
-                    backgroundColor: "orange"
-                }, styles.cardWrap]}>
+
+                <View style={[{backgroundColor: "orange"}, styles.cardWrap]}>
                     <Text style={[styles.cardText]}>광화문풍림스페이스본(101동~105동)</Text>
                     <Text style={[styles.cardText]}>월세: 300</Text>
                     <Text style={[styles.cardText]}>보증금: 60,000</Text>
                 </View>
-                <View style={[
-                    {
-                        backgroundColor: "gold",
-                    }, styles.cardWrap]}>
+
+                <View style={[{backgroundColor: "gold",}, styles.cardWrap]}>
                     <Text style={[styles.cardText]}>광화문풍림스페이스본(101동~105동)</Text>
                     <Text style={[styles.cardText]}>월세: 300</Text>
                     <Text style={[styles.cardText]}>보증금: 60,000</Text>
                 </View>
             </View>
+
+
+
         </View>
     )
 }
