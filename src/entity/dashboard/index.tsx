@@ -80,14 +80,19 @@ const Dashboard = (props: IDashboardProps) => {
 }
 
 const CardGroup = (props: any) => {
+
     return (
-        <View style={
-            {
-                marginTop: 10
-            }
-        }>
-            <View>
-                <Text>아파트 전월세</Text>
+        <View style={{marginTop: 10}}>
+
+            <View style={{
+                paddingLeft : 10
+            }}>
+                <Text style={
+                    {
+                        fontSize: 17,
+                        fontWeight: '600'
+                    }
+                }>아파트 전월세</Text>
             </View>
 
             <View style={{
@@ -99,34 +104,26 @@ const CardGroup = (props: any) => {
                         backgroundColor: "tomato",
                     }, styles.cardWrap]
                 }>
-                    <Text>신동아블루아광화문의 꿈</Text>
-                    <Text>월세: 300</Text>
-                    <Text>보증금: 60,000</Text>
+                    <Text style={[styles.cardText]}>신동아블루아광화문의 꿈</Text>
+                    <Text style={[styles.cardText]}>월세: 300</Text>
+                    <Text style={[styles.cardText]}>보증금: 60,000</Text>
                 </View>
-                <View style={
-                    [
-                        {
-                            backgroundColor: "orange"
-                        },
-                        styles.cardWrap
-                    ]
-                }>
-                    <Text>광화문풍림스페이스본(101동~105동)</Text>
-                    <Text>월세: 300</Text>
-                    <Text>보증금: 60,000</Text>
+                <View style={[{
+                    backgroundColor: "orange"
+                }, styles.cardWrap]}>
+                    <Text style={[styles.cardText]}>광화문풍림스페이스본(101동~105동)</Text>
+                    <Text style={[styles.cardText]}>월세: 300</Text>
+                    <Text style={[styles.cardText]}>보증금: 60,000</Text>
                 </View>
                 <View style={[
                     {
                         backgroundColor: "gold",
-                    },
-                    styles.cardWrap
-                ]}>
-                    <Text>광화문풍림스페이스본(101동~105동)</Text>
-                    <Text>월세: 300</Text>
-                    <Text>보증금: 60,000</Text>
+                    }, styles.cardWrap]}>
+                    <Text style={[styles.cardText]}>광화문풍림스페이스본(101동~105동)</Text>
+                    <Text style={[styles.cardText]}>월세: 300</Text>
+                    <Text style={[styles.cardText]}>보증금: 60,000</Text>
                 </View>
             </View>
-
         </View>
     )
 }
@@ -136,6 +133,9 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 5,
         borderRadius: 8
+    },
+    cardText: {
+        color: '#fff'
     }
 })
 
