@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Text, View, SafeAreaView, StyleSheet, Alert, Modal, Pressable } from "react-native";
+import { Text, View, SafeAreaView, StyleSheet, Alert, Modal, Pressable, TouchableOpacity } from "react-native";
 // @ts-ignore
 import { TagSelect } from 'react-native-tag-select';
 import { arrOfPicker } from "./filter-data";
@@ -9,6 +9,7 @@ import { setByFilterValue } from "./filter.reducer";
 import { IRootState } from "../../shared/reducer";
 import ExModal from "../../shared/component/ex-modal";
 import { Calendar } from "react-native-calendars";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 const Filter = (props: any) => {
 
@@ -61,18 +62,15 @@ const Filter = (props: any) => {
 
     return (
         <SafeAreaView style={styles.viewWrap}>
+
             <View style={
                 {
                     alignItems: "flex-end",
                     paddingRight: 10,
                 }}>
-                {/*<Icon*/}
-                {/*    size={25}*/}
-                {/*    name='close'*/}
-                {/*    type='material'*/}
-                {/*    color='#000'*/}
-                {/*    onPress={toClose}*/}
-                {/*/>*/}
+                <TouchableOpacity onPress={toClose}>
+                    <FontAwesomeIcon size={18} icon={["fas", "times"]}/>
+                </TouchableOpacity>
             </View>
 
             <LayoutWrap title={"지역"}>

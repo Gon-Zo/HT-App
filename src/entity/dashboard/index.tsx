@@ -5,6 +5,14 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CardGroup from "../../shared/component/card-group";
 import DashboardTable from "../../shared/component/dashboard-table";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import styled from "styled-components/native";
+
+const FilterWrap = styled.View`
+align-items: flex-end;
+padding-right: 10px;
+`;
+
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -26,24 +34,17 @@ const Dashboard = (props: IDashboardProps) => {
     return (
         <DashBoardSafeAreaView>
 
-            <View style={
-                    {
-                        alignItems: "flex-end",
-                        paddingRight: 10,
-                    }}>
-                {/*<Icon*/}
-                {/*    size={25}*/}
-                {/*    name='filter-alt'*/}
-                {/*    type='material'*/}
-                {/*    color='#000'*/}
-                {/*    onPress={goFilter}*/}
-                {/*/>*/}
-            </View>
+            <FilterWrap>
+                <TouchableOpacity onPress={goFilter}>
+                    <FontAwesomeIcon size={18}
+                                     icon={['fas', 'filter']}
+                                     color={'#000'}/>
+                </TouchableOpacity>
+            </FilterWrap>
 
             <ScrollView style={{
                 flex: 1
             }}>
-
                 <View style={{
                     padding: 10
                 }}>

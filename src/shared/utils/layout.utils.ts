@@ -45,4 +45,3 @@ const HEADER_TITLE_STYLE: Animated.WithAnimatedValue<StyleProp<TextStyle>> = {
 export const SCREEN_OPTION = {
     headerTitleStyle: HEADER_TITLE_STYLE
 }
-

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { IDashboardDetailProps } from "./dashboard.interface";
 import { BackButton } from "../../shared/component/component";
 import { Button, View } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const DashboardDetail = (props: IDashboardDetailProps) => {
 
@@ -39,12 +38,6 @@ const DashboardDetail = (props: IDashboardDetailProps) => {
 
             <View>
                 <Button title="Show Date Picker" onPress={showDatePicker}/>
-                <DateTimePickerModal
-                    isVisible={isDatePickerVisible}
-                    mode="date"
-                    onConfirm={handleConfirm}
-                    onCancel={hideDatePicker}
-                />
             </View>
 
         </React.Fragment>
