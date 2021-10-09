@@ -14,8 +14,6 @@ target 'HT_App' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
   target 'HT_AppTests' do
     inherit! :complete
     # Pods for testing
