@@ -4,6 +4,7 @@ import dashboard, { DashboardState } from "../../entity/dashboard/dashboard.redu
 import area, { AreaState } from "../../entity/area/area.reducer";
 import home, { HomeState } from "../../entity/home/home.reducer";
 import appShared, { AppSharedState } from '../../entity/app-shared/app-shared.reducer'
+import filter, { FilterState } from "../../entity/filter/filter.reducer";
 
 export interface IRootState {
     readonly count: CountState
@@ -11,6 +12,7 @@ export interface IRootState {
     readonly area: AreaState
     readonly home: HomeState
     readonly appShared: AppSharedState
+    readonly filter: FilterState
 }
 
 const rootReducer = combineReducers<IRootState>({
@@ -18,7 +20,8 @@ const rootReducer = combineReducers<IRootState>({
     dashboard,
     area,
     home,
-    appShared
+    appShared,
+    filter
 })
 
 export default rootReducer

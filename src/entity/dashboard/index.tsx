@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { IDashboardProps } from "./dashboard.interface";
 import { DashBoardSafeAreaView } from "./dashboard.style";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CardGroup from "../../shared/component/card-group";
 import DashboardTable from "../../shared/component/dashboard-table";
