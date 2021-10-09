@@ -37,9 +37,9 @@ const Home = (props: HomeProps) => {
     }
 
     return (
-        <ScrollLayout stickyList={[1]}>
+        <ScrollLayout stickyList={[]}>
             <LogoComponent/>
-            <SearchUiButton onPress={goSearch}/>
+            {/*<SearchUiButton onPress={goSearch}/>*/}
 
             <View>
                 <VictoryChart
