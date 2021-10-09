@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Text, View, SafeAreaView, StyleSheet, Alert } from "react-native";
+import { Text, View, SafeAreaView, StyleSheet, Alert, Modal, Pressable } from "react-native";
 // @ts-ignore
 import { TagSelect } from 'react-native-tag-select';
 import { arrOfPicker } from "./filter-data";
@@ -8,6 +8,8 @@ import { ISaveFilterDTO } from "../home/filter.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setByFilterValue } from "./filter.reducer";
 import { IRootState } from "../../shared/reducer";
+import ExModal from "../../shared/component/ex-modal";
+import { Calendar } from "react-native-calendars";
 
 const Filter = (props: any) => {
 
@@ -20,6 +22,8 @@ const Filter = (props: any) => {
     const toClose = () => {
         navigation.goBack()
     }
+
+    const [isDateModalAble, setDateModalAble] = useState(false)
 
     const {tagSelectValue} = useSelector((state: IRootState) => {
         return {
@@ -54,9 +58,10 @@ const Filter = (props: any) => {
 
     }
 
+    const toToggleDateModal = () => setDateModalAble(prevState => !prevState)
+
     return (
         <SafeAreaView style={styles.viewWrap}>
-
             <View style={
                 {
                     alignItems: "flex-end",
@@ -77,6 +82,18 @@ const Filter = (props: any) => {
 
             <LayoutWrap title={"날짜"}>
 
+                <View style={styles.centeredView}>
+                    <ExModal visible={isDateModalAble}
+                             toClose={toToggleDateModal}>
+                        <Calendar/>
+                    </ExModal>
+                    <Pressable
+                        style={[styles.button, styles.buttonOpen]}
+                        onPress={toToggleDateModal}
+                    >
+                        <Text style={styles.textStyle}>Show Modal</Text>
+                    </Pressable>
+                </View>
             </LayoutWrap>
 
             <LayoutWrap title={"거래 유형"} flex={.5}>
@@ -170,6 +187,50 @@ const styles = StyleSheet.create({
     labelSelected: {
         color: '#fff',
     },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    }
+
+
 })
 
 export default React.memo(Filter)
