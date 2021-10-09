@@ -55,4 +55,5 @@ npm ios
 
 [chart lib](https://formidable.com/open-source/victory/docs) </br>
 [load view](https://github.com/mohebifar/react-native-loader) </br>
+[tag](https://github.com/rafaelmotta/react-native-tag-select) </br>
 
