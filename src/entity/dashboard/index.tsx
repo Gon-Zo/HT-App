@@ -5,7 +5,6 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CardGroup from "../../shared/component/card-group";
 import DashboardTable from "../../shared/component/dashboard-table";
-import { Icon } from 'react-native-elements'
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -32,13 +31,13 @@ const Dashboard = (props: IDashboardProps) => {
                         alignItems: "flex-end",
                         paddingRight: 10,
                     }}>
-                <Icon
-                    size={25}
-                    name='filter-alt'
-                    type='material'
-                    color='#000'
-                    onPress={goFilter}
-                />
+                {/*<Icon*/}
+                {/*    size={25}*/}
+                {/*    name='filter-alt'*/}
+                {/*    type='material'*/}
+                {/*    color='#000'*/}
+                {/*    onPress={goFilter}*/}
+                {/*/>*/}
             </View>
 
             <ScrollView style={{

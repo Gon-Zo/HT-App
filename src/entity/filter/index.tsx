@@ -3,7 +3,6 @@ import { Text, View, SafeAreaView, StyleSheet, Alert, Modal, Pressable } from "r
 // @ts-ignore
 import { TagSelect } from 'react-native-tag-select';
 import { arrOfPicker } from "./filter-data";
-import { Button, Icon } from "react-native-elements";
 import { ISaveFilterDTO } from "../home/filter.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setByFilterValue } from "./filter.reducer";
@@ -67,13 +66,13 @@ const Filter = (props: any) => {
                     alignItems: "flex-end",
                     paddingRight: 10,
                 }}>
-                <Icon
-                    size={25}
-                    name='close'
-                    type='material'
-                    color='#000'
-                    onPress={toClose}
-                />
+                {/*<Icon*/}
+                {/*    size={25}*/}
+                {/*    name='close'*/}
+                {/*    type='material'*/}
+                {/*    color='#000'*/}
+                {/*    onPress={toClose}*/}
+                {/*/>*/}
             </View>
 
             <LayoutWrap title={"지역"}>
@@ -121,9 +120,9 @@ const Filter = (props: any) => {
             </LayoutWrap>
 
             <View style={{flex: .17, margin: 10}}>
-                <Button title="적용"
-                        type="outline"
-                        onPress={toApplyFilter}/>
+                {/*<Button title="적용"*/}
+                {/*        type="outline"*/}
+                {/*        onPress={toApplyFilter}/>*/}
             </View>
 
         </SafeAreaView>

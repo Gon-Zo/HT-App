@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from "react-native";
-import { Tooltip, Text } from 'react-native-elements';
+import { StyleSheet, View, Text } from "react-native";
 
 interface ICardGroupProps {
 }
@@ -39,7 +38,6 @@ const CardGroup = (props: ICardGroupProps) => {
                     <Text style={[styles.cardText]}>보증금: 60,000</Text>
                 </View>
             </View>
-
 
 
         </View>
