@@ -103,7 +103,8 @@ const styled = StyleSheet.create({
     // logo - component - styled
     headerWrap: {
         height: 60,
-        flexDirection: "row"
+        flexDirection: "row",
+        backgroundColor : "#fff"
     },
     logoBox: {
         width: 120,
