@@ -1,5 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Text, View, SafeAreaView, StyleSheet, Alert, Modal, Pressable, TouchableOpacity } from "react-native";
+import {
+    Text,
+    View,
+    SafeAreaView,
+    StyleSheet,
+    Alert,
+    Pressable,
+    TouchableOpacity,
+     Button
+} from "react-native";
 // @ts-ignore
 import { TagSelect } from 'react-native-tag-select';
 import { arrOfPicker } from "./filter-data";
@@ -7,9 +16,8 @@ import { ISaveFilterDTO } from "../home/filter.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setByFilterValue } from "./filter.reducer";
 import { IRootState } from "../../shared/reducer";
-import ExModal from "../../shared/component/ex-modal";
-import { Calendar } from "react-native-calendars";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import DateModal, { DateModalState } from "../../shared/component/date-modal";
 
 const Filter = (props: any) => {
 
@@ -22,6 +30,8 @@ const Filter = (props: any) => {
     const toClose = () => {
         navigation.goBack()
     }
+
+    const [state , setState] = useState<any>({startDate : '' , endDate : ''})
 
     const [isDateModalAble, setDateModalAble] = useState(false)
 
@@ -58,6 +68,17 @@ const Filter = (props: any) => {
 
     }
 
+    const setDate = (modalState : DateModalState) =>{
+
+        const newState = {
+            ...state,
+            startDate : modalState.startDate,
+            endDate : modalState.endDate
+        }
+
+        setState(newState)
+    }
+
     const toToggleDateModal = () => setDateModalAble(prevState => !prevState)
 
     return (
@@ -80,21 +101,29 @@ const Filter = (props: any) => {
             <LayoutWrap title={"날짜"}>
 
                 <View style={styles.centeredView}>
-                    <ExModal visible={isDateModalAble}
-                             toClose={toToggleDateModal}>
-                        <Calendar/>
-                    </ExModal>
+
+                    <DateModal
+                        setDate={setDate}
+                        visible={isDateModalAble}
+                               toClose={toToggleDateModal}/>
+
+                    <Text>
+                        startDate : {state.startDate},
+                        endDate : {state.endDate}
+                    </Text>
+
                     <Pressable
                         style={[styles.button, styles.buttonOpen]}
-                        onPress={toToggleDateModal}
-                    >
-                        <Text style={styles.textStyle}>Show Modal</Text>
+                        onPress={toToggleDateModal}>
+                        <Text style={styles.textStyle}>
+                            <FontAwesomeIcon size={20} icon={['fas', 'calendar']}/>
+                            Show Modal</Text>
                     </Pressable>
+
                 </View>
             </LayoutWrap>
 
             <LayoutWrap title={"거래 유형"} flex={.5}>
-
                 <View style={{
                     marginTop: 10,
                     marginLeft: 10
@@ -114,18 +143,16 @@ const Filter = (props: any) => {
                         itemLabelStyleSelected={styles.labelSelected}
                     />
                 </View>
-
             </LayoutWrap>
 
             <View style={{flex: .17, margin: 10}}>
-                {/*<Button title="적용"*/}
-                {/*        type="outline"*/}
-                {/*        onPress={toApplyFilter}/>*/}
+                <Button title={"적용"} onPress={toApplyFilter}/>
             </View>
 
         </SafeAreaView>
     )
 }
+
 
 const LayoutWrap = (props: any) => {
 
@@ -188,29 +215,17 @@ const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
+        paddingTop : 20,
+        // alignItems: "center",
+        // marginTop: 22
     },
-    modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-    },
+
     button: {
         borderRadius: 20,
         padding: 10,
-        elevation: 2
+        elevation: 2,
     },
+
     buttonOpen: {
         backgroundColor: "#F194FF",
     },
@@ -220,13 +235,10 @@ const styles = StyleSheet.create({
     textStyle: {
         color: "white",
         fontWeight: "bold",
-        textAlign: "center"
+        textAlign: "center",
+        justifyContent : "center",
+        alignItems : "center"
     },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-    }
-
 
 })
 

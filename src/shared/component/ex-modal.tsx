@@ -1,7 +1,8 @@
 import React from "react";
-import { Alert, Modal, View, Text, Pressable, StyleSheet } from "react-native";
+import { Alert, Modal, View, StyleSheet, TouchableOpacity } from "react-native";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
-interface IExModalProps {
+export interface IExModalProps {
     visible: boolean,
     toClose: () => void
     children?: React.ReactNode
@@ -13,7 +14,7 @@ const ExModal = (props: IExModalProps) => {
 
     return (
         <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={visible}
             onRequestClose={() => {
@@ -23,12 +24,15 @@ const ExModal = (props: IExModalProps) => {
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <Pressable
-                        style={[styles.button, styles.buttonClose]}
-                        onPress={toClose}>
-                        <Text style={styles.textStyle}>Hide Modal</Text>
-                    </Pressable>
-                    {/*<Text style={styles.modalText}>Hello World!</Text>*/}
+                    <View style={{
+                        position : "absolute",
+                        top : 15,
+                        right : 15
+                    }}>
+                        <TouchableOpacity onPress={toClose}>
+                            <FontAwesomeIcon size={18} icon={["fas", "times"]}/>
+                        </TouchableOpacity>
+                    </View>
                     {
                         children
                     }
@@ -43,14 +47,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22
+        marginTop: 22,
+        backgroundColor: 'rgba(0,0,0,0.7)'
     },
     modalView: {
         margin: 20,
+        height: 450,
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
-        alignItems: "center",
+        // alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
