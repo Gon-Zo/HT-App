@@ -14,7 +14,6 @@ align-items: flex-end;
 padding-right: 10px;
 `;
 
-
 const Dashboard = (props: IDashboardProps) => {
 
     const dispatch = useDispatch()

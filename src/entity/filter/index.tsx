@@ -18,6 +18,7 @@ import { setByFilterValue } from "./filter.reducer";
 import { IRootState } from "../../shared/reducer";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import DateModal, { DateModalState } from "../../shared/component/date-modal";
+import FilterLayoutWrap from "./filter-layout-wrap";
 
 type FilterState = {
     startDate: string,
@@ -137,11 +138,11 @@ const Filter = (props: any) => {
                 </TouchableOpacity>
             </View>
 
-            <LayoutWrap title={"지역"}>
+            <FilterLayoutWrap title={"지역"}>
 
-            </LayoutWrap>
+            </FilterLayoutWrap>
 
-            <LayoutWrap title={"날짜"}>
+            <FilterLayoutWrap title={"날짜"}>
 
                 <View style={styles.centeredView}>
 
@@ -168,9 +169,9 @@ const Filter = (props: any) => {
                     </Pressable>
 
                 </View>
-            </LayoutWrap>
+            </FilterLayoutWrap>
 
-            <LayoutWrap title={"거래 유형"} flex={.5}>
+            <FilterLayoutWrap title={"거래 유형"} flex={.5}>
                 <View style={{
                     marginTop: 10,
                     marginLeft: 10
@@ -193,7 +194,7 @@ const Filter = (props: any) => {
                         />
                     }
                 </View>
-            </LayoutWrap>
+            </FilterLayoutWrap>
 
             <View style={{flex: .17, margin: 10}}>
                 <Button title={"적용"} onPress={toApplyFilter}/>
@@ -203,34 +204,6 @@ const Filter = (props: any) => {
     )
 }
 
-
-const LayoutWrap = (props: any) => {
-
-    const {children, title, flex} = props
-
-    const [state, setState] = useState({
-        flex: 1
-    })
-
-    useEffect(() => {
-
-        const newState = {
-            ...state,
-            flex: typeof flex === "undefined" ? 1 : flex
-        }
-
-        setState(newState)
-    }, [])
-
-    return (
-        <View style={{flex: state.flex}}>
-            <Text style={{fontSize: 25, fontWeight: "bold", marginLeft: 10}}>
-                {title}
-            </Text>
-            {children}
-        </View>
-    )
-}
 
 const styles = StyleSheet.create({
     viewWrap: {
