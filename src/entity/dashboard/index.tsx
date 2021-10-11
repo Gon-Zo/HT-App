@@ -54,8 +54,8 @@ const Dashboard = (props: IDashboardProps) => {
                 }}>
                 <View style={{
                     padding: 10,
-                    flexDirection : "row",
-                    alignItems : "baseline",
+                    flexDirection: "row",
+                    alignItems: "baseline",
                 }}>
                     <Text style={
                         {
@@ -66,10 +66,10 @@ const Dashboard = (props: IDashboardProps) => {
                         서울시
                     </Text>
                     {
-                        (selectDate.startDate !== "" && selectDate.endDate !== "") ?
+                        (!selectDate.startDate || !selectDate.endDate) ?
                             <Text style={{
                                 paddingLeft: 10,
-                                color : '#989898'
+                                color: '#989898'
                             }}> {selectDate.startDate} ~ {selectDate.endDate}</Text> : null
                     }
                 </View>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ExModal, { IExModalProps } from "./ex-modal";
 import { Calendar } from "react-native-calendars";
-import { getDatesStartToLast, toDistanceByDate } from "../utils/layout.utils";
+import { toDistanceByDate } from "../utils/layout.utils";
 import { Pressable, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IFilterDate } from "../../entity/home/filter.interface";
+import { DATE_COLOR, getBySelectMarkers } from "../../entity/filter/filter.service";
 
 interface IDateModalProps extends IExModalProps {
     setDate: (payload: DateModalState) => void
@@ -58,14 +59,10 @@ const DateModal = (props: IDateModalProps) => {
 
             const markedDates: any = {}
 
-            markedDates[startDate] = {startingDay: true, color: '#50cebb'}
-
-            const result = getDatesStartToLast(startDate, endDate)
-
-            markedDates[endDate] = {endingDay: true, color: '#50cebb'}
-
-            for (let i = 1; i < result.length - 1; i++) {
-                markedDates[result[i]] = {color: '#50cebb'}
+            if (selectData.startDate == selectData.endDate) {
+                markedDates[startDate] = DATE_COLOR['DEFAULT_DATE']
+            } else {
+                getBySelectMarkers(startDate, endDate, markedDates)
             }
 
             const newState = {
@@ -99,14 +96,14 @@ const DateModal = (props: IDateModalProps) => {
 
                     if (isStart && !isAdd) {
 
-                        const anyOfStartDate = {startingDay: true, color: '#50cebb'};
+                        const anyOfStartDate = DATE_COLOR['START_DATE']
 
                         markedDates[dateString] = anyOfStartDate
 
                         newState = {
                             ...state,
+                            startDate: dateString,
                             markedDates: markedDates,
-                            startDate: dateString
                         }
 
                     } else if (!isStart && isAdd) {
@@ -119,17 +116,9 @@ const DateModal = (props: IDateModalProps) => {
 
                         const endNum = toDistanceByDate(dateString, endDate)
 
-                        if (startNum <= endNum) {
+                        if (startNum < endNum) {
 
-                            markedDates[dateString] = {startingDay: true, color: '#50cebb'}
-
-                            const result = getDatesStartToLast(dateString, endDate)
-
-                            markedDates[endDate] = state.markedDates[endDate]
-
-                            for (let i = 1; i < result.length - 1; i++) {
-                                markedDates[result[i]] = {color: '#50cebb'}
-                            }
+                            getBySelectMarkers(dateString, endDate, markedDates);
 
                             newState = {
                                 ...state,
@@ -137,17 +126,9 @@ const DateModal = (props: IDateModalProps) => {
                                 markedDates: markedDates
                             }
 
-                        } else {
+                        } else if (startNum > endNum) {
 
-                            markedDates[dateString] = {endingDay: true, color: '#50cebb'}
-
-                            const result = getDatesStartToLast(startDate, dateString)
-
-                            markedDates[startDate] = state.markedDates[startDate]
-
-                            for (let i = 1; i < result.length - 1; i++) {
-                                markedDates[result[i]] = {color: '#50cebb'}
-                            }
+                            getBySelectMarkers(startDate, dateString, markedDates)
 
                             newState = {
                                 ...state,
@@ -155,20 +136,13 @@ const DateModal = (props: IDateModalProps) => {
                                 markedDates: markedDates
                             }
 
+                        } else {
+
                         }
 
                     } else {
-                        markedDates = {...state.markedDates}
 
-                        const anyOfEndDate = {endingDay: true, color: '#50cebb'}
-
-                        markedDates[dateString] = anyOfEndDate
-
-                        const result = getDatesStartToLast(state.startDate, dateString)
-
-                        for (let i = 1; i < result.length - 1; i++) {
-                            markedDates[result[i]] = {color: '#50cebb'}
-                        }
+                        getBySelectMarkers(state.startDate, dateString, markedDates)
 
                         newState = {
                             ...state,

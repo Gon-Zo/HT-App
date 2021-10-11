@@ -20,6 +20,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import DateModal, { DateModalState } from "../../shared/component/date-modal";
 import FilterLayoutWrap from "./filter-layout-wrap";
 
+import moment from "moment";
+
 type FilterState = {
     startDate: string,
     endDate: string,
@@ -48,15 +50,19 @@ const Filter = (props: any) => {
 
     useEffect(() => {
 
-        const startDate = typeof selectDate.startDate === 'undefined' ? '' : selectDate.startDate
+        const nowDate = moment(new Date()).format("YYYY-MM-DD")
 
-        const endDate = typeof selectDate.endDate === 'undefined' ? '' : selectDate.endDate
+        const startDate = typeof selectDate.startDate === 'undefined' ? nowDate : selectDate.startDate
+
+        const endDate = typeof selectDate.endDate === 'undefined' ? nowDate : selectDate.endDate
+
+        const tagValue = tagSelectValue.length == 0 ? [arrOfPicker[0]] : tagSelectValue
 
         const newState: FilterState = {
             ...state,
-            startDate: startDate,
-            endDate: endDate,
-            tagValue: tagSelectValue,
+            startDate,
+            endDate,
+            tagValue,
             isTagAble: true
         }
 
