@@ -146,6 +146,10 @@ const Filter = (props: any) => {
                 <View style={styles.centeredView}>
 
                     <DateModal
+                        selectData={{
+                            startDate: state.startDate,
+                            endDate: state.endDate
+                        }}
                         setDate={setDate}
                         visible={isDateModalAble}
                         toClose={toToggleDateModal}/>

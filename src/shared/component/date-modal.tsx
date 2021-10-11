@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExModal, { IExModalProps } from "./ex-modal";
 import { Calendar } from "react-native-calendars";
 import { getDatesStartToLast, toDistanceByDate } from "../utils/layout.utils";
 import { Pressable, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { IFilterDate } from "../../entity/home/filter.interface";
 
 interface IDateModalProps extends IExModalProps {
-    setDate : (payload : DateModalState) => void
+    setDate: (payload: DateModalState) => void
+    selectData: IFilterDate
 }
 
 export type DateModalState = {
@@ -17,7 +19,7 @@ export type DateModalState = {
 
 const DateModal = (props: IDateModalProps) => {
 
-    const {visible, toClose , setDate} = props
+    const {visible, toClose, setDate, selectData} = props
 
     const [state, setState] = useState<DateModalState>({
         startDate: '',
@@ -25,7 +27,7 @@ const DateModal = (props: IDateModalProps) => {
         markedDates: {}
     })
 
-    const toReset = () =>{
+    const toReset = () => {
 
         const newState = {
             startDate: '',
@@ -41,10 +43,42 @@ const DateModal = (props: IDateModalProps) => {
         toClose()
     }
 
-    const toSave = () =>{
+    const toSave = () => {
         setDate(state)
         toClose()
     }
+
+    useEffect(() => {
+
+        if (visible && selectData.startDate !== "" && selectData.endDate !== "") {
+
+            const startDate = selectData.startDate;
+
+            const endDate = selectData.endDate;
+
+            const markedDates: any = {}
+
+            markedDates[startDate] = {startingDay: true, color: '#50cebb'}
+
+            const result = getDatesStartToLast(startDate, endDate)
+
+            markedDates[endDate] = {endingDay: true, color: '#50cebb'}
+
+            for (let i = 1; i < result.length - 1; i++) {
+                markedDates[result[i]] = {color: '#50cebb'}
+            }
+
+            const newState = {
+                ...state,
+                startDate,
+                endDate,
+                markedDates
+            }
+
+            setState(newState)
+        }
+
+    }, [visible])
 
     return (
         <ExModal visible={visible} toClose={onClose}>
@@ -147,8 +181,8 @@ const DateModal = (props: IDateModalProps) => {
                 }}
             />
             <View style={{
-                flexDirection : 'row',
-                justifyContent : "flex-end"
+                flexDirection: 'row',
+                justifyContent: "flex-end"
             }}>
                 <Pressable
                     style={{
@@ -156,7 +190,7 @@ const DateModal = (props: IDateModalProps) => {
                         padding: 10,
                         elevation: 2,
                         backgroundColor: "#c9c9c9",
-                        marginRight : 10
+                        marginRight: 10
                     }}
                     onPress={toReset}>
                     <FontAwesomeIcon color={'#fff'} icon={['fas', 'trash']}/>
