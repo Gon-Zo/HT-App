@@ -7,6 +7,7 @@ import CardGroup from "../../shared/component/card-group";
 import DashboardTable from "../../shared/component/dashboard-table";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import styled from "styled-components/native";
+import { IRootState } from "../../shared/reducer";
 
 const FilterWrap = styled.View`
 align-items: flex-end;
@@ -27,6 +28,12 @@ const Dashboard = (props: IDashboardProps) => {
         })
     }, [])
 
+    const {selectDate} = useSelector((state: IRootState) => {
+        return {
+            selectDate: state.filter.selectDate
+        }
+    })
+
     const goFilter = () => {
         navigation.navigate("Filter")
     }
@@ -42,11 +49,14 @@ const Dashboard = (props: IDashboardProps) => {
                 </TouchableOpacity>
             </FilterWrap>
 
-            <ScrollView style={{
-                flex: 1
-            }}>
+            <ScrollView
+                style={{
+                    flex: 1
+                }}>
                 <View style={{
-                    padding: 10
+                    padding: 10,
+                    flexDirection : "row",
+                    alignItems : "baseline",
                 }}>
                     <Text style={
                         {
@@ -56,6 +66,13 @@ const Dashboard = (props: IDashboardProps) => {
                     }>
                         서울시
                     </Text>
+                    {
+                        (selectDate.startDate !== "" && selectDate.endDate !== "") ?
+                            <Text style={{
+                                paddingLeft: 10,
+                                color : '#989898'
+                            }}> {selectDate.startDate} ~ {selectDate.endDate}</Text> : null
+                    }
                 </View>
 
                 {/*<View style={*/}
