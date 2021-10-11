@@ -7,7 +7,7 @@ import {
     Alert,
     Pressable,
     TouchableOpacity,
-     Button
+    Button
 } from "react-native";
 // @ts-ignore
 import { TagSelect } from 'react-native-tag-select';
@@ -19,29 +19,59 @@ import { IRootState } from "../../shared/reducer";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import DateModal, { DateModalState } from "../../shared/component/date-modal";
 
-const Filter = (props: any) => {
+type FilterState = {
+    startDate: string,
+    endDate: string,
+}
 
-    const {navigation} = props
+const Filter = (props: any) => {
 
     const dispatch = useDispatch()
 
+    const {navigation} = props
+
     const tagRef = useRef()
+
+    const [state, setState] = useState<FilterState>({startDate: '', endDate: ''})
+
+    const [isDateModalAble, setDateModalAble] = useState(false)
+
+    const {tagSelectValue, selectDate} = useSelector((state: IRootState) => {
+        return {
+            tagSelectValue: state.filter.tagSelectValue,
+            selectDate: state.filter.selectDate
+        }
+    }, shallowEqual)
+
+    useEffect(() => {
+
+        const startDate = typeof selectDate.startDate === 'undefined' ? '' : selectDate.startDate
+
+        const endDate = typeof selectDate.endDate === 'undefined' ? '' : selectDate.endDate
+
+        const newState : FilterState = {
+            ...state,
+            startDate : startDate,
+            endDate : endDate
+        }
+
+        setState(newState)
+
+        return () => {
+        }
+
+    }, [dispatch])
 
     const toClose = () => {
         navigation.goBack()
     }
 
-    const [state , setState] = useState<any>({startDate : '' , endDate : ''})
-
-    const [isDateModalAble, setDateModalAble] = useState(false)
-
-    const {tagSelectValue} = useSelector((state: IRootState) => {
-        return {
-            tagSelectValue: state.filter.tagSelectValue
-        }
-    }, shallowEqual)
-
     const toApplyFilter = () => {
+
+        if (state.startDate == '' || state.endDate == '') {
+            Alert.alert("날짜가 아직 선택 되지 않았습니다.")
+            return;
+        }
 
         // @ts-ignore
         const _tagSelectValue = tagRef['current'].itemsSelected
@@ -54,7 +84,9 @@ const Filter = (props: any) => {
         }
 
         const newPayload: ISaveFilterDTO = {
-            tagSelectValue: _tagSelectValue
+            tagSelectValue: _tagSelectValue,
+            startDate: state.startDate,
+            endDate: state.endDate
         }
 
         dispatch(setByFilterValue(newPayload))
@@ -68,12 +100,12 @@ const Filter = (props: any) => {
 
     }
 
-    const setDate = (modalState : DateModalState) =>{
+    const setDate = (modalState: DateModalState) => {
 
         const newState = {
             ...state,
-            startDate : modalState.startDate,
-            endDate : modalState.endDate
+            startDate: modalState.startDate,
+            endDate: modalState.endDate
         }
 
         setState(newState)
@@ -105,7 +137,7 @@ const Filter = (props: any) => {
                     <DateModal
                         setDate={setDate}
                         visible={isDateModalAble}
-                               toClose={toToggleDateModal}/>
+                        toClose={toToggleDateModal}/>
 
                     <Text>
                         startDate : {state.startDate},
@@ -215,7 +247,7 @@ const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: "center",
-        paddingTop : 20,
+        paddingTop: 20,
         // alignItems: "center",
         // marginTop: 22
     },
@@ -236,8 +268,8 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         textAlign: "center",
-        justifyContent : "center",
-        alignItems : "center"
+        justifyContent: "center",
+        alignItems: "center"
     },
 
 })
