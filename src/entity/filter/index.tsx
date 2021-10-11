@@ -22,6 +22,8 @@ import DateModal, { DateModalState } from "../../shared/component/date-modal";
 type FilterState = {
     startDate: string,
     endDate: string,
+    tagValue: Array<any>
+    isTagAble: boolean
 }
 
 const Filter = (props: any) => {
@@ -32,7 +34,7 @@ const Filter = (props: any) => {
 
     const tagRef = useRef()
 
-    const [state, setState] = useState<FilterState>({startDate: '', endDate: ''})
+    const [state, setState] = useState<FilterState>({startDate: '', endDate: '', tagValue: [], isTagAble: false})
 
     const [isDateModalAble, setDateModalAble] = useState(false)
 
@@ -49,15 +51,24 @@ const Filter = (props: any) => {
 
         const endDate = typeof selectDate.endDate === 'undefined' ? '' : selectDate.endDate
 
-        const newState : FilterState = {
+        const newState: FilterState = {
             ...state,
-            startDate : startDate,
-            endDate : endDate
+            startDate: startDate,
+            endDate: endDate,
+            tagValue: tagSelectValue,
+            isTagAble: true
         }
 
         setState(newState)
 
         return () => {
+
+            const newState = {
+                ...state,
+                isTagAble: false
+            }
+
+            setState(newState)
         }
 
     }, [dispatch])
@@ -160,20 +171,23 @@ const Filter = (props: any) => {
                     marginTop: 10,
                     marginLeft: 10
                 }}>
-                    <TagSelect
-                        value={tagSelectValue}
-                        data={arrOfPicker}
-                        max={1}
-                        theme={"warning"}
-                        ref={tagRef}
-                        onMaxError={() => {
-                            return
-                        }}
-                        itemStyle={styles.item}
-                        itemLabelStyle={styles.label}
-                        itemStyleSelected={styles.itemSelected}
-                        itemLabelStyleSelected={styles.labelSelected}
-                    />
+                    {
+                        state.isTagAble &&
+                        <TagSelect
+                            value={state.tagValue}
+                            data={arrOfPicker}
+                            max={1}
+                            theme={"warning"}
+                            ref={tagRef}
+                            onMaxError={() => {
+                                return
+                            }}
+                            itemStyle={styles.item}
+                            itemLabelStyle={styles.label}
+                            itemStyleSelected={styles.itemSelected}
+                            itemLabelStyleSelected={styles.labelSelected}
+                        />
+                    }
                 </View>
             </LayoutWrap>
 

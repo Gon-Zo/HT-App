@@ -1,5 +1,4 @@
 import { IFilterDate, ISaveFilterDTO } from "../home/filter.interface";
-import { arrOfPicker } from "./filter-data";
 
 const ACTION_TYPES = {
     SET_TAG_VALUE: 'filter/SET_TAG_VALUE',
@@ -7,7 +6,7 @@ const ACTION_TYPES = {
 }
 
 const initialState = {
-    tagSelectValue: [arrOfPicker[0]],
+    tagSelectValue: [],
     selectDate: {} as IFilterDate
 }
 
