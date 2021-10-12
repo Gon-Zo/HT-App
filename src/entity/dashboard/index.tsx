@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IDashboardProps } from "./dashboard.interface";
 import { DashBoardSafeAreaView } from "./dashboard.style";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -14,11 +14,23 @@ align-items: flex-end;
 padding-right: 10px;
 `;
 
+type DashboardState = {
+    isSelectDateAble : boolean
+}
+
 const Dashboard = (props: IDashboardProps) => {
 
-    const dispatch = useDispatch()
-
     const {navigation} = props
+
+    const [state, setState] = useState<DashboardState>({
+        isSelectDateAble : false
+    })
+
+    const {selectDate} = useSelector((state: IRootState) => {
+        return {
+            selectDate: state.filter.selectDate
+        }
+    }, shallowEqual)
 
     useEffect(() => {
         navigation.setOptions({
@@ -27,11 +39,16 @@ const Dashboard = (props: IDashboardProps) => {
         })
     }, [])
 
-    const {selectDate} = useSelector((state: IRootState) => {
-        return {
-            selectDate: state.filter.selectDate
+    useEffect(() => {
+
+        const newState: DashboardState = {
+            ...state,
+            isSelectDateAble: Object.keys(selectDate).length != 0
         }
-    })
+
+        setState(newState)
+
+    }, [selectDate])
 
     const goFilter = () => {
         navigation.navigate("Filter")
@@ -66,27 +83,13 @@ const Dashboard = (props: IDashboardProps) => {
                         서울시
                     </Text>
                     {
-                        (!selectDate.startDate || !selectDate.endDate) ?
+                        state.isSelectDateAble ?
                             <Text style={{
                                 paddingLeft: 10,
                                 color: '#989898'
                             }}> {selectDate.startDate} ~ {selectDate.endDate}</Text> : null
                     }
                 </View>
-
-                {/*<View style={*/}
-                {/*    {*/}
-                {/*        backgroundColor: "#f00",*/}
-                {/*        flexDirection : "column"*/}
-                {/*    }*/}
-                {/*}>*/}
-                {/*    <Text>*/}
-                {/*        2020.02.01 ~ 2020.03.01*/}
-                {/*    </Text>*/}
-                {/*    <Text>*/}
-                {/*        토지 거래*/}
-                {/*    </Text>*/}
-                {/*</View>*/}
 
                 <CardGroup/>
 
