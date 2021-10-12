@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ExModal, { IExModalProps } from "./ex-modal";
 import { Calendar } from "react-native-calendars";
-import { toDistanceByDate } from "../utils/layout.utils";
 import { Pressable, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IFilterDate } from "../../entity/home/filter.interface";
