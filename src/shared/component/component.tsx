@@ -19,7 +19,7 @@ export const LogoComponent = (props: any) => {
         <View style={styled.headerWrap}>
             <View style={styled.iconBox}>
                 <Image style={styled.logoBox}
-                       source={require('../../assets/images/logo.png')}/>
+                       source={require('../../assets/images/bonbang1.png')}/>
             </View>
             <View style={styled.emptyBox}>
             </View>

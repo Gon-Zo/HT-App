@@ -52,17 +52,17 @@ const TabNavigation = (props: any) => {
                                     size={size}/>;
                             }
                         }}/>
-            <Tap.Screen name={"내주변"}
-                        component={Around}
-                        options={{
-                            tabBarIcon: ({focused, color, size}) => {
-                                return <FontAwesomeIcon
-                                    color={color}
-                                    icon={["fas", "map-marker-alt"]}
-                                    size={size}
-                                />
-                            }
-                        }}/>
+            {/*<Tap.Screen name={"내주변"}*/}
+            {/*            component={Around}*/}
+            {/*            options={{*/}
+            {/*                tabBarIcon: ({focused, color, size}) => {*/}
+            {/*                    return <FontAwesomeIcon*/}
+            {/*                        color={color}*/}
+            {/*                        icon={["fas", "map-marker-alt"]}*/}
+            {/*                        size={size}*/}
+            {/*                    />*/}
+            {/*                }*/}
+            {/*            }}/>*/}
         </Tap.Navigator>
     )
 }
