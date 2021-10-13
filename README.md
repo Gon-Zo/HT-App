@@ -1,5 +1,8 @@
 # bonbang app
 
+<img width="350" src="https://user-images.githubusercontent.com/53357210/137144072-652fde37-8bb5-48b3-9b3e-5d4229b5c9ac.png"/>
+
+
 ### Project Structure
 
 ```
@@ -21,6 +24,7 @@
 ```
 
 ### Runbook
+
 
 #### use to yarn
 
