@@ -8,6 +8,7 @@ import DashboardTable from "../../shared/component/dashboard-table";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import styled from "styled-components/native";
 import { IRootState } from "../../shared/reducer";
+import { getAreaCodes } from "../app-shared/app-shared.reducer";
 
 const FilterWrap = styled.View`
 align-items: flex-end;
@@ -15,15 +16,17 @@ padding-right: 10px;
 `;
 
 type DashboardState = {
-    isSelectDateAble : boolean
+    isSelectDateAble: boolean
 }
 
 const Dashboard = (props: IDashboardProps) => {
 
     const {navigation} = props
 
+    const dispatch = useDispatch()
+
     const [state, setState] = useState<DashboardState>({
-        isSelectDateAble : false
+        isSelectDateAble: false
     })
 
     const {selectDate} = useSelector((state: IRootState) => {
@@ -33,10 +36,15 @@ const Dashboard = (props: IDashboardProps) => {
     }, shallowEqual)
 
     useEffect(() => {
+
+        dispatch(getAreaCodes())
+
         navigation.setOptions({
             headerTitle: "대시보드",
             headerShown: false
         })
+        return () => {
+        }
     }, [])
 
     useEffect(() => {
