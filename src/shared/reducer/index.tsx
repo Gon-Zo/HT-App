@@ -4,6 +4,7 @@ import dashboard, { DashboardState } from "../../entity/dashboard/dashboard.redu
 import home, { HomeState } from "../../entity/home/home.reducer";
 import shared, { SharedState } from './shared.reducer'
 import filter, { FilterState } from "../../entity/filter/filter.reducer";
+import news, { NewsState } from "../../entity/news/new.reducer";
 
 export interface IRootState {
     readonly count: CountState
@@ -11,6 +12,7 @@ export interface IRootState {
     readonly home: HomeState
     readonly shared: SharedState
     readonly filter: FilterState
+    readonly news: NewsState
 }
 
 const rootReducer = combineReducers<IRootState>({
@@ -18,7 +20,8 @@ const rootReducer = combineReducers<IRootState>({
     dashboard,
     home,
     shared,
-    filter
+    filter,
+    news
 })
 
 export default rootReducer

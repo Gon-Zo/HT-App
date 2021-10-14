@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { IDashboardProps } from "./dashboard.interface";
 import { FilterWrap } from "./dashboard.style";
-import { shallowEqual, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import CardGroup from "../../shared/component/card-group";
 import DashboardTable from "../../shared/component/dashboard-table";
@@ -16,6 +16,8 @@ type DashboardState = {
 const Dashboard = (props: IDashboardProps) => {
 
     const {navigation} = props
+
+    const dispatch = useDispatch()
 
     const [state, setState] = useState<DashboardState>({
         isSelectDateAble: false
@@ -36,7 +38,6 @@ const Dashboard = (props: IDashboardProps) => {
 
         return () => {
         }
-
     }, [])
 
     useEffect(() => {
