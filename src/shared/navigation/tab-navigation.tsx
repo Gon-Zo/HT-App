@@ -17,8 +17,7 @@ const TabNavigation = (props: any) => {
                     inactiveTintColor: 'gray',
                     showLabel: false
                 }
-            }
-        >
+            }>
             <Tap.Screen name={"홈"}
                         component={Home}
                         options={{
@@ -45,21 +44,10 @@ const TabNavigation = (props: any) => {
                             tabBarIcon: ({focused, color, size}) => {
                                 return <FontAwesomeIcon
                                     color={color}
-                                    icon={["far", "map"]}
+                                    icon={["far", "newspaper"]}
                                     size={size}/>;
                             }
                         }}/>
-            {/*/!*<Tap.Screen name={"내주변"}*!/*/}
-            {/*/!*            component={Around}*!/*/}
-            {/*/!*            options={{*!/*/}
-            {/*/!*                tabBarIcon: ({focused, color, size}) => {*!/*/}
-            {/*/!*                    return <FontAwesomeIcon*!/*/}
-            {/*/!*                        color={color}*!/*/}
-            {/*/!*                        icon={["fas", "map-marker-alt"]}*!/*/}
-            {/*/!*                        size={size}*!/*/}
-            {/*/!*                    />*!/*/}
-            {/*/!*                }*!/*/}
-            {/*/!*            }}/>*!/*/}
         </Tap.Navigator>
     )
 }

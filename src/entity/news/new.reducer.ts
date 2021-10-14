@@ -15,7 +15,11 @@ interface INewsData extends IBaseReducer {
 }
 
 const initialState = {
-    newsData: {} as INewsData
+    newsData: {
+        load: false,
+        error: null,
+        data: []
+    } as INewsData
 }
 
 export type NewsState = Readonly<typeof initialState>
@@ -60,9 +64,9 @@ export default (state = initialState, action: any): NewsState => {
     }
 }
 
-export const getByNewsData = () => ({
+export const getByNewsData = (page: number) => ({
     type: ACTION_TYPES.FETCH_NEWS_DATA,
-    payload: axios.get("https://openapi.naver.com/v1/search/news.json?query=부동산&display=40&start=2&sort=sim", {
+    payload: axios.get(`https://openapi.naver.com/v1/search/news.json?query=부동산&display=50&start=${page}`, {
         headers: {
             "X-Naver-Client-Id": secret.NEVER_ID,
             "X-Naver-Client-Secret": secret.NEVER_SECRET
