@@ -1,18 +1,9 @@
 import styled from 'styled-components/native';
-import {IHtTapStyleProps} from './component.interface';
+import { IAppSafeAreaViewProps, IHtTapStyleProps } from './component.interface';
 
 export const ScrollerAreaWrap = styled.SafeAreaView`
 flex: 1;
 background-color: white;
-`;
-
-export const ScrollerViewWrap = styled.View`
-flex: 1;
-background-color: white;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 10px;
 `;
 
 
@@ -60,33 +51,14 @@ export const SearchIconButtonText = styled.Text`
 color: rgba( 0 , 0, 0, 0.5);
 `;
 
-export const SearchButtonWrap = styled.TouchableOpacity`
-right: 10px;
-`;
-
-export const HomeButtonWrap = styled.TouchableOpacity`
-right: 30px;
-`;
-
-export const AreaDetailWrap = styled.View`
-flex-direction: row;
-`;
-
 export const BackButtonWrap = styled.TouchableOpacity`
 left: 10px;
 `;
 
-export const LogoImageWrap = styled.Image`
-width: 50px;
-height: 50px;
-`;
-
-export const TextBoxWrap = styled.View`
-align-self: stretch;
-`;
-
-export const TextBoxText = styled.Text`
-text-align: left;
-font-weight: bold;
-`;
 // font-size: ${actuatedNormalize(15)};
+
+export const AppSafeAreaView = styled.SafeAreaView<IAppSafeAreaViewProps>`
+flex: 1;
+background-color: #fff;
+padding-top: ${props => props.paddingTop};
+`;

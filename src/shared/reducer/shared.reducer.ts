@@ -9,13 +9,27 @@ const ACTION_TYPES = {
     FETCH_AREA_CODES: "dashboard/FETCH_AREA_CODES"
 }
 
-const initialState = {
-    areaCodes: {} as IBaseReducer
+interface ISharedData extends IBaseReducer {
+    data: Array<AreaCodeType>
 }
 
-export type AppSharedState = Readonly<typeof initialState>
+type AreaCodeType = {
+    id: number
+    code: string
+    name: string
+    type: string
+    createBy: string
+    createDate: string,
+    SubAreaCodeList: Array<AreaCodeType>
+}
 
-export default (state = initialState, action: any): AppSharedState => {
+const initialState = {
+    areaCodes: {} as ISharedData
+}
+
+export type SharedState = Readonly<typeof initialState>
+
+export default (state = initialState, action: any): SharedState => {
     switch (action.type) {
         case SUCCESS(ACTION_TYPES.FETCH_AREA_CODES): {
             return {
@@ -23,7 +37,7 @@ export default (state = initialState, action: any): AppSharedState => {
                 areaCodes: {
                     load: false,
                     error: null,
-                    data: action.payload.data
+                    data: action.payload.data as Array<AreaCodeType>
                 }
             }
         }
@@ -59,9 +73,9 @@ export const getAreaCodes = () => {
 
     return async (dispatch: any, getState: any) => {
 
-        const {appShared}: IRootState = await getState()
+        const {shared}: IRootState = await getState()
 
-        const areaCodes = appShared.areaCodes
+        const areaCodes = shared.areaCodes
 
         if (typeof areaCodes.data == "undefined" || areaCodes.data == null || areaCodes.data.length == 0) {
             await dispatch({type: ACTION_TYPES.FETCH_AREA_CODES, payload: axios.get(areaApiUri)})

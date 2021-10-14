@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const DashBoardSafeAreaView = styled.SafeAreaView`
-flex: 1;
-background-color: #fff;
+export const FilterWrap = styled.View`
+align-items: flex-end;
+padding-right: 10px;
 `;

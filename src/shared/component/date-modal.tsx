@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ExModal, { IExModalProps } from "./ex-modal";
+import ModalLayout, { IExModalProps } from "./modal-layout";
 import { Calendar } from "react-native-calendars";
 import { Pressable, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { IFilterDate } from "../../entity/home/filter.interface";
+import { IFilterDate } from "../../entity/filter/filter.interface";
 import { DATE_COLOR, getBySelectMarkers } from "../../entity/filter/filter.service";
 
 interface IDateModalProps extends IExModalProps {
@@ -77,7 +77,7 @@ const DateModal = (props: IDateModalProps) => {
     }, [visible])
 
     return (
-        <ExModal visible={visible} toClose={onClose}>
+        <ModalLayout visible={visible} toClose={onClose}>
             <Calendar
                 markingType={'period'}
                 markedDates={state.markedDates}
@@ -208,7 +208,7 @@ const DateModal = (props: IDateModalProps) => {
                     <FontAwesomeIcon color={'#fff'} icon={['fas', 'save']}/>
                 </Pressable>
             </View>
-        </ExModal>
+        </ModalLayout>
     )
 }
 

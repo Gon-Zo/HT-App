@@ -8,7 +8,7 @@ export interface IExModalProps {
     children?: React.ReactNode
 }
 
-const ExModal = (props: IExModalProps) => {
+const ModalLayout = (props: IExModalProps) => {
 
     const {visible, toClose, children} = props
 
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ExModal
+export default ModalLayout

@@ -1,20 +1,19 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {IAppTextProps, IBackButtonProps} from "./component.interface";
-import {BackButtonWrap} from "./component.style";
+import { Image, StyleSheet, Text, Platform, StatusBar, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { IAppTextProps, IBackButtonProps, IGlobalSafeAreaViewProps } from "./component.interface";
+import { AppSafeAreaView, BackButtonWrap } from "./component.style";
 
-export const AppText = (props : IAppTextProps)  =>{
-   const {title , style} = props
+export const AppText = (props: IAppTextProps) => {
+    const {title, style} = props
     return (
-        <Text  style={[style , {fontFamily : "NanumSquare_acB"}]}>
+        <Text style={[style, {fontFamily: "NanumSquare_acB"}]}>
             {title}
         </Text>
     )
 }
 
 export const LogoComponent = (props: any) => {
-
     return (
         <View style={styled.headerWrap}>
             <View style={styled.iconBox}>
@@ -23,32 +22,6 @@ export const LogoComponent = (props: any) => {
             </View>
             <View style={styled.emptyBox}>
             </View>
-        </View>
-    )
-}
-
-export const SearchUiButton = (props: any) => {
-
-    const {onPress} = props
-
-    return (
-        <View style={styled.searchWrap}>
-            <TouchableOpacity
-                onPress={onPress}
-                activeOpacity={1}
-                style={styled.searchBox}>
-                <View style={styled.searchIconBox}>
-                    <FontAwesomeIcon
-                        color={"#000"}
-                        icon={['fas', "search"]}
-                        size={23}/>
-                </View>
-                <View style={styled.placeholderBox}>
-                    <Text style={styled.placeholderText}>
-                        검색어를 입력하세요
-                    </Text>
-                </View>
-            </TouchableOpacity>
         </View>
     )
 }
@@ -66,8 +39,27 @@ export const BackButton = (props: IBackButtonProps) => {
     );
 };
 
+export const GlobalSafeAreaView = (props: IGlobalSafeAreaViewProps) => {
+
+    const {children} = props
+
+    const [paddingTop, setPaddingTop] = useState<number>(0)
+
+    useEffect(() => {
+        if (Platform.OS === "android") {
+            // @ts-ignore
+            setPaddingTop(StatusBar['currentHeight'])
+        }
+    }, [])
+
+    return (
+        <AppSafeAreaView paddingTop={paddingTop}>
+            {children}
+        </AppSafeAreaView>
+    )
+}
+
 const styled = StyleSheet.create({
-    // search - button - component
     searchWrap: {
         height: 70,
         backgroundColor: "#fff",
@@ -104,7 +96,7 @@ const styled = StyleSheet.create({
     headerWrap: {
         height: 60,
         flexDirection: "row",
-        backgroundColor : "#fff"
+        backgroundColor: "#fff"
     },
     logoBox: {
         width: 120,

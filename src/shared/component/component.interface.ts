@@ -1,6 +1,6 @@
 import React from 'react';
-import {NavigationProp, ParamListBase} from '@react-navigation/native';
-import {StyleProp, TextStyle} from "react-native";
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { StyleProp, TextStyle } from "react-native";
 
 export interface IBaseReducer {
     load: boolean,
@@ -17,17 +17,6 @@ export interface IBackButtonProps {
     navigation: NavigationProp<ParamListBase>
 }
 
-export interface IAreaTabProps {
-    data: any[]
-}
-
-export interface ITabItemProps {
-    text: string,
-    index: number,
-    onPress: Function,
-    active: boolean
-}
-
 export interface IHtTapStyleProps {
     active: boolean
 }
@@ -35,15 +24,15 @@ export interface IHtTapStyleProps {
 export type IAreaParentsCode = {
     key: string,
     active: boolean,
-    index : number,
-    code : string,
+    index: number,
+    code: string,
     list: Array<IAreaChildCode>
 }
 
 export type IAreaChildCode = {
     key: string,
-    index : number,
-    code : string,
+    index: number,
+    code: string,
 }
 
 export interface IAreaListWrapProps extends IAreaListProps {
@@ -51,14 +40,8 @@ export interface IAreaListWrapProps extends IAreaListProps {
 }
 
 export interface IAreaListProps {
-    onPress: (select : any) => void
+    onPress: (select: any) => void
     areaCodeList: any[]
-}
-
-export interface IAreaCodeSubItemProps {
-    item: IAreaChildCode,
-    index: number,
-    onPress: Function
 }
 
 export interface IAreaCodeItemProps {
@@ -67,11 +50,15 @@ export interface IAreaCodeItemProps {
     onSwitch: Function
 }
 
-export interface IHeaderComponentProps {
-    title: string
-}
-
 export interface IAppTextProps {
     title?: string,
     style?: StyleProp<TextStyle>
+}
+
+export interface IGlobalSafeAreaViewProps {
+    children: React.ReactNode
+}
+
+export interface IAppSafeAreaViewProps {
+    paddingTop: number
 }

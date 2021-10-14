@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { IDashboardProps } from "./dashboard.interface";
-import { DashBoardSafeAreaView } from "./dashboard.style";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FilterWrap } from "./dashboard.style";
+import { shallowEqual, useSelector } from "react-redux";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import CardGroup from "../../shared/component/card-group";
 import DashboardTable from "../../shared/component/dashboard-table";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import styled from "styled-components/native";
 import { IRootState } from "../../shared/reducer";
-import { getAreaCodes } from "../app-shared/app-shared.reducer";
-
-const FilterWrap = styled.View`
-align-items: flex-end;
-padding-right: 10px;
-`;
+import { GlobalSafeAreaView } from "../../shared/component/component";
 
 type DashboardState = {
     isSelectDateAble: boolean
@@ -22,8 +16,6 @@ type DashboardState = {
 const Dashboard = (props: IDashboardProps) => {
 
     const {navigation} = props
-
-    const dispatch = useDispatch()
 
     const [state, setState] = useState<DashboardState>({
         isSelectDateAble: false
@@ -37,14 +29,14 @@ const Dashboard = (props: IDashboardProps) => {
 
     useEffect(() => {
 
-        dispatch(getAreaCodes())
-
         navigation.setOptions({
             headerTitle: "대시보드",
             headerShown: false
         })
+
         return () => {
         }
+
     }, [])
 
     useEffect(() => {
@@ -63,7 +55,7 @@ const Dashboard = (props: IDashboardProps) => {
     }
 
     return (
-        <DashBoardSafeAreaView>
+        <GlobalSafeAreaView>
 
             <FilterWrap>
                 <TouchableOpacity onPress={goFilter}>
@@ -98,14 +90,10 @@ const Dashboard = (props: IDashboardProps) => {
                             }}> {selectDate.startDate} ~ {selectDate.endDate}</Text> : null
                     }
                 </View>
-
                 <CardGroup/>
-
                 <DashboardTable/>
-
             </ScrollView>
-
-        </DashBoardSafeAreaView>
+        </GlobalSafeAreaView>
     )
 }
 

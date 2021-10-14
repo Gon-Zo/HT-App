@@ -5,7 +5,7 @@ import TabNavigation from "./tab-navigation";
 import Search from "../../entity/search";
 import Filter from "../../entity/filter";
 import { useDispatch } from "react-redux";
-import { getAreaCodes } from "../../entity/app-shared/app-shared.reducer";
+import { getAreaCodes } from "../reducer/shared.reducer";
 
 const RootStack = createStackNavigator()
 

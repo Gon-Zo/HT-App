@@ -1,12 +1,8 @@
-import React, {memo} from "react";
+import React, { memo } from "react";
 import 'react-native-gesture-handler';
 import Home from "../../entity/home";
-import Around from "../../entity/around";
-
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
-import AreaNavigation from "./area-navigation";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import DashboardNavigation from "./dashboard-navigation";
 
 const Tap = createBottomTabNavigator()
@@ -42,27 +38,27 @@ const TabNavigation = (props: any) => {
                                     size={size}/>;
                             }
                         }}/>
-            <Tap.Screen name={"지역"}
-                        component={AreaNavigation}
-                        options={{
-                            tabBarIcon: ({focused, color, size}) => {
-                                return <FontAwesomeIcon
-                                    color={color}
-                                    icon={["far", "map"]}
-                                    size={size}/>;
-                            }
-                        }}/>
-            {/*<Tap.Screen name={"내주변"}*/}
-            {/*            component={Around}*/}
+            {/*<Tap.Screen name={"지역"}*/}
+            {/*            component={AreaNavigation}*/}
             {/*            options={{*/}
             {/*                tabBarIcon: ({focused, color, size}) => {*/}
             {/*                    return <FontAwesomeIcon*/}
             {/*                        color={color}*/}
-            {/*                        icon={["fas", "map-marker-alt"]}*/}
-            {/*                        size={size}*/}
-            {/*                    />*/}
+            {/*                        icon={["far", "map"]}*/}
+            {/*                        size={size}/>;*/}
             {/*                }*/}
             {/*            }}/>*/}
+            {/*/!*<Tap.Screen name={"내주변"}*!/*/}
+            {/*/!*            component={Around}*!/*/}
+            {/*/!*            options={{*!/*/}
+            {/*/!*                tabBarIcon: ({focused, color, size}) => {*!/*/}
+            {/*/!*                    return <FontAwesomeIcon*!/*/}
+            {/*/!*                        color={color}*!/*/}
+            {/*/!*                        icon={["fas", "map-marker-alt"]}*!/*/}
+            {/*/!*                        size={size}*!/*/}
+            {/*/!*                    />*!/*/}
+            {/*/!*                }*!/*/}
+            {/*/!*            }}/>*!/*/}
         </Tap.Navigator>
     )
 }

@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react'
 import ScrollLayout from "../../shared/component/scroll-layout";
 import { HomeProps } from "./home.interface";
-import { LogoComponent, SearchUiButton } from "../../shared/component/component";
+import { LogoComponent } from "../../shared/component/component";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../shared/reducer";
 import { View } from "react-native";
@@ -51,8 +51,8 @@ const Home = (props: HomeProps) => {
                     }}
                 >
                     <VictoryHistogram style={{
-                                          // data: { fill: "#c43a31" }
-                                      }}
+                        // data: { fill: "#c43a31" }
+                    }}
                                       data={[
                                           {x: 1},
                                           {x: 2},
