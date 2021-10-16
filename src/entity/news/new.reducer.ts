@@ -63,12 +63,15 @@ export default (state = initialState, action: any): NewsState => {
     }
 }
 
-export const getByNewsData = (page: number) => ({
-    type: ACTION_TYPES.FETCH_NEWS_DATA,
-    payload: axios.get(`https://openapi.naver.com/v1/search/news.json?query=부동산&display=50&start=${page}`, {
-        headers: {
-            "X-Naver-Client-Id": secret.NEVER_ID,
-            "X-Naver-Client-Secret": secret.NEVER_SECRET
-        }
+export const getByNewsData = (page: number) => {
+    const query = "아파트,부동산"
+    return ({
+        type: ACTION_TYPES.FETCH_NEWS_DATA,
+        payload: axios.get(`https://openapi.naver.com/v1/search/news.json?query=${query}&display=50&start=${page}`, {
+            headers: {
+                "X-Naver-Client-Id": secret.NEVER_ID,
+                "X-Naver-Client-Secret": secret.NEVER_SECRET
+            }
+        })
     })
-})
+}
