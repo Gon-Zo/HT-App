@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { IDashboardProps } from "./dashboard.interface";
-import { FilterWrap } from "./dashboard.style";
+import { DashboardState, IDashboardProps } from "./dashboard.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import CardGroup from "../../shared/component/card-group";
-import DashboardTable from "../../shared/component/dashboard-table";
+import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IRootState } from "../../shared/reducer";
-import { GlobalSafeAreaView } from "../../shared/component/component";
-import { CardDataList } from "../../shared/utils/empty-data.utils";
-
-type DashboardState = {
-    isSelectDateAble: boolean
-}
+import { GlobalSafeAreaView, H1 } from "../../shared/component/component";
+import { getByJeonseMonthlyRent } from "./dashboard.reducer";
+import CardGroup from "./card-group";
+import moment from "moment";
+import { IFilterDate } from "../filter/filter.interface";
+import { setBySelectDate } from "../../shared/reducer/shared.reducer";
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -24,19 +21,19 @@ const Dashboard = (props: IDashboardProps) => {
         isSelectDateAble: false
     })
 
-    const {selectDate} = useSelector(({shared}: IRootState) => {
+    const {selectDate, jeonseMonthlyRentData} = useSelector(({shared, dashboard}: IRootState) => {
         return {
-            selectDate: shared.selectDate
+            selectDate: shared.selectDate,
+            jeonseMonthlyRentData: dashboard.jeonseMonthlyRentData
         }
     }, shallowEqual)
 
     useEffect(() => {
-
         navigation.setOptions({
             headerTitle: "대시보드",
             headerShown: false
         })
-
+        toCallDashboardData(true)
         return () => {
         }
     }, [])
@@ -50,7 +47,25 @@ const Dashboard = (props: IDashboardProps) => {
 
         setState(newState)
 
+        toCallDashboardData()
+
     }, [selectDate])
+
+    const toCallDashboardData = (isInitAble: boolean = false) => {
+
+        if (isInitAble) {
+            const nowDate = moment(new Date()).format("YYYY-MM-DD")
+
+            const selectData: IFilterDate = {
+                startDate: nowDate,
+                endDate: nowDate
+            }
+
+            dispatch(setBySelectDate(selectData))
+        }
+
+        dispatch(getByJeonseMonthlyRent())
+    }
 
     const goFilter = () => {
         navigation.navigate("Filter")
@@ -58,31 +73,19 @@ const Dashboard = (props: IDashboardProps) => {
 
     return (
         <GlobalSafeAreaView>
-
-            <FilterWrap>
-                <TouchableOpacity onPress={goFilter}>
-                    <FontAwesomeIcon size={18}
-                                     icon={['fas', 'filter']}
-                                     color={'#000'}/>
-                </TouchableOpacity>
-            </FilterWrap>
-
-            <ScrollView
-                style={{
-                    flex: 1
-                }}>
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: 5,
+                paddingLeft: 10,
+                paddingRight: 10
+            }}>
                 <View style={{
-                    padding: 7,
-                    flexDirection: "row",
+                    flexDirection: 'row',
+                    alignItems: 'flex-end',
                 }}>
-                    <Text style={
-                        {
-                            fontSize: 27,
-                            fontWeight: "bold",
-                        }
-                    }>
-                        서울시
-                    </Text>
+                    <H1 text={'서울시'}/>
                     {
                         state.isSelectDateAble &&
                         (
@@ -93,18 +96,51 @@ const Dashboard = (props: IDashboardProps) => {
                         )
                     }
                 </View>
+                <TouchableOpacity
+                    style={[{
+                        width: 35,
+                        height: 35,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#fff',
+                        borderRadius: 5
+                    }, styles.shadow]}
+                    onPress={goFilter}>
+                    <FontAwesomeIcon size={18}
+                                     icon={['fas', 'filter']}
+                                     color={'#000'}/>
+                </TouchableOpacity>
+            </View>
+
+            <ScrollView
+                style={{
+                    flex: 1
+                }}>
 
                 <View style={{
                     padding: 5
                 }}>
-                    <CardGroup cardData={CardDataList}/>
-                    <DashboardTable/>
+                    <CardGroup data={jeonseMonthlyRentData}/>
+                    {/*<DashboardTable/>*/}
                 </View>
 
             </ScrollView>
         </GlobalSafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    shadow: {
+        ...Platform.select({
+            ios: {
+                shadowColor: '#4d4d4d',
+                shadowOffset: {width: 1, height: 0,},
+                shadowOpacity: 0.2,
+                shadowRadius: 5,
+            }, android: {elevation: 8,},
+        }),
+    },
+})
 
 
 export default Dashboard

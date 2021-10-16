@@ -4,6 +4,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { IAppTextProps, IBackButtonProps, IGlobalSafeAreaViewProps } from "./component.interface";
 import { AppSafeAreaView, BackButtonWrap } from "./component.style";
 
+export const H1 = (props : any) => {
+    const {text} = props
+    return (
+        <Text style={{
+                fontSize: 27,
+                fontWeight: "bold",
+            }}>
+            {text}
+        </Text>
+    )
+}
+
+export const H3  = (props : any) =>{
+    const {text} = props
+    return (
+        <Text style={{
+                fontSize: 17,
+                fontWeight: '600'
+            }}>
+            {text}
+        </Text>
+    )
+}
+
 export const AppText = (props: IAppTextProps) => {
     const {title, style} = props
     return (
