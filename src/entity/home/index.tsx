@@ -19,28 +19,12 @@ const Home = (props: HomeProps) => {
 
     const {navigation} = props
 
-    const dispatch = useDispatch()
-
-    const {realEstateListData, realEstateListLoad} = useSelector((state: IRootState) => {
-        return {
-            realEstateListData: state.home.realEstateList.data,
-            realEstateListLoad: state.home.realEstateList.load,
-        }
-    }, shallowEqual)
-
     useEffect(() => {
-        // dispatch(getRealEstateList())
     }, [])
-
-    const goSearch = () => {
-        navigation.navigate("Modal")
-    }
 
     return (
         <ScrollLayout stickyList={[0]}>
             <LogoComponent/>
-            {/*<SearchUiButton onPress={goSearch}/>*/}
-
             <View>
                 <VictoryChart
                     theme={VictoryTheme.material}
@@ -50,17 +34,14 @@ const Home = (props: HomeProps) => {
                         onLoad: {duration: 1000}
                     }}
                 >
-                    <VictoryHistogram style={{
-                        // data: { fill: "#c43a31" }
-                    }}
-                                      data={[
-                                          {x: 1},
-                                          {x: 2},
-                                          {x: 2},
-                                          {x: 4},
-                                          {x: 4},
-                                          {x: 5}
-                                      ]}
+                    <VictoryHistogram data={[
+                        {x: 1},
+                        {x: 2},
+                        {x: 2},
+                        {x: 4},
+                        {x: 4},
+                        {x: 5}
+                    ]}
                     />
                 </VictoryChart>
             </View>
@@ -71,8 +52,7 @@ const Home = (props: HomeProps) => {
                     animate={{
                         duration: 2000,
                         onLoad: {duration: 1000}
-                    }}
-                >
+                    }}>
                     <VictoryLine
                         style={{
                             data: {stroke: "orange"},
@@ -96,12 +76,8 @@ const Home = (props: HomeProps) => {
                     animate={{
                         duration: 2000,
                         onLoad: {duration: 1000}
-                    }}
-                >
+                    }}>
                     <VictoryHistogram horizontal
-                                      style={{
-                                          // data: { fill: "#c43a31" }
-                                      }}
                                       data={[
                                           {x: 1},
                                           {x: 2},
