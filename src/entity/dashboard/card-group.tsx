@@ -100,7 +100,7 @@ const CardGroup = (props: ICardGroupProps) => {
     }
 
     return (
-        <View style={{marginTop: 10}}>
+        <View style={{marginTop: 10 , padding : 5}}>
             <View style={{
                 paddingLeft: 8
             }}>

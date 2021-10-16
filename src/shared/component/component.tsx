@@ -4,27 +4,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { IAppTextProps, IBackButtonProps, IGlobalSafeAreaViewProps } from "./component.interface";
 import { AppSafeAreaView, BackButtonWrap } from "./component.style";
 
-export const H1 = (props : any) => {
+export const H1 = (props: any) => {
     const {text} = props
     return (
-        <Text style={{
+        <Text style={[
+            {
                 fontSize: 27,
                 fontWeight: "bold",
-            }}>
+            }]}>
             {text}
         </Text>
     )
 }
 
-export const H3  = (props : any) =>{
+export const H3 = (props: any) => {
     const {text} = props
     return (
-        <Text style={{
-                fontSize: 17,
-                fontWeight: '600'
-            }}>
-            {text}
-        </Text>
+        <Text style={[{
+            fontSize: 17,
+            fontWeight: '600'
+        }]}>{text}</Text>
     )
 }
 
@@ -84,6 +83,11 @@ export const GlobalSafeAreaView = (props: IGlobalSafeAreaViewProps) => {
 }
 
 const styled = StyleSheet.create({
+    textShadow: {
+        textShadowOffset: {width: 1, height: 1},
+        textShadowRadius: 1,
+        textShadowColor: '#4d4d4d',
+    },
     searchWrap: {
         height: 70,
         backgroundColor: "#fff",

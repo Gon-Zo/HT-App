@@ -2,6 +2,7 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 
 export type DashboardState = {
     isSelectDateAble: boolean
+    isFilterModal : boolean
 }
 
 export type DashboardStack = {

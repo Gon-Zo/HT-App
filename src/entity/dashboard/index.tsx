@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DashboardState, IDashboardProps } from "./dashboard.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IRootState } from "../../shared/reducer";
 import { GlobalSafeAreaView, H1 } from "../../shared/component/component";
@@ -10,6 +10,7 @@ import CardGroup from "./card-group";
 import moment from "moment";
 import { IFilterDate } from "../filter/filter.interface";
 import { setBySelectDate } from "../../shared/reducer/shared.reducer";
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -18,7 +19,8 @@ const Dashboard = (props: IDashboardProps) => {
     const dispatch = useDispatch()
 
     const [state, setState] = useState<DashboardState>({
-        isSelectDateAble: false
+        isSelectDateAble: false,
+        isFilterModal: false
     })
 
     const {selectDate, jeonseMonthlyRentData} = useSelector(({shared, dashboard}: IRootState) => {
@@ -60,76 +62,105 @@ const Dashboard = (props: IDashboardProps) => {
                 startDate: nowDate,
                 endDate: nowDate
             }
-
             dispatch(setBySelectDate(selectData))
         }
 
         dispatch(getByJeonseMonthlyRent())
     }
 
-    const goFilter = () => {
-        navigation.navigate("Filter")
+    const toToggleModal = () => {
+        const newState: DashboardState = {
+            ...state,
+            isFilterModal: !state.isFilterModal
+        }
+        setState(newState)
     }
 
     return (
         <GlobalSafeAreaView>
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: 5,
-                paddingLeft: 10,
-                paddingRight: 10
-            }}>
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'flex-end',
-                }}>
+
+            <GestureRecognizer onSwipeDown={toToggleModal}>
+                <Modal
+                    animationType={'slide'}
+                    visible={state.isFilterModal}
+                    transparent={true}>
+                    <TouchableOpacity
+                        onPress={toToggleModal}
+                        style={{
+                            flex: .5,
+                            // backgroundColor: 'rgba( 0, 0, 0, 0.1)'
+                        }}>
+                    </TouchableOpacity>
+                    <View style={{
+                        flex: 1,
+                        backgroundColor: "#ffffff",
+                        borderTopLeftRadius: 10,
+                        borderTopRightRadius: 10,
+                    }}>
+                        <View style={{
+                            paddingLeft : 10,
+                            paddingTop : 10
+                        }}>
+                            <H1 text={'필터'}/>
+                        </View>
+                    </View>
+                </Modal>
+            </GestureRecognizer>
+
+            <View style={styles.headerWrap}>
+                <View style={styles.headerBox}>
                     <H1 text={'서울시'}/>
                     {
                         state.isSelectDateAble &&
                         (
-                            <Text style={{
-                                paddingLeft: 10,
-                                color: '#989898'
-                            }}> {selectDate.startDate} ~ {selectDate.endDate}</Text>
+                            <Text style={styles.dateText}>{selectDate.startDate} ~ {selectDate.endDate}</Text>
                         )
                     }
                 </View>
                 <TouchableOpacity
-                    style={[{
-                        width: 35,
-                        height: 35,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#fff',
-                        borderRadius: 5
-                    }, styles.shadow]}
-                    onPress={goFilter}>
+                    style={[styles.btn, styles.shadow]}
+                    onPress={toToggleModal}>
                     <FontAwesomeIcon size={18}
                                      icon={['fas', 'filter']}
                                      color={'#000'}/>
                 </TouchableOpacity>
             </View>
 
-            <ScrollView
-                style={{
-                    flex: 1
-                }}>
-
-                <View style={{
-                    padding: 5
-                }}>
-                    <CardGroup data={jeonseMonthlyRentData}/>
-                    {/*<DashboardTable/>*/}
-                </View>
-
+            <ScrollView style={styles.scrolWrap}>
+                <CardGroup data={jeonseMonthlyRentData}/>
             </ScrollView>
         </GlobalSafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    headerWrap: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 5,
+        paddingLeft: 10,
+        paddingRight: 10
+    },
+    headerBox: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+    },
+    dateText: {
+        paddingLeft: 10,
+        color: '#989898'
+    },
+    btn: {
+        width: 35,
+        height: 35,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 5
+    },
+    scrolWrap: {
+        flex: 1
+    },
     shadow: {
         ...Platform.select({
             ios: {
