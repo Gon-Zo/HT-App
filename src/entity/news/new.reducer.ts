@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IBaseReducer } from "../../shared/component/component.interface";
-import { FAILURE, REQUEST, SUCCESS } from "../../shared/utils/action-utils";
+import { FAILURE, REQUEST, SUCCESS } from "../../shared/utils/action.utils";
 
 // @ts-ignore
 import secret from '../../../secret/secret.json'
@@ -8,7 +8,6 @@ import secret from '../../../secret/secret.json'
 const ACTION_TYPES = {
     FETCH_NEWS_DATA: 'news/FETCH_NEWS_DATA'
 }
-
 
 interface INewsData extends IBaseReducer {
     data: Array<any>

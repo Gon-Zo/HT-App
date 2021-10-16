@@ -1,9 +1,6 @@
-import axios from 'axios'
-
 // @ts-ignore
 import { IBaseReducer } from "../../shared/component/component.interface";
-import { FAILURE, REQUEST, SUCCESS } from "../../shared/utils/action-utils";
-import { IRootState } from "../../shared/reducer";
+import { FAILURE, REQUEST, SUCCESS } from "../utils/action.utils";
 
 const ACTION_TYPES = {
     FETCH_AREA_CODES: "dashboard/FETCH_AREA_CODES"
@@ -68,17 +65,3 @@ export default (state = initialState, action: any): SharedState => {
 }
 
 const areaApiUri = "/api/area-code"
-
-export const getAreaCodes = () => {
-
-    return async (dispatch: any, getState: any) => {
-
-        const {shared}: IRootState = await getState()
-
-        const areaCodes = shared.areaCodes
-
-        if (typeof areaCodes.data == "undefined" || areaCodes.data == null || areaCodes.data.length == 0) {
-            await dispatch({type: ACTION_TYPES.FETCH_AREA_CODES, payload: axios.get(areaApiUri)})
-        }
-    }
-}

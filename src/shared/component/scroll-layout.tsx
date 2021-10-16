@@ -16,5 +16,4 @@ const ScrollLayout = (props: IScrollerLayout) => {
     );
 };
 
-// @ts-ignore
-export default ScrollLayout;
+export default React.memo(ScrollLayout);

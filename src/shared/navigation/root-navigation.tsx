@@ -4,18 +4,12 @@ import { NavigationContainer } from '@react-navigation/native'
 import TabNavigation from "./tab-navigation";
 import Search from "../../entity/search";
 import Filter from "../../entity/filter";
-import { useDispatch } from "react-redux";
-import { getAreaCodes } from "../reducer/shared.reducer";
 
 const RootStack = createStackNavigator()
 
 const RootStackNavigation = () => {
 
-    const dispatch = useDispatch()
-
     useEffect(() => {
-        // todo : 나중에 지울것
-        dispatch(getAreaCodes())
     }, [])
 
     return (

@@ -1,5 +1,5 @@
 import {IBaseReducer} from "../../shared/component/component.interface";
-import {FAILURE, REQUEST, SUCCESS} from "../../shared/utils/action-utils";
+import {FAILURE, REQUEST, SUCCESS} from "../../shared/utils/action.utils";
 import axios from "axios";
 
 const ACTION_TYPES = {
