@@ -116,72 +116,8 @@ const DateModal = (props: IDateModalProps) => {
                     }
 
                     setState(newState)
+                }}/>
 
-                    // const isStart = state.startDate === '' && state.endDate === ''
-                    //
-                    // const isAdd = state.startDate !== '' && state.endDate !== ''
-                    //
-                    //
-                    // if (isStart && !isAdd) {
-                    //
-                    //     const anyOfStartDate = DATE_COLOR['START_DATE']
-                    //
-                    //     markedDates[dateString] = anyOfStartDate
-                    //
-                    //     newState = {
-                    //         ...state,
-                    //         startDate: dateString,
-                    //         markedDates: markedDates,
-                    //     }
-                    //
-                    // } else if (!isStart && isAdd) {
-                    //
-                    //     const startDate = state.startDate
-                    //
-                    //     const endDate = state.endDate
-                    //
-                    //     const startNum = toDistanceByDate(startDate, dateString)
-                    //
-                    //     const endNum = toDistanceByDate(dateString, endDate)
-                    //
-                    //     if (startNum < endNum) {
-                    //
-                    //         getBySelectMarkers(dateString, endDate, markedDates);
-                    //
-                    //         newState = {
-                    //             ...state,
-                    //             startDate: dateString,
-                    //             markedDates: markedDates
-                    //         }
-                    //
-                    //     } else if (startNum > endNum) {
-                    //
-                    //         getBySelectMarkers(startDate, dateString, markedDates)
-                    //
-                    //         newState = {
-                    //             ...state,
-                    //             endDate: dateString,
-                    //             markedDates: markedDates
-                    //         }
-                    //
-                    //     } else {
-                    //
-                    //     }
-                    //
-                    // } else {
-                    //
-                    //     getBySelectMarkers(state.startDate, dateString, markedDates)
-                    //
-                    //     newState = {
-                    //         ...state,
-                    //         markedDates: markedDates,
-                    //         endDate: dateString
-                    //     }
-                    // }
-                    //
-                    // setState(newState)
-                }}
-            />
             <View style={{
                 flexDirection: 'row',
                 justifyContent: "flex-end"
