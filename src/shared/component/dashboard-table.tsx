@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import { StyleSheet, View } from "react-native";
 
-const tableHead = ['', 'Head1', 'Head2', 'Head3']
+const tableHead = [ 'Head1', 'Head2', 'Head3']
 
 const tableData = [
     ['1', '2', '3'],
@@ -15,10 +15,9 @@ const DashboardTable = (props: any) => {
     return (
         <View style={styles.container}>
             <Table borderStyle={{borderWidth: 1}}>
-                <Row data={tableHead} flexArr={[1, 2, 1, 1]} style={styles.head} textStyle={styles.text}/>
+                <Row data={tableHead} flexArr={[1, 1, 1]} style={styles.head} textStyle={styles.text}/>
                 <TableWrapper style={styles.wrapper}>
-                    {/*<Col data={tableTitle} style={styles.title} heightArr={[28, 28]} textStyle={styles.text}/>*/}
-                    <Rows data={tableData} flexArr={[2, 1, 1]} style={styles.row} textStyle={styles.text}/>
+                    <Rows data={tableData} flexArr={[1, 1, 1]} style={styles.row} textStyle={styles.text}/>
                 </TableWrapper>
             </Table>
         </View>
@@ -26,7 +25,7 @@ const DashboardTable = (props: any) => {
 }
 
 const styles = StyleSheet.create({
-    container: {flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff'},
+    container: {flex: 1, padding: 16, paddingTop: 10, backgroundColor: '#fff'},
     head: {height: 40, backgroundColor: '#f1f8ff'},
     wrapper: {flexDirection: 'row'},
     title: {flex: 1, backgroundColor: '#f6f8fa'},

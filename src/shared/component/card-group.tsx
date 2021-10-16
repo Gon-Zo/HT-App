@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text } from "react-native";
+import { CARD_COLOR } from "../utils/color.utils";
+
+export type BaseCardData = {
+    title: string
+    count1: number
+    count2: number
+}
+
+type BaseCardState = {
+    color: string
+    data: BaseCardData
+}
+
+interface IBaseCardWrapProps {
+    num: number
+    data: BaseCardData
+}
 
 interface ICardGroupProps {
+    cardData: Array<BaseCardData>
 }
 
 const CardGroup = (props: ICardGroupProps) => {
+
+    const {cardData} = props
 
     return (
         <View style={{marginTop: 10}}>
 
             <View style={{
-                paddingLeft: 10
+                paddingLeft: 8
             }}>
                 <Text style={
                     {
@@ -21,25 +41,74 @@ const CardGroup = (props: ICardGroupProps) => {
             </View>
 
             <View style={{flexDirection: "row", height: 150,}}>
-                <View style={[{backgroundColor: "tomato",}, styles.cardWrap]}>
-                    <Text style={[styles.cardText]}>월세: 300</Text>
-                    <Text style={[styles.cardText]}>보증금: 60,000</Text>
-                </View>
-
-                <View style={[{backgroundColor: "orange"}, styles.cardWrap]}>
-                    <Text style={[styles.cardText]}>광화문풍림스페이스본(101동~105동)</Text>
-                    <Text style={[styles.cardText]}>월세: 300</Text>
-                    <Text style={[styles.cardText]}>보증금: 60,000</Text>
-                </View>
-
-                <View style={[{backgroundColor: "gold",}, styles.cardWrap]}>
-                    <Text style={[styles.cardText]}>광화문풍림스페이스본(101동~105동)</Text>
-                    <Text style={[styles.cardText]}>월세: 300</Text>
-                    <Text style={[styles.cardText]}>보증금: 60,000</Text>
-                </View>
+                {
+                    cardData.map((data: any, num: number) =>
+                        (
+                            <BaseCardWrap
+                                key={num}
+                                num={num}
+                                data={data}/>
+                        )
+                    )
+                }
             </View>
+        </View>
+    )
+}
 
+const BaseCardWrap = (props: IBaseCardWrapProps) => {
 
+    const {data, num} = props
+
+    const [state, setState] = useState<BaseCardState>({
+        data: {
+            title: '',
+            count1: 0,
+            count2: 0
+        },
+        color: ''
+    })
+
+    useEffect(() => {
+
+        const color = CARD_COLOR[num]
+
+        const newData = {
+            ...data,
+            count1: data.count1 / 1000,
+            count2: data.count2 / 1000
+        }
+
+        const newState: BaseCardState = {
+            data: newData,
+            color: color
+        }
+
+        setState(newState)
+
+    }, [])
+
+    return (
+        <View style={[{backgroundColor: state.color, padding: 5}, styles.cardWrap]}>
+            <View style={{
+                flex: 1,
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: 'center'
+            }}>
+                <Text style={[styles.cardText]}>
+                    {state.data.title}
+                </Text>
+            </View>
+            <View style={{
+                flex: 1,
+                flexDirection: "column",
+                alignItems: "flex-end",
+                justifyContent: "center"
+            }}>
+                <Text style={[styles.cardText]}>월세: {state.data.count1} K</Text>
+                <Text style={[styles.cardText]}>보증금: {state.data.count2} K</Text>
+            </View>
         </View>
     )
 }

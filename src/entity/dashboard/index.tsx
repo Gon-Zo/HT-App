@@ -8,6 +8,7 @@ import DashboardTable from "../../shared/component/dashboard-table";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IRootState } from "../../shared/reducer";
 import { GlobalSafeAreaView } from "../../shared/component/component";
+import { CardDataList } from "../../shared/utils/empty-data.utils";
 
 type DashboardState = {
     isSelectDateAble: boolean
@@ -71,7 +72,7 @@ const Dashboard = (props: IDashboardProps) => {
                     flex: 1
                 }}>
                 <View style={{
-                    padding: 10,
+                    padding: 7,
                     flexDirection: "row",
                     alignItems: "baseline",
                 }}>
@@ -91,7 +92,7 @@ const Dashboard = (props: IDashboardProps) => {
                             }}> {selectDate.startDate} ~ {selectDate.endDate}</Text> : null
                     }
                 </View>
-                <CardGroup/>
+                <CardGroup cardData={CardDataList}/>
                 <DashboardTable/>
             </ScrollView>
         </GlobalSafeAreaView>
