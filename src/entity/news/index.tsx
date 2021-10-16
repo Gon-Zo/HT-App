@@ -4,9 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getByNewsData } from "./new.reducer";
 import { IRootState } from "../../shared/reducer";
 import { FlatList, Linking, Text, TouchableOpacity, View } from "react-native";
-import ScrollLayout from "../../shared/component/scroll-layout";
-// import HTML from 'react-native-render-html'
-// import { useWindowDimensions } from "react-native";
+import { toCreateByNewsList } from "./news.service";
 
 type NewsState = {
     newsList: Array<any>,
@@ -35,39 +33,23 @@ const News = (props: any) => {
     useEffect(() => {
 
         // @ts-ignore
-        const listOfNews = newsData.data['items']
+        const currentNewsList = newsData.data['items']
 
-        if (typeof listOfNews == "undefined") return
+        if (typeof currentNewsList == "undefined") return
 
-        let newItems = listOfNews.map((items: any) => {
-
-            const reg = /&quot;/g
-
-            const reg2 = /<[^>]+>/g
-
-            const title = items.title.replace(reg, "\"\"").replace(reg2, '')
-
-            const description = items.description.replace(reg, "\"\"").replace(reg2, '')
-
-            return {
-                ...items,
-                title,
-                description
-            }
-        })
-
-        const currentItems = state.newsList
-
-        const resultItems = currentItems.length == 0 ? newItems : currentItems.concat(newItems)
+        const newsList = toCreateByNewsList(currentNewsList, state.newsList)
 
         const newState: NewsState = {
             ...state,
-            newsList: resultItems
+            newsList
         }
 
         setState(newState)
-
     }, [newsData])
+
+    const toOpenWindow = (link: string) => {
+        Linking.openURL(link).then(r => console.log(">>>>>>>> sucess", r))
+    }
 
     const toRenderItem = (render: any) => {
         const {item, index} = render
@@ -76,11 +58,8 @@ const News = (props: any) => {
                 key={index}
                 style={{
                     margin: 10
-                }} onPress={() => {
-                Linking.openURL(item['originallink']).then(r => {
-                    console.log(">>>>>>>>>>> open link")
-                })
-            }}>
+                }}
+                onPress={() => toOpenWindow(item['originallink'])}>
                 <Text>
                     {index}
                 </Text>
@@ -99,16 +78,22 @@ const News = (props: any) => {
         dispatch(getByNewsData(page))
     }
 
+    const toKeyExtractor = (item: any, index: number) => index
+
     return (
         <GlobalSafeAreaView>
-            {/*// @ts-ignore*/}
-            <FlatList data={state.newsList} keyExtractor={(item, index) => index}
-                      onEndReached={toEndReached}
-                      onEndReachedThreshold={1}
-                      refreshing={newsData.load}
-                      renderItem={toRenderItem}/>
+            <FlatList
+                // @ts-ignore
+                keyExtractor={toKeyExtractor}
+                data={state.newsList}
+                onEndReached={toEndReached}
+                onEndReachedThreshold={1}
+                scrollEventThrottle={16}
+                refreshing={newsData.load}
+                renderItem={toRenderItem}/>
         </GlobalSafeAreaView>
     )
+
 }
 
 export default News
