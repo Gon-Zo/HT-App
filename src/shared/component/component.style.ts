@@ -1,11 +1,6 @@
 import styled from 'styled-components/native';
 import { IAppSafeAreaViewProps, IHtTapStyleProps } from './component.interface';
 
-export const ScrollerAreaWrap = styled.SafeAreaView`
-flex: 1;
-background-color: white;
-`;
-
 
 export const ScrollerArea = styled.ScrollView`
 flex: 1;
@@ -59,6 +54,6 @@ left: 10px;
 
 export const AppSafeAreaView = styled.SafeAreaView<IAppSafeAreaViewProps>`
 flex: 1;
-background-color: #fff;
+background-color: rgba( 255, 255, 255, 0.3);
 padding-top: ${props => props.paddingTop};
 `;

@@ -21,7 +21,7 @@ const Home = (props: HomeProps) => {
     }, [])
 
     return (
-        <ScrollLayout stickyList={[0]}>
+        <ScrollLayout stickyList={[]}>
             <LogoComponent/>
             <View>
                 <VictoryChart

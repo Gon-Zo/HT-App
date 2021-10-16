@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import { StyleSheet, View } from "react-native";
 
-const tableHead = [ 'Head1', 'Head2', 'Head3']
+const tableHead = [ '아파트 명', '전월세', '보증금']
 
 const tableData = [
     ['1', '2', '3'],
