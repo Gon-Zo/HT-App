@@ -74,7 +74,6 @@ const Dashboard = (props: IDashboardProps) => {
                 <View style={{
                     padding: 7,
                     flexDirection: "row",
-                    alignItems: "baseline",
                 }}>
                     <Text style={
                         {
@@ -85,15 +84,23 @@ const Dashboard = (props: IDashboardProps) => {
                         서울시
                     </Text>
                     {
-                        state.isSelectDateAble ?
+                        state.isSelectDateAble &&
+                        (
                             <Text style={{
                                 paddingLeft: 10,
                                 color: '#989898'
-                            }}> {selectDate.startDate} ~ {selectDate.endDate}</Text> : null
+                            }}> {selectDate.startDate} ~ {selectDate.endDate}</Text>
+                        )
                     }
                 </View>
-                <CardGroup cardData={CardDataList}/>
-                <DashboardTable/>
+
+                <View style={{
+                    padding: 5
+                }}>
+                    <CardGroup cardData={CardDataList}/>
+                    <DashboardTable/>
+                </View>
+
             </ScrollView>
         </GlobalSafeAreaView>
     )

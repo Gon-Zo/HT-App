@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 import { StyleSheet, View } from "react-native";
 
-const tableHead = [ '아파트 명', '전월세', '보증금']
+const tableHead = ['아파트 명', '전월세', '보증금']
 
 const tableData = [
     ['1', '2', '3'],
@@ -25,7 +25,7 @@ const DashboardTable = (props: any) => {
 }
 
 const styles = StyleSheet.create({
-    container: {flex: 1, padding: 16, paddingTop: 10, backgroundColor: '#fff'},
+    container: {flex: 1, padding: 5, paddingTop: 10},
     head: {height: 40, backgroundColor: '#f1f8ff'},
     wrapper: {flexDirection: 'row'},
     title: {flex: 1, backgroundColor: '#f6f8fa'},
