@@ -11,16 +11,16 @@ import {
 } from "react-native";
 // @ts-ignore
 import { TagSelect } from 'react-native-tag-select';
-import { arrOfPicker } from "./filter-data";
-import { ISaveFilterDTO } from "../home/filter.interface";
+import {transactionType} from "../../shared/utils/data.utils";
+import { ISaveFilterDTO } from "../filter/filter.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { setByFilterValue } from "./filter.reducer";
 import { IRootState } from "../../shared/reducer";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import DateModal, { DateModalState } from "../../shared/component/date-modal";
 import FilterLayoutWrap from "./filter-layout-wrap";
 
 import moment from "moment";
+import { setByFilterValue } from "../../shared/reducer/shared.reducer";
 
 type FilterState = {
     startDate: string,
@@ -41,10 +41,10 @@ const Filter = (props: any) => {
 
     const [isDateModalAble, setDateModalAble] = useState(false)
 
-    const {tagSelectValue, selectDate} = useSelector((state: IRootState) => {
+    const {tagSelectValue, selectDate} = useSelector(({shared}: IRootState) => {
         return {
-            tagSelectValue: state.filter.tagSelectValue,
-            selectDate: state.filter.selectDate
+            tagSelectValue: shared.tagSelectValue,
+            selectDate: shared.selectDate
         }
     }, shallowEqual)
 
@@ -56,7 +56,7 @@ const Filter = (props: any) => {
 
         const endDate = typeof selectDate.endDate === 'undefined' ? nowDate : selectDate.endDate
 
-        const tagValue = tagSelectValue.length == 0 ? [arrOfPicker[0]] : tagSelectValue
+        const tagValue = tagSelectValue.length == 0 ? [transactionType[0]] : tagSelectValue
 
         const newState: FilterState = {
             ...state,
@@ -186,7 +186,7 @@ const Filter = (props: any) => {
                         state.isTagAble &&
                         <TagSelect
                             value={state.tagValue}
-                            data={arrOfPicker}
+                            data={transactionType}
                             max={1}
                             theme={"warning"}
                             ref={tagRef}

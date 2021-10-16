@@ -1,61 +1,31 @@
 // @ts-ignore
 import { IBaseReducer } from "../../shared/component/component.interface";
-import { FAILURE, REQUEST, SUCCESS } from "../utils/action.utils";
+import { IFilterDate, ISaveFilterDTO } from "../../entity/filter/filter.interface";
 
 const ACTION_TYPES = {
-    FETCH_AREA_CODES: "dashboard/FETCH_AREA_CODES"
-}
-
-interface ISharedData extends IBaseReducer {
-    data: Array<AreaCodeType>
-}
-
-type AreaCodeType = {
-    id: number
-    code: string
-    name: string
-    type: string
-    createBy: string
-    createDate: string,
-    SubAreaCodeList: Array<AreaCodeType>
+    SET_TAG_VALUE: 'filter/SET_TAG_VALUE',
+    SET_FILTER_DATE: 'filter/SET_FILTER_DATE'
 }
 
 const initialState = {
-    areaCodes: {} as ISharedData
+    tagSelectValue: [],
+    selectDate: {} as IFilterDate
 }
 
 export type SharedState = Readonly<typeof initialState>
 
 export default (state = initialState, action: any): SharedState => {
     switch (action.type) {
-        case SUCCESS(ACTION_TYPES.FETCH_AREA_CODES): {
+        case ACTION_TYPES.SET_TAG_VALUE: {
             return {
                 ...state,
-                areaCodes: {
-                    load: false,
-                    error: null,
-                    data: action.payload.data as Array<AreaCodeType>
-                }
+                tagSelectValue: action.payload
             }
         }
-        case REQUEST(ACTION_TYPES.FETCH_AREA_CODES): {
+        case ACTION_TYPES.SET_FILTER_DATE: {
             return {
                 ...state,
-                areaCodes: {
-                    load: true,
-                    error: null,
-                    data: []
-                }
-            }
-        }
-        case FAILURE(ACTION_TYPES.FETCH_AREA_CODES): {
-            return {
-                ...state,
-                areaCodes: {
-                    load: false,
-                    error: action.payload,
-                    data: []
-                }
+                selectDate: action.payload
             }
         }
         default : {
@@ -64,4 +34,28 @@ export default (state = initialState, action: any): SharedState => {
     }
 }
 
-const areaApiUri = "/api/area-code"
+export const setByTagValue = (payload: any) => ({type: ACTION_TYPES.SET_TAG_VALUE, payload: payload})
+
+export const setBySelectDate = (payload: IFilterDate) => ({type: ACTION_TYPES.SET_FILTER_DATE, payload: payload})
+
+export const setByFilterValue = (payload: ISaveFilterDTO) => {
+    return async (dispatch: any, getState: any) => {
+        let isStateAble = true
+
+        try {
+
+            await dispatch(setByTagValue(payload.tagSelectValue))
+
+            const selectDate: IFilterDate = {startDate: payload.startDate, endDate: payload.endDate};
+
+            await dispatch(setBySelectDate(selectDate))
+
+        } catch (e) {
+            isStateAble = false
+            console.log(e)
+        } finally {
+            return Promise.resolve(isStateAble)
+        }
+
+    }
+}

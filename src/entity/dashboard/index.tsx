@@ -23,9 +23,9 @@ const Dashboard = (props: IDashboardProps) => {
         isSelectDateAble: false
     })
 
-    const {selectDate} = useSelector((state: IRootState) => {
+    const {selectDate} = useSelector(({shared}: IRootState) => {
         return {
-            selectDate: state.filter.selectDate
+            selectDate: shared.selectDate
         }
     }, shallowEqual)
 
