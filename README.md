@@ -58,6 +58,6 @@ npm ios
 ### lib.
 
 [chart lib](https://formidable.com/open-source/victory/docs) </br>
-[load view](https://github.com/mohebifar/react-native-loader) </br>
+[load view](https://github.com/chramos/react-native-skeleton-placeholder) </br>
 [tag](https://github.com/rafaelmotta/react-native-tag-select) </br>
 [calendar](https://github.com/wix/react-native-calendars) </br>
