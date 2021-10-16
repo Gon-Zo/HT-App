@@ -3,15 +3,11 @@ import { GlobalSafeAreaView } from "../../shared/component/component";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getByNewsData } from "./new.reducer";
 import { IRootState } from "../../shared/reducer";
-import { FlatList, Linking, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Linking, Text, TouchableOpacity } from "react-native";
 import { toCreateByNewsList } from "./news.service";
+import { INewsProps, NewsState } from "./news.interface";
 
-type NewsState = {
-    newsList: Array<any>,
-    page: number
-}
-
-const News = (props: any) => {
+const News = (props: INewsProps) => {
 
     const [state, setState] = useState<NewsState>({
         newsList: [],
@@ -45,6 +41,7 @@ const News = (props: any) => {
         }
 
         setState(newState)
+
     }, [newsData])
 
     const toOpenWindow = (link: string) => {
