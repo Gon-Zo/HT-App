@@ -2,8 +2,6 @@ import React, { memo, useEffect } from 'react'
 import ScrollLayout from "../../shared/component/scroll-layout";
 import { HomeProps } from "./home.interface";
 import { LogoComponent } from "../../shared/component/component";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../../shared/reducer";
 import { View } from "react-native";
 import {
     VictoryAxis,
