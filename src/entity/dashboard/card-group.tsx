@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, Platform } from "react-native";
 import { CARD_COLOR } from "../../shared/utils/color.utils";
 import { BaseCardData, CardGroupState, ICardGroupProps } from "./dashboard.interface";
-import { H3 } from "../../shared/component/component";
+import { H3, noData } from "../../shared/component/component";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 
 const CardGroup = (props: ICardGroupProps) => {
@@ -12,7 +12,6 @@ const CardGroup = (props: ICardGroupProps) => {
     const [state, setState] = useState<CardGroupState>({
         cardData: [],
         topData: [],
-        isLoad: true
     })
 
     useEffect(() => {
@@ -38,7 +37,6 @@ const CardGroup = (props: ICardGroupProps) => {
         const newState: CardGroupState = {
             cardData: cardData,
             topData: topData,
-            isLoad: data.load
         }
 
         setState(newState)
@@ -100,7 +98,7 @@ const CardGroup = (props: ICardGroupProps) => {
                 <H3 text={'아파트 월세'}/>
             </View>
             <View style={{flexDirection: "row", flex: 1, height: 150}}>
-                {state.isLoad ? loader() : (state.cardData.length == 0 ? null : baseCard)}
+                {data.load ? loader() : (state.cardData.length == 0 ? noData() : baseCard)}
             </View>
         </View>
     )

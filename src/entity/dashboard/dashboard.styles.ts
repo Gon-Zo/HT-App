@@ -79,5 +79,25 @@ export const styles = StyleSheet.create({
     tagContentBoxOn: {
         borderColor: CARD_COLOR[1],
         backgroundColor: CARD_COLOR[1]
+    },
+    btnWrap: {
+        flex: .2,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    btnText: {
+        color: "#fff",
+        fontWeight: '800',
+        marginLeft: 10
+    },
+    saveBtn: {
+        backgroundColor: CARD_COLOR[1],
+        width: '100%',
+        height: "50%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row'
     }
+
+
 })

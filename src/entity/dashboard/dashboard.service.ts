@@ -82,3 +82,6 @@ export const toDistanceByDate = (startDate: string, endDate: string): number => 
 
     return distanceDate
 }
+
+export class tabValues {
+}

@@ -84,6 +84,16 @@ export default (state = initialState, action: any): DashboardState => {
                 selectRegion: action.payload
             }
         }
+        case ACTION_TYPES.SET_JEONSE_MONTHLY_RENT:{
+            return {
+                ...state,
+                jeonseMonthlyRentData: {
+                    load : false,
+                    error : null,
+                    data : []
+                }
+            }
+        }
         default : {
             return state
         }
@@ -109,6 +119,11 @@ export const getByJeonseMonthlyRent = () => {
         const region = dashboard.region.code
 
         if (!endDate) return;
+
+        if (dashboard.region.type == 'P') {
+            await dispatch({type: ACTION_TYPES.SET_JEONSE_MONTHLY_RENT})
+            return
+        }
 
         const date = moment(endDate).format("YYYYMM")
 

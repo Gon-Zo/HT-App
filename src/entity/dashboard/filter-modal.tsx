@@ -10,32 +10,8 @@ import { Calendar } from "react-native-calendars";
 import { styles } from "./dashboard.styles";
 import { useDispatch } from "react-redux";
 import { setByFilterData } from "./dashboard.reducer";
-import { IFilterDate } from "./dashboard.interface";
+import { AreaCodeData, IFilterDate, IFilterModalProps, tabEnum } from "./dashboard.interface";
 import { DATE_COLOR, getBySelectMarkers } from "./dashboard.service";
-
-interface IFilterModalProps {
-    isVisible: boolean
-    toClose: () => void,
-    startDate: string,
-    endDate: string,
-    region: any
-}
-
-type AreaCodeData = {
-    id: number
-    code: string,
-    name: string,
-    type: string,
-    subAreaCodeList: Array<AreaCodeData>,
-    createBy: string,
-    createDate: string
-}
-
-const tabValues = {
-    '지역': 'A',
-    '날짜': 'B',
-    '거래': 'C'
-}
 
 const FilterModal = (props: IFilterModalProps) => {
 
@@ -79,8 +55,6 @@ const FilterModal = (props: IFilterModalProps) => {
             return
         }
 
-        setMarkerAble(true)
-
         const newMarkedDates: any = {}
 
         if (startDate == endDate) {
@@ -97,7 +71,6 @@ const FilterModal = (props: IFilterModalProps) => {
         setSubPickerValue(subPickerValue)
         setFilterDate({startDate: startDate, endDate: endDate})
         setMarkedDates(newMarkedDates)
-        setMarkerAble(false)
 
         return () => {
         }
@@ -195,11 +168,11 @@ const FilterModal = (props: IFilterModalProps) => {
             setMarkedDates(markedDates)
         }
 
-        if (isMarkerAble) return null
-
         return (
             <>
                 <Calendar markingType={'period'}
+                          displayLoadingIndicator={true}
+                          current={filterDate.startDate}
                           markedDates={markedDates}
                           onDayPress={toDayPress}/>
             </>
@@ -267,7 +240,7 @@ const FilterModal = (props: IFilterModalProps) => {
     const toPressTab = React.useCallback((event: any) => {
         const tabKey = event._targetInst.memoizedProps.children[0][0].props.children
         // @ts-ignore
-        const tabValue: string = tabValues[tabKey]
+        const tabValue: string = tabEnum[tabKey]
         setTab(tabValue)
         setPickerOpen(false)
     }, [tab])
@@ -277,7 +250,7 @@ const FilterModal = (props: IFilterModalProps) => {
         const toRenderItems = (title: string) => {
 
             // @ts-ignore
-            const isActive = tabValues[title] === tab
+            const isActive = tabEnum[title] === tab
 
             return (
                 <View style={styles.tabWrap}>
@@ -348,55 +321,33 @@ const FilterModal = (props: IFilterModalProps) => {
 
     return (
         <GestureRecognizer onSwipeDown={toClose}>
-            <Modal
-                animationType={'slide'}
-                visible={isVisible}
-                transparent={true}>
-
+            <Modal animationType={'slide'}
+                   visible={isVisible}
+                   transparent={true}>
                 <View style={styles.modalWrap}>
-
                     <TouchableOpacity style={styles.modalBg} onPress={toClose}/>
                     <View style={styles.modalContent}>
                         <H1 text={'필터'}/>
                         {toRenderTab()}
                         {renderFilterContent()}
-
-                        <View style={{
-                            flex: .2,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
+                        <View style={styles.btnWrap}>
                             <TouchableOpacity
-                                style={{
-                                    backgroundColor: CARD_COLOR[1],
-                                    width: '100%',
-                                    height: "50%",
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    flexDirection: 'row'
-                                }}
+                                style={styles.saveBtn}
                                 onPress={toSaveFilterData}>
                                 <FontAwesomeIcon
                                     color={"#fff"}
                                     icon={['fas', "save"]}/>
-                                <Text style={{
-                                    color: "#fff",
-                                    fontWeight: '800',
-                                    marginLeft: 10
-                                }}>
+                                <Text style={styles.btnText}>
                                     적용
                                 </Text>
                             </TouchableOpacity>
                         </View>
-
                     </View>
-
                 </View>
-
             </Modal>
-
         </GestureRecognizer>
     )
+
 }
 
 

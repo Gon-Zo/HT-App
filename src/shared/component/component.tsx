@@ -1,8 +1,15 @@
 import { Image, StyleSheet, Text, Platform, StatusBar, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { IAppTextProps, IBackButtonProps, IGlobalSafeAreaViewProps } from "./component.interface";
-import { AppSafeAreaView, BackButtonWrap } from "./component.style";
+import { IGlobalSafeAreaViewProps } from "./component.interface";
+import { AppSafeAreaView , NoDataWrap } from "./component.style";
+
+export const noData = () => {
+    return (
+        <NoDataWrap>
+            <H3 text={'No Data'}/>
+        </NoDataWrap>
+    )
+}
 
 export const H1 = (props: any) => {
     const {text} = props
@@ -27,15 +34,6 @@ export const H3 = (props: any) => {
     )
 }
 
-export const AppText = (props: IAppTextProps) => {
-    const {title, style} = props
-    return (
-        <Text style={[style, {fontFamily: "NanumSquare_acB"}]}>
-            {title}
-        </Text>
-    )
-}
-
 export const LogoComponent = (props: any) => {
     return (
         <View style={styled.headerWrap}>
@@ -48,19 +46,6 @@ export const LogoComponent = (props: any) => {
         </View>
     )
 }
-
-export const BackButton = (props: IBackButtonProps) => {
-    const {navigation} = props;
-    return (
-        <BackButtonWrap
-            activeOpacity={1}
-            onPress={() => {
-                navigation.goBack();
-            }}>
-            <FontAwesomeIcon icon={['fas', 'chevron-left']} size={20} color={'#000'}/>
-        </BackButtonWrap>
-    );
-};
 
 export const GlobalSafeAreaView = (props: IGlobalSafeAreaViewProps) => {
 

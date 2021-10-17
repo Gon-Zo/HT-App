@@ -37,7 +37,6 @@ export interface ICardGroupProps {
 export type CardGroupState = {
     cardData: Array<BaseCardData>
     topData: Array<BaseCardData>
-    isLoad: boolean
 }
 
 export type SaveFilterData = {
@@ -51,4 +50,28 @@ export type SaveFilterData = {
 export interface IFilterDate {
     startDate: string,
     endDate: string
+}
+
+export interface IFilterModalProps {
+    isVisible: boolean
+    toClose: () => void,
+    startDate: string,
+    endDate: string,
+    region: any
+}
+
+export type AreaCodeData = {
+    id: number
+    code: string,
+    name: string,
+    type: string,
+    subAreaCodeList: Array<AreaCodeData>,
+    createBy: string,
+    createDate: string
+}
+
+export enum tabEnum  {
+    '지역'= 'A',
+    '날짜'= 'B',
+    '거래'= 'C',
 }
