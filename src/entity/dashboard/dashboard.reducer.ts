@@ -3,15 +3,15 @@ import { FAILURE, REQUEST, SUCCESS } from "../../shared/utils/action.utils";
 import { IBaseReducer } from "../../shared/component/component.interface";
 import { IRootState } from "../../shared/reducer";
 import moment from "moment";
-import { IFilterDate } from "../filter/filter.interface";
-import { SaveFilterData } from "./dashboard.interface";
+import { IFilterDate, SaveFilterData } from "./dashboard.interface";
 
 const ACTION_TYPES = {
     FETCH_JEONSE_MONTHLY_RENT: 'dashboard/FETCH_JEONSE_MONTHLY_RENT',
     SET_REGION_DATA: 'dashboard/SET_REGION_DATA',
     SET_SELECT_DATE: 'dashboard/SET_SELECT_DATE',
     SET_TRANSACTION_TYPE: 'dashboard/SET_TRANSACTION_TYPE',
-    SET_SELECT_REGION: 'dashboard/SET_SELECT_REGION'
+    SET_SELECT_REGION: 'dashboard/SET_SELECT_REGION',
+    SET_JEONSE_MONTHLY_RENT : 'dashboard/SET_JEONSE_MONTHLY_RENT'
 }
 
 interface IJeonseMonthlyRent extends IBaseReducer {

@@ -37,7 +37,6 @@
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^12.1.1",
     "react-native-table-component": "^1.2.1",
-    "react-native-tag-select": "^2.0.0",
     "react-native-webview": "^11.13.0",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
