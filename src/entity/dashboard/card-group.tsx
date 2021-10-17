@@ -100,7 +100,7 @@ const CardGroup = (props: ICardGroupProps) => {
                 <H3 text={'아파트 월세'}/>
             </View>
             <View style={{flexDirection: "row", flex: 1, height: 150}}>
-                {state.isLoad ? loader() : baseCard}
+                {state.isLoad ? loader() : (state.cardData.length == 0 ? null : baseCard)}
             </View>
         </View>
     )

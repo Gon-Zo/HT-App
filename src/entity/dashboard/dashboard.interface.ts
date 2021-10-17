@@ -2,7 +2,7 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 
 export type DashboardState = {
     isSelectDateAble: boolean
-    isFilterModal : boolean
+    isFilterModal: boolean
 }
 
 export type DashboardStack = {
@@ -38,4 +38,17 @@ export type CardGroupState = {
     cardData: Array<BaseCardData>
     topData: Array<BaseCardData>
     isLoad: boolean
+}
+
+export type SaveFilterData = {
+    readonly pickerObj: any,
+    readonly typeObj: any,
+    readonly filterDate: IFilterDate,
+    readonly pickerData: any
+    readonly subData: any
+}
+
+export interface IFilterDate {
+    startDate: string,
+    endDate: string
 }

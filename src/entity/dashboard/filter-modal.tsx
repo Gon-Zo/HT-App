@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import GestureRecognizer from "react-native-swipe-gestures";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Modal, Text, TouchableOpacity, View } from "react-native";
 import { H1 } from "../../shared/component/component";
 import { areaCodes, transactionType } from "../../shared/utils/data.utils";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { CARD_COLOR } from "../../shared/utils/color.utils";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { Calendar } from "react-native-calendars";
-import { DATE_COLOR, getBySelectMarkers } from "../filter/filter.service";
-import { IFilterDate } from "../filter/filter.interface";
-
+import { styles } from "./dashboard.styles";
+import { useDispatch } from "react-redux";
+import { setByFilterData } from "./dashboard.reducer";
+import { IFilterDate } from "./dashboard.interface";
+import { DATE_COLOR, getBySelectMarkers } from "./dashboard.service";
 
 interface IFilterModalProps {
     isVisible: boolean
     toClose: () => void,
     startDate: string,
-    endDate: string
+    endDate: string,
+    region: any
 }
 
 type AreaCodeData = {
@@ -36,7 +39,7 @@ const tabValues = {
 
 const FilterModal = (props: IFilterModalProps) => {
 
-    const {isVisible, toClose, startDate, endDate} = props
+    const {region, isVisible, toClose, startDate, endDate} = props
 
     const [tab, setTab] = useState<string | any>(null)
     const [isPickerOpen, setPickerOpen] = useState<boolean>(false);
@@ -49,6 +52,9 @@ const FilterModal = (props: IFilterModalProps) => {
     const [typeValue, setTypeValue] = useState<string | any>(null)
     const [markedDates, setMarkedDates] = useState({})
     const [filterDate, setFilterDate] = useState<IFilterDate>({startDate: '', endDate: ''})
+    const [isMarkerAble, setMarkerAble] = useState(false)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const selectItems = areaCodes.map(item => {
@@ -73,17 +79,25 @@ const FilterModal = (props: IFilterModalProps) => {
             return
         }
 
+        setMarkerAble(true)
 
         const newMarkedDates: any = {}
 
         if (startDate == endDate) {
             newMarkedDates[startDate] = DATE_COLOR['DEFAULT_DATE']
         } else {
-            getBySelectMarkers(startDate, endDate, markedDates)
+            getBySelectMarkers(startDate, endDate, newMarkedDates)
         }
 
+        const pickerValue = region.main.code
+
+        const subPickerValue = typeof region.sub == "undefined" ? '' : region.sub.code
+
+        setPickerValue(pickerValue)
+        setSubPickerValue(subPickerValue)
         setFilterDate({startDate: startDate, endDate: endDate})
         setMarkedDates(newMarkedDates)
+        setMarkerAble(false)
 
         return () => {
         }
@@ -106,13 +120,16 @@ const FilterModal = (props: IFilterModalProps) => {
         // @ts-ignore
         const foundSubCodeList = foundCode.subAreaCodeList
 
-        const subSelectItems = foundSubCodeList
-            .map((item: any) => {
-                return {
-                    label: item.name,
-                    value: item.code
-                }
-            })
+        const subSelectItems = [{label: '선택안함', value: ''}]
+            .concat(
+                foundSubCodeList
+                    .map((item: any) => {
+                        return {
+                            label: item.name,
+                            value: item.code
+                        }
+                    })
+            )
 
         setSubPickerOpen(false)
         setSubSelectItems(subSelectItems)
@@ -178,13 +195,16 @@ const FilterModal = (props: IFilterModalProps) => {
             setMarkedDates(markedDates)
         }
 
+        if (isMarkerAble) return null
+
         return (
             <>
                 <Calendar markingType={'period'}
-                    markedDates={markedDates}
-                    onDayPress={toDayPress}/>
+                          markedDates={markedDates}
+                          onDayPress={toDayPress}/>
             </>
         )
+
     }
 
     const typePicker = () => {
@@ -283,6 +303,49 @@ const FilterModal = (props: IFilterModalProps) => {
         )
     }
 
+    const toSaveFilterData = () => {
+
+        if (pickerValue == '') {
+            Alert.alert("지역(대분류)를 선택 해주세요.")
+            return
+        }
+
+        const foundCode = areaCodes.find(item => item.code == pickerValue)
+
+        // @ts-ignore
+        const pickerObj = subPickerValue === '' ? foundCode : foundCode.subAreaCodeList.find(item => item.code == subPickerValue)
+
+        if (typeof pickerObj == 'undefined') {
+            Alert.alert("지역을 선택해 주세요.")
+            return;
+        }
+
+        const typeObj = transactionType.find(item => item.value == typeValue)
+
+        if (typeof typeObj == 'undefined') {
+            Alert.alert("거래 타입을 선택해주세요.")
+            return;
+        }
+
+        if (filterDate.startDate == '' || filterDate.endDate == '') {
+            Alert.alert("날짜를 선택해주세요.")
+            return;
+        }
+
+        const filterData = {
+            pickerObj,
+            typeObj,
+            filterDate,
+            pickerData: foundCode,
+            subData: subPickerValue === '' ? {} : pickerObj
+        }
+
+        dispatch(setByFilterData(filterData))
+
+        Alert.alert("적용되었습니다.")
+        toClose()
+    }
+
     return (
         <GestureRecognizer onSwipeDown={toClose}>
             <Modal
@@ -303,14 +366,16 @@ const FilterModal = (props: IFilterModalProps) => {
                             justifyContent: 'center',
                             alignItems: 'center',
                         }}>
-                            <TouchableOpacity style={{
-                                backgroundColor: CARD_COLOR[1],
-                                width: '100%',
-                                height: "50%",
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                flexDirection: 'row'
-                            }}>
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: CARD_COLOR[1],
+                                    width: '100%',
+                                    height: "50%",
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexDirection: 'row'
+                                }}
+                                onPress={toSaveFilterData}>
                                 <FontAwesomeIcon
                                     color={"#fff"}
                                     icon={['fas', "save"]}/>
@@ -334,87 +399,5 @@ const FilterModal = (props: IFilterModalProps) => {
     )
 }
 
-const styles = StyleSheet.create({
-    modalWrap: {
-        flex: 1,
-    },
-    modalBg: {
-        flex: .5
-    },
-    modalContent: {
-        flex: 1,
-        backgroundColor: "#fff",
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        padding: 20
-    },
-    modalContentWrap: {
-        flex: 1
-    },
-    areaPickerWrap: {
-        padding: 10,
-    },
-    mainPickerWrap: {
-        zIndex: 4000
-    },
-    subPickerWrap: {
-        zIndex: 3000
-    },
-    pickerLabel: {
-        fontSize: 14,
-        paddingBottom: 10
-    },
-    tabViewWrap: {
-        flexDirection: 'row',
-        flex: .15
-    },
-    tabWrap: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    tabBox: {
-        width: "80%",
-        height: "80%",
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    tabTitle: {
-        fontSize: 17,
-        marginBottom: 5,
-        color: '#c9c9c9'
-    },
-    tabTitleOn: {
-        color: CARD_COLOR[1],
-        fontWeight: '800'
-    },
-    tabTitleLine: {
-        width: '50%',
-        height: 3,
-        backgroundColor: CARD_COLOR[1]
-    },
-    tagBox: {
-        marginLeft: 4,
-        marginRight: 4,
-        marginBottom: 8
-    },
-    tagContentBox: {
-        flexDirection: 'row',
-        borderRadius: 10,
-        borderColor: "#c9c9c9",
-        borderWidth: 1,
-        height: 46,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: 16,
-        paddingRight: 16
-    },
-    tagContentBoxOn: {
-        borderColor: CARD_COLOR[1],
-        backgroundColor: CARD_COLOR[1]
-    }
-
-
-})
 
 export default FilterModal

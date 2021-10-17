@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { DashboardState, IDashboardProps } from "./dashboard.interface";
+import { DashboardState, IDashboardProps, IFilterDate } from "./dashboard.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IRootState } from "../../shared/reducer";
 import { GlobalSafeAreaView, H1 } from "../../shared/component/component";
-import { getByJeonseMonthlyRent } from "./dashboard.reducer";
+import { getByJeonseMonthlyRent, setByRegion, setBySelectDate, setBySelectRegion } from "./dashboard.reducer";
 import CardGroup from "./card-group";
 import moment from "moment";
-import { IFilterDate } from "../filter/filter.interface";
-import { setBySelectDate } from "../../shared/reducer/shared.reducer";
 import FilterModal from "./filter-modal";
+import { areaCodes } from "../../shared/utils/data.utils";
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -23,10 +22,19 @@ const Dashboard = (props: IDashboardProps) => {
         isFilterModal: false
     })
 
-    const {selectDate, jeonseMonthlyRentData} = useSelector(({shared, dashboard}: IRootState) => {
+    const {
+        transactionType,
+        region,
+        selectDate,
+        jeonseMonthlyRentData,
+        selectRegion
+    } = useSelector(({dashboard}: IRootState) => {
         return {
-            selectDate: shared.selectDate,
-            jeonseMonthlyRentData: dashboard.jeonseMonthlyRentData
+            transactionType: dashboard.transactionType,
+            region: dashboard.region,
+            selectDate: dashboard.selectDate,
+            jeonseMonthlyRentData: dashboard.jeonseMonthlyRentData,
+            selectRegion: dashboard.selectRegion
         }
     }, shallowEqual)
 
@@ -58,11 +66,21 @@ const Dashboard = (props: IDashboardProps) => {
         if (isInitAble) {
             const nowDate = moment(new Date()).format("YYYY-MM-DD")
 
-            const selectData: IFilterDate = {
+            const _selectDate: IFilterDate = {
                 startDate: nowDate,
                 endDate: nowDate
             }
-            dispatch(setBySelectDate(selectData))
+
+            const areaCode = {
+                id: areaCodes[0].id,
+                code: areaCodes[0].code,
+                name: areaCodes[0].name,
+                type: areaCodes[0].type,
+            }
+
+            dispatch(setByRegion(areaCode))
+            dispatch(setBySelectRegion({main: areaCode}))
+            dispatch(setBySelectDate(_selectDate))
         }
 
         dispatch(getByJeonseMonthlyRent())
@@ -79,12 +97,15 @@ const Dashboard = (props: IDashboardProps) => {
     return (
         <GlobalSafeAreaView>
             <FilterModal
+                region={selectRegion}
                 startDate={selectDate.startDate}
                 endDate={selectDate.endDate}
-                isVisible={state.isFilterModal} toClose={toToggleModal}/>
+                isVisible={state.isFilterModal}
+                toClose={toToggleModal}/>
             <View style={styles.headerWrap}>
                 <View style={styles.headerBox}>
-                    <H1 text={'서울시'}/>
+                    {/*// @ts-ignore*/}
+                    <H1 text={region.name}/>
                     {
                         state.isSelectDateAble &&
                         (
