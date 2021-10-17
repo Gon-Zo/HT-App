@@ -92,11 +92,9 @@ const CardGroup = (props: ICardGroupProps) => {
 
     return (
         <View style={{marginTop: 10, padding: 5}}>
-            <View style={{
+            <H3 text={'아파트 월세'} styles={{
                 paddingLeft: 8
-            }}>
-                <H3 text={'아파트 월세'}/>
-            </View>
+            }}/>
             <View style={{flexDirection: "row", flex: 1, height: 150}}>
                 {data.load ? loader() : (state.cardData.length == 0 ? noData() : baseCard)}
             </View>

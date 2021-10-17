@@ -6,30 +6,42 @@ import moment from "moment";
 import { IFilterDate, SaveFilterData } from "./dashboard.interface";
 
 const ACTION_TYPES = {
+    FETCH_REAL_ESTATE_TRADING_COUNT: 'dashboard/FETCH_REAL_ESTATE_TRADING_COUNT',
     FETCH_JEONSE_MONTHLY_RENT: 'dashboard/FETCH_JEONSE_MONTHLY_RENT',
     SET_REGION_DATA: 'dashboard/SET_REGION_DATA',
     SET_SELECT_DATE: 'dashboard/SET_SELECT_DATE',
     SET_TRANSACTION_TYPE: 'dashboard/SET_TRANSACTION_TYPE',
     SET_SELECT_REGION: 'dashboard/SET_SELECT_REGION',
-    SET_JEONSE_MONTHLY_RENT : 'dashboard/SET_JEONSE_MONTHLY_RENT'
+    SET_JEONSE_MONTHLY_RENT: 'dashboard/SET_JEONSE_MONTHLY_RENT'
 }
 
-interface IJeonseMonthlyRent extends IBaseReducer {
-    data: undefined | Array<any>
+interface IDashboardReducer extends IBaseReducer {
+    data: undefined | any | Array<any>
 }
 
 const initialState = {
-    jeonseMonthlyRentData: {} as IJeonseMonthlyRent,
+    jeonseMonthlyRentData: {} as IDashboardReducer,
+    realEstateTradingCount: {} as IDashboardReducer,
     selectDate: {} as IFilterDate,
     region: {} as any,
     transactionType: {} as any,
-    selectRegion: {} as any
+    selectRegion: {} as any,
 }
 
 export type DashboardState = Readonly<typeof initialState>
 
 export default (state = initialState, action: any): DashboardState => {
     switch (action.type) {
+        case SUCCESS(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT): {
+            return {
+                ...state,
+                realEstateTradingCount: {
+                    load: false,
+                    error: null,
+                    data: action.payload.data
+                }
+            }
+        }
         case SUCCESS(ACTION_TYPES.FETCH_JEONSE_MONTHLY_RENT): {
             return {
                 ...state,
@@ -40,6 +52,16 @@ export default (state = initialState, action: any): DashboardState => {
                 }
             }
         }
+        case REQUEST(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT): {
+            return {
+                ...state,
+                realEstateTradingCount: {
+                    load: true,
+                    error: null,
+                    data: state.realEstateTradingCount.data
+                }
+            }
+        }
         case REQUEST(ACTION_TYPES.FETCH_JEONSE_MONTHLY_RENT): {
             return {
                 ...state,
@@ -47,6 +69,16 @@ export default (state = initialState, action: any): DashboardState => {
                     load: true,
                     error: null,
                     data: state.jeonseMonthlyRentData.data
+                }
+            }
+        }
+        case FAILURE(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT): {
+            return {
+                ...state,
+                realEstateTradingCount: {
+                    load: false,
+                    error: action.payload,
+                    data: undefined
                 }
             }
         }
@@ -84,13 +116,13 @@ export default (state = initialState, action: any): DashboardState => {
                 selectRegion: action.payload
             }
         }
-        case ACTION_TYPES.SET_JEONSE_MONTHLY_RENT:{
+        case ACTION_TYPES.SET_JEONSE_MONTHLY_RENT: {
             return {
                 ...state,
                 jeonseMonthlyRentData: {
-                    load : false,
-                    error : null,
-                    data : []
+                    load: false,
+                    error: null,
+                    data: []
                 }
             }
         }
@@ -166,5 +198,42 @@ export const setByFilterData = (payload: SaveFilterData) => {
     } catch (e) {
         console.log(e)
     } finally {
+    }
+}
+
+export const getByRealEstateTradingCount = () => {
+
+    return async (dispatch: any, getState: any) => {
+
+        const apiUri = `/api/national-statistics/number-transactions`
+
+        const {dashboard}: IRootState = await getState()
+
+        const apiCode = 'RealEstateTradingCount'
+
+        const typeCode = 'BUILDING_TRADE'
+
+        const region = dashboard.region.code
+
+        const startDate = moment(dashboard.selectDate.startDate).format("YYYYMM")
+
+        const endDate = moment(dashboard.selectDate.endDate).format("YYYYMM")
+
+        const params = {
+            apiCode,
+            typeCode,
+            startDate,
+            endDate,
+            region,
+            trending : 20
+        }
+
+        await dispatch({
+            type: ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT,
+            payload: axios.get(apiUri, {
+                    params
+                }
+            )
+        })
     }
 }

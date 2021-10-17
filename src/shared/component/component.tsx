@@ -25,12 +25,12 @@ export const H1 = (props: any) => {
 }
 
 export const H3 = (props: any) => {
-    const {text} = props
+    const {text , styles} = props
     return (
         <Text style={[{
             fontSize: 17,
             fontWeight: '600'
-        }]}>{text}</Text>
+        }, styles]}>{text}</Text>
     )
 }
 

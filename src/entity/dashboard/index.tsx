@@ -5,11 +5,18 @@ import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IRootState } from "../../shared/reducer";
 import { GlobalSafeAreaView, H1 } from "../../shared/component/component";
-import { getByJeonseMonthlyRent, setByRegion, setBySelectDate, setBySelectRegion } from "./dashboard.reducer";
+import {
+    getByJeonseMonthlyRent,
+    getByRealEstateTradingCount,
+    setByRegion,
+    setBySelectDate,
+    setBySelectRegion
+} from "./dashboard.reducer";
 import CardGroup from "./card-group";
 import moment from "moment";
 import FilterModal from "./filter-modal";
 import { areaCodes } from "../../shared/utils/data.utils";
+import RealEstateTradingCountChart from "./real-estate-trading-count.chart";
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -26,15 +33,17 @@ const Dashboard = (props: IDashboardProps) => {
         transactionType,
         region,
         selectDate,
+        selectRegion,
         jeonseMonthlyRentData,
-        selectRegion
+        realEstateTradingCount
     } = useSelector(({dashboard}: IRootState) => {
         return {
             transactionType: dashboard.transactionType,
             region: dashboard.region,
             selectDate: dashboard.selectDate,
             jeonseMonthlyRentData: dashboard.jeonseMonthlyRentData,
-            selectRegion: dashboard.selectRegion
+            selectRegion: dashboard.selectRegion,
+            realEstateTradingCount : dashboard.realEstateTradingCount
         }
     }, shallowEqual)
 
@@ -62,7 +71,6 @@ const Dashboard = (props: IDashboardProps) => {
     }, [selectDate])
 
     const toCallDashboardData = (isInitAble: boolean = false) => {
-
         if (isInitAble) {
             const nowDate = moment(new Date()).format("YYYY-MM-DD")
 
@@ -84,6 +92,7 @@ const Dashboard = (props: IDashboardProps) => {
         }
 
         dispatch(getByJeonseMonthlyRent())
+        dispatch(getByRealEstateTradingCount())
     }
 
     const toToggleModal = () => {
@@ -124,6 +133,7 @@ const Dashboard = (props: IDashboardProps) => {
 
             <ScrollView style={styles.scrolWrap}>
                 <CardGroup data={jeonseMonthlyRentData}/>
+                <RealEstateTradingCountChart data={realEstateTradingCount}/>
             </ScrollView>
         </GlobalSafeAreaView>
     )
