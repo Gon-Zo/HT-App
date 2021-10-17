@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DashboardState, IDashboardProps } from "./dashboard.interface";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Modal, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IRootState } from "../../shared/reducer";
 import { GlobalSafeAreaView, H1 } from "../../shared/component/component";
@@ -10,7 +10,7 @@ import CardGroup from "./card-group";
 import moment from "moment";
 import { IFilterDate } from "../filter/filter.interface";
 import { setBySelectDate } from "../../shared/reducer/shared.reducer";
-import GestureRecognizer from 'react-native-swipe-gestures';
+import FilterModal from "./filter-modal";
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -78,35 +78,7 @@ const Dashboard = (props: IDashboardProps) => {
 
     return (
         <GlobalSafeAreaView>
-
-            <GestureRecognizer onSwipeDown={toToggleModal}>
-                <Modal
-                    animationType={'slide'}
-                    visible={state.isFilterModal}
-                    transparent={true}>
-                    <TouchableOpacity
-                        onPress={toToggleModal}
-                        style={{
-                            flex: .5,
-                            // backgroundColor: 'rgba( 0, 0, 0, 0.1)'
-                        }}>
-                    </TouchableOpacity>
-                    <View style={{
-                        flex: 1,
-                        backgroundColor: "#ffffff",
-                        borderTopLeftRadius: 10,
-                        borderTopRightRadius: 10,
-                    }}>
-                        <View style={{
-                            paddingLeft : 10,
-                            paddingTop : 10
-                        }}>
-                            <H1 text={'필터'}/>
-                        </View>
-                    </View>
-                </Modal>
-            </GestureRecognizer>
-
+            <FilterModal isVisible={state.isFilterModal} toClose={toToggleModal}/>
             <View style={styles.headerWrap}>
                 <View style={styles.headerBox}>
                     <H1 text={'서울시'}/>

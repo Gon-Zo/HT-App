@@ -41,15 +41,7 @@ const CardGroup = (props: ICardGroupProps) => {
             isLoad: data.load
         }
 
-        const timer = setTimeout(() => {
-
-            setState(newState)
-
-            return () => {
-                clearTimeout(timer);
-            }
-
-        }, 3000);
+        setState(newState)
 
     }, [data])
 
@@ -89,7 +81,8 @@ const CardGroup = (props: ICardGroupProps) => {
 
     const loader = () => {
         return (
-            <SkeletonPlaceholder speed={20000}>
+            <SkeletonPlaceholder speed={50000}
+                                 direction={'left'}>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     <SkeletonPlaceholder.Item width={100} height={130} borderRadius={10} margin={10}/>
                     <SkeletonPlaceholder.Item width={100} height={130} borderRadius={10} margin={10}/>
@@ -100,20 +93,17 @@ const CardGroup = (props: ICardGroupProps) => {
     }
 
     return (
-        <View style={{marginTop: 10 , padding : 5}}>
+        <View style={{marginTop: 10, padding: 5}}>
             <View style={{
                 paddingLeft: 8
             }}>
                 <H3 text={'아파트 월세'}/>
             </View>
             <View style={{flexDirection: "row", flex: 1, height: 150}}>
-                {
-                    state.isLoad ? loader() : baseCard
-                }
+                {state.isLoad ? loader() : baseCard}
             </View>
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({
