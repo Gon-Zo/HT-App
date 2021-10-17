@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import GestureRecognizer from "react-native-swipe-gestures";
-import { Button, Modal, Picker, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { H1 } from "../../shared/component/component";
 import { areaCodes } from "../../shared/utils/data.utils";
 import DropDownPicker from 'react-native-dropdown-picker';
+import { CARD_COLOR } from "../../shared/utils/color.utils";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+
 
 interface IFilterModalProps {
     isVisible: boolean
@@ -18,6 +21,12 @@ type AreaCodeData = {
     subAreaCodeList: Array<AreaCodeData>,
     createBy: string,
     createDate: string
+}
+
+const tabValues = {
+    '지역': 'A',
+    '날짜': 'B',
+    '종류': 'C'
 }
 
 const FilterModal = (props: IFilterModalProps) => {
@@ -49,7 +58,6 @@ const FilterModal = (props: IFilterModalProps) => {
             setTab('A')
             setPickerOpen(false)
             setPickerValue(null)
-            setSelectItems([])
             setSubPickerOpen(false)
             setSubPickerValue(null)
             setSubSelectItems([])
@@ -64,22 +72,18 @@ const FilterModal = (props: IFilterModalProps) => {
     const toChangePickerValue = (value: any) => {
 
         const foundCode: AreaCodeData = {
-            ...areaCodes.find(item => item.code == value),
             id: 0,
             code: '',
             name: '',
             type: '',
             subAreaCodeList: [],
             createBy: '',
-            createDate: ''
+            createDate: '',
+            ...areaCodes.find(item => item.code == value)
         }
 
         // @ts-ignore
         const foundSubCodeList = foundCode.subAreaCodeList
-
-        if (typeof foundSubCodeList === "undefined" || foundSubCodeList == null) {
-            return;
-        }
 
         const subSelectItems = foundSubCodeList
             .map((item: any) => {
@@ -128,34 +132,43 @@ const FilterModal = (props: IFilterModalProps) => {
         )
     }
 
+    const typePicker = () => {
+        return (
+            <Text>TEST</Text>
+        )
+    }
+
     const renderFilterContent = (): any | React.ReactNode => {
         return (
             <View style={{
                 flex: 1
             }}>
                 {
-                    (tab == 'A' ? areaPicker() : (tab == 'B' ? datePicker() : null))
+                    (tab == 'A' ? areaPicker() : (tab == 'B' ? datePicker() : typePicker()))
                 }
             </View>
         )
     }
 
     const toPressTab = React.useCallback((event: any) => {
-        console.log(">>>>>>>>>>>>>.....", event._targetInst.memoizedProps.children)
-        const tabValue = event._targetInst.memoizedProps.children[0][0].props.children
-        console.log(">>>>>>>>>>>>>.tableName" , tabValue)
-        setTab('A')
+        const tabKey = event._targetInst.memoizedProps.children[0][0].props.children
+        // @ts-ignore
+        const tabValue: string = tabValues[tabKey]
+        setTab(tabValue)
         setPickerOpen(false)
     }, [tab])
 
     const toRenderTab = () => {
 
-        const toRenderItems = (title : string) => {
+        const toRenderItems = (title: string) => {
+
+            // @ts-ignore
+            const isActive = tabValues[title] === tab
+
             return (
-                <View style={{flex: 1, backgroundColor: "#f00", alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <TouchableOpacity onPress={toPressTab} style={
                         {
-                            backgroundColor: "#00f",
                             width: "80%",
                             height: "80%",
                             alignItems: 'center',
@@ -165,15 +178,16 @@ const FilterModal = (props: IFilterModalProps) => {
                         <Text style={[{
                             fontSize: 17,
                             marginBottom: 5,
-                        }, tab == title && {color: '#fff'}]}>
+                            color: '#c9c9c9'
+                        }, isActive && {color: CARD_COLOR[1]}]}>
                             {title}
                         </Text>
                         {
-                            tab == title && (
+                            isActive && (
                                 <View style={{
                                     width: '50%',
                                     height: 3,
-                                    backgroundColor: "#fff"
+                                    backgroundColor: CARD_COLOR[1]
                                 }}/>
                             )
                         }
@@ -211,10 +225,29 @@ const FilterModal = (props: IFilterModalProps) => {
 
                         <View style={{
                             flex: .2,
-                            backgroundColor: "#f00"
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            // backgroundColor: "#f00"
                         }}>
-                            <Button title={'test'} onPress={() => {
-                            }}/>
+                            <TouchableOpacity style={{
+                                backgroundColor: CARD_COLOR[1],
+                                width: '100%',
+                                height: "50%",
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flexDirection: 'row'
+                            }}>
+                                <FontAwesomeIcon
+                                    color={"#fff"}
+                                    icon={['fas', "save"]}/>
+                                <Text style={{
+                                    color: "#fff",
+                                    fontWeight: '800',
+                                    marginLeft : 10
+                                }}>
+                                    적용
+                                </Text>
+                            </TouchableOpacity>
                         </View>
 
                     </View>
