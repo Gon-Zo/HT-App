@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GestureRecognizer from "react-native-swipe-gestures";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { H1 } from "../../shared/component/component";
-import { areaCodes } from "../../shared/utils/data.utils";
+import { areaCodes, transactionType } from "../../shared/utils/data.utils";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { CARD_COLOR } from "../../shared/utils/color.utils";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -26,7 +26,7 @@ type AreaCodeData = {
 const tabValues = {
     '지역': 'A',
     '날짜': 'B',
-    '종류': 'C'
+    '거래': 'C'
 }
 
 const FilterModal = (props: IFilterModalProps) => {
@@ -40,6 +40,8 @@ const FilterModal = (props: IFilterModalProps) => {
     const [isSubPickerOpen, setSubPickerOpen] = useState<boolean>(false);
     const [subPickerValue, setSubPickerValue] = useState<string | any>(null);
     const [subSelectItems, setSubSelectItems] = useState<Array<any> | any>([]);
+    const [transactionTypes, setTransactionTypes] = useState<Array<any> | any>([])
+    const [typeValue, setTypeValue] = useState<string | any>(null)
 
     useEffect(() => {
         const selectItems = areaCodes.map(item => {
@@ -49,6 +51,7 @@ const FilterModal = (props: IFilterModalProps) => {
             }
         })
         setSelectItems(selectItems)
+        setTransactionTypes(transactionType)
         setTab('A')
     }, [])
 
@@ -134,7 +137,48 @@ const FilterModal = (props: IFilterModalProps) => {
 
     const typePicker = () => {
         return (
-            <Text>TEST</Text>
+            <>
+                <Text style={styles.pickerLabel}>거래 종류</Text>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    padding: 20
+                }}>
+                    {
+                        transactionTypes.map((type: any, index: number) => (
+                            <TouchableOpacity key={index}
+                                              style={{
+                                                  marginLeft: 4,
+                                                  marginRight: 4,
+                                                  marginBottom: 8
+                                              }}
+                                              onPress={() => {
+                                                  setTypeValue(type.value)
+                                              }}>
+                                <View style={[{
+                                    flexDirection: 'row',
+                                    borderRadius: 10,
+                                    borderColor: "#c9c9c9",
+                                    borderWidth: 1,
+                                    height: 46,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    paddingLeft: 16,
+                                    paddingRight: 16
+                                }, typeValue == type.value && {
+                                    borderColor: CARD_COLOR[1],
+                                    backgroundColor: CARD_COLOR[1]
+                                }]}>
+                                    <Text style={[{
+                                        color: "#c9c9c9"
+                                    }, typeValue == type.value && {color: '#fff'}]}>{type.label}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        ))
+                    }
+                </View>
+            </>
         )
     }
 
@@ -167,19 +211,23 @@ const FilterModal = (props: IFilterModalProps) => {
 
             return (
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <TouchableOpacity onPress={toPressTab} style={
-                        {
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={toPressTab}
+                        style={{
                             width: "80%",
                             height: "80%",
                             alignItems: 'center',
                             justifyContent: 'center'
-                        }
-                    }>
+                        }}>
                         <Text style={[{
                             fontSize: 17,
                             marginBottom: 5,
                             color: '#c9c9c9'
-                        }, isActive && {color: CARD_COLOR[1]}]}>
+                        }, isActive && {
+                            color: CARD_COLOR[1],
+                            fontWeight: '800'
+                        }]}>
                             {title}
                         </Text>
                         {
@@ -203,7 +251,7 @@ const FilterModal = (props: IFilterModalProps) => {
             }}>
                 {toRenderItems('지역')}
                 {toRenderItems('날짜')}
-                {toRenderItems('종류')}
+                {toRenderItems('거래')}
             </View>
         )
     }
@@ -243,7 +291,7 @@ const FilterModal = (props: IFilterModalProps) => {
                                 <Text style={{
                                     color: "#fff",
                                     fontWeight: '800',
-                                    marginLeft : 10
+                                    marginLeft: 10
                                 }}>
                                     적용
                                 </Text>
@@ -263,7 +311,7 @@ const FilterModal = (props: IFilterModalProps) => {
 const styles = StyleSheet.create({
     modalWrap: {
         flex: 1,
-        backgroundColor: "rgba(0,0,0,.1)"
+        // backgroundColor: "rgba(0,0,0,.1)"
     },
     modalBg: {
         flex: .5
