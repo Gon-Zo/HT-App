@@ -1,13 +1,14 @@
 import { getDatesStartToLast } from "../../shared/utils/layout.utils";
+import { CARD_COLOR } from "../../shared/utils/color.utils";
 
 /**
  * Calender Color Object
  */
 export const DATE_COLOR = {
-    "START_DATE": {startingDay: true, color: '#50cebb', selected: true},
-    "END_DATE": {endingDay: true, color: '#50cebb', selected: true},
-    "DEFAULT_DATE": {selected: true, color: '#50cebb'},
-    "SELECT_DATE": {color: '#50cebb'}
+    "START_DATE": {startingDay: true, color: CARD_COLOR[1], selected: true},
+    "END_DATE": {endingDay: true, color: CARD_COLOR[1], selected: true},
+    "DEFAULT_DATE": {selected: true, color: CARD_COLOR[1]},
+    "SELECT_DATE": {color: 'rgb(124,125,203)'}
 }
 
 /**

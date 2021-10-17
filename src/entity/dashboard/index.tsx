@@ -78,7 +78,10 @@ const Dashboard = (props: IDashboardProps) => {
 
     return (
         <GlobalSafeAreaView>
-            <FilterModal isVisible={state.isFilterModal} toClose={toToggleModal}/>
+            <FilterModal
+                startDate={selectDate.startDate}
+                endDate={selectDate.endDate}
+                isVisible={state.isFilterModal} toClose={toToggleModal}/>
             <View style={styles.headerWrap}>
                 <View style={styles.headerBox}>
                     <H1 text={'서울시'}/>

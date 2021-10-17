@@ -6,11 +6,16 @@ import { areaCodes, transactionType } from "../../shared/utils/data.utils";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { CARD_COLOR } from "../../shared/utils/color.utils";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { Calendar } from "react-native-calendars";
+import { DATE_COLOR, getBySelectMarkers } from "../filter/filter.service";
+import { IFilterDate } from "../filter/filter.interface";
 
 
 interface IFilterModalProps {
     isVisible: boolean
-    toClose: () => void
+    toClose: () => void,
+    startDate: string,
+    endDate: string
 }
 
 type AreaCodeData = {
@@ -31,7 +36,7 @@ const tabValues = {
 
 const FilterModal = (props: IFilterModalProps) => {
 
-    const {isVisible, toClose} = props
+    const {isVisible, toClose, startDate, endDate} = props
 
     const [tab, setTab] = useState<string | any>(null)
     const [isPickerOpen, setPickerOpen] = useState<boolean>(false);
@@ -42,6 +47,8 @@ const FilterModal = (props: IFilterModalProps) => {
     const [subSelectItems, setSubSelectItems] = useState<Array<any> | any>([]);
     const [transactionTypes, setTransactionTypes] = useState<Array<any> | any>([])
     const [typeValue, setTypeValue] = useState<string | any>(null)
+    const [markedDates, setMarkedDates] = useState({})
+    const [filterDate, setFilterDate] = useState<IFilterDate>({startDate: '', endDate: ''})
 
     useEffect(() => {
         const selectItems = areaCodes.map(item => {
@@ -58,7 +65,6 @@ const FilterModal = (props: IFilterModalProps) => {
     useEffect(() => {
 
         if (isVisible == false) {
-            setTab('A')
             setPickerOpen(false)
             setPickerValue(null)
             setSubPickerOpen(false)
@@ -66,6 +72,18 @@ const FilterModal = (props: IFilterModalProps) => {
             setSubSelectItems([])
             return
         }
+
+
+        const newMarkedDates: any = {}
+
+        if (startDate == endDate) {
+            newMarkedDates[startDate] = DATE_COLOR['DEFAULT_DATE']
+        } else {
+            getBySelectMarkers(startDate, endDate, markedDates)
+        }
+
+        setFilterDate({startDate: startDate, endDate: endDate})
+        setMarkedDates(newMarkedDates)
 
         return () => {
         }
@@ -130,12 +148,75 @@ const FilterModal = (props: IFilterModalProps) => {
     }
 
     const datePicker = () => {
+
+        const toDayPress = (payload: any) => {
+
+            const dateString = payload['dateString']
+
+            const isSelect = filterDate.startDate !== "" && filterDate.endDate !== ""
+
+            let markedDates: any = {}
+
+            let nowFilterDate: any = {}
+
+            if (isSelect) {
+                const anyOfStartDate = DATE_COLOR['START_DATE']
+                markedDates[dateString] = anyOfStartDate
+                nowFilterDate = {
+                    startDate: dateString,
+                    endDate: ''
+                }
+            } else {
+                getBySelectMarkers(filterDate.startDate, dateString, markedDates)
+                nowFilterDate = {
+                    ...filterDate,
+                    endDate: dateString
+                }
+            }
+
+            setFilterDate(nowFilterDate)
+            setMarkedDates(markedDates)
+        }
+
         return (
-            <Text>datePicker</Text>
+            <>
+                <Calendar markingType={'period'}
+                    markedDates={markedDates}
+                    onDayPress={toDayPress}/>
+            </>
         )
     }
 
     const typePicker = () => {
+
+        const toRenderItem = (type: any, index: number) => {
+
+            const isActiveAble = typeValue == type.value
+
+            const toPress = () => {
+                setTypeValue(type.value)
+            }
+
+            return (
+                <TouchableOpacity key={index}
+                                  activeOpacity={1}
+                                  style={styles.tagBox}
+                                  onPress={toPress}>
+                    <View style={[
+                        styles.tagContentBox, isActiveAble &&
+                        {
+                            borderColor: CARD_COLOR[1],
+                            backgroundColor: CARD_COLOR[1]
+                        }
+                    ]}>
+                        <Text style={[{
+                            color: "#c9c9c9"
+                        }, isActiveAble && {color: '#fff'}]}>{type.label}</Text>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
+
         return (
             <>
                 <Text style={styles.pickerLabel}>거래 종류</Text>
@@ -146,36 +227,7 @@ const FilterModal = (props: IFilterModalProps) => {
                     padding: 20
                 }}>
                     {
-                        transactionTypes.map((type: any, index: number) => (
-                            <TouchableOpacity key={index}
-                                              style={{
-                                                  marginLeft: 4,
-                                                  marginRight: 4,
-                                                  marginBottom: 8
-                                              }}
-                                              onPress={() => {
-                                                  setTypeValue(type.value)
-                                              }}>
-                                <View style={[{
-                                    flexDirection: 'row',
-                                    borderRadius: 10,
-                                    borderColor: "#c9c9c9",
-                                    borderWidth: 1,
-                                    height: 46,
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    paddingLeft: 16,
-                                    paddingRight: 16
-                                }, typeValue == type.value && {
-                                    borderColor: CARD_COLOR[1],
-                                    backgroundColor: CARD_COLOR[1]
-                                }]}>
-                                    <Text style={[{
-                                        color: "#c9c9c9"
-                                    }, typeValue == type.value && {color: '#fff'}]}>{type.label}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        ))
+                        transactionTypes.map(toRenderItem)
                     }
                 </View>
             </>
@@ -184,9 +236,7 @@ const FilterModal = (props: IFilterModalProps) => {
 
     const renderFilterContent = (): any | React.ReactNode => {
         return (
-            <View style={{
-                flex: 1
-            }}>
+            <View style={styles.modalContentWrap}>
                 {
                     (tab == 'A' ? areaPicker() : (tab == 'B' ? datePicker() : typePicker()))
                 }
@@ -210,45 +260,22 @@ const FilterModal = (props: IFilterModalProps) => {
             const isActive = tabValues[title] === tab
 
             return (
-                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <View style={styles.tabWrap}>
                     <TouchableOpacity
                         activeOpacity={1}
                         onPress={toPressTab}
-                        style={{
-                            width: "80%",
-                            height: "80%",
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                        <Text style={[{
-                            fontSize: 17,
-                            marginBottom: 5,
-                            color: '#c9c9c9'
-                        }, isActive && {
-                            color: CARD_COLOR[1],
-                            fontWeight: '800'
-                        }]}>
+                        style={styles.tabBox}>
+                        <Text style={[styles.tabTitle, isActive && styles.tabTitleOn]}>
                             {title}
                         </Text>
-                        {
-                            isActive && (
-                                <View style={{
-                                    width: '50%',
-                                    height: 3,
-                                    backgroundColor: CARD_COLOR[1]
-                                }}/>
-                            )
-                        }
+                        {isActive && <View style={styles.tabTitleLine}/>}
                     </TouchableOpacity>
                 </View>
             )
         }
 
         return (
-            <View style={{
-                flexDirection: 'row',
-                flex: .15
-            }}>
+            <View style={styles.tabViewWrap}>
                 {toRenderItems('지역')}
                 {toRenderItems('날짜')}
                 {toRenderItems('거래')}
@@ -275,7 +302,6 @@ const FilterModal = (props: IFilterModalProps) => {
                             flex: .2,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            // backgroundColor: "#f00"
                         }}>
                             <TouchableOpacity style={{
                                 backgroundColor: CARD_COLOR[1],
@@ -311,7 +337,6 @@ const FilterModal = (props: IFilterModalProps) => {
 const styles = StyleSheet.create({
     modalWrap: {
         flex: 1,
-        // backgroundColor: "rgba(0,0,0,.1)"
     },
     modalBg: {
         flex: .5
@@ -322,6 +347,9 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         padding: 20
+    },
+    modalContentWrap: {
+        flex: 1
     },
     areaPickerWrap: {
         padding: 10,
@@ -335,7 +363,58 @@ const styles = StyleSheet.create({
     pickerLabel: {
         fontSize: 14,
         paddingBottom: 10
+    },
+    tabViewWrap: {
+        flexDirection: 'row',
+        flex: .15
+    },
+    tabWrap: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    tabBox: {
+        width: "80%",
+        height: "80%",
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    tabTitle: {
+        fontSize: 17,
+        marginBottom: 5,
+        color: '#c9c9c9'
+    },
+    tabTitleOn: {
+        color: CARD_COLOR[1],
+        fontWeight: '800'
+    },
+    tabTitleLine: {
+        width: '50%',
+        height: 3,
+        backgroundColor: CARD_COLOR[1]
+    },
+    tagBox: {
+        marginLeft: 4,
+        marginRight: 4,
+        marginBottom: 8
+    },
+    tagContentBox: {
+        flexDirection: 'row',
+        borderRadius: 10,
+        borderColor: "#c9c9c9",
+        borderWidth: 1,
+        height: 46,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: 16,
+        paddingRight: 16
+    },
+    tagContentBoxOn: {
+        borderColor: CARD_COLOR[1],
+        backgroundColor: CARD_COLOR[1]
     }
+
+
 })
 
 export default FilterModal
