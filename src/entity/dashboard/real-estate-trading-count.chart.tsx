@@ -3,8 +3,9 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { H3 } from "../../shared/component/component";
 import {
     VictoryChart,
+    VictoryLabel,
     VictoryLine,
-    VictoryTheme,
+    VictoryTheme, VictoryZoomContainer,
 } from "victory-native";
 import Svg from "react-native-svg";
 import { CARD_COLOR } from "../../shared/utils/color.utils";
@@ -49,10 +50,8 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
             }
         })
 
-        const chartDataSize = values.length
-
-        const isLongChartData = chartDataSize > 6
-
+        // const chartDataSize = values.length
+        // const isLongChartData = chartDataSize > 6
         // const chartData = isLongChartData ? values.slice(0, 6) : values
 
         const chartData = values
@@ -68,9 +67,25 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
 
     const toPressButtonGroup = (num: number) => {
         setTrendingNum(num)
+        // setZoom({x: [0, 4]})
         dispatch(setByTrendingNum(ButtonGroupList[num].value))
         dispatch(getByRealEstateTradingCount())
     }
+
+    // const [zoom , setZoom] = useState<any>({x: [0, 4]})
+    // const toPress1 = () => {
+    //     const newZoom = {x : [4 , 8]}
+    //     setZoom(newZoom)
+    // }
+    //
+    // const toPress2 = () =>{
+    //     const newZoom = {x : [0 , 4]}
+    //     setZoom(newZoom)
+    // }
+    //
+    // const onDomainChange = (domain : any) =>{
+    //     console.log(">>>>>>>>>>> move", domain)
+    // }
 
     return (
         <View style={{marginTop: 10, padding: 5}}>
@@ -81,19 +96,37 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
                          pos={'flex-end'}
                          selectValue={trendingNum}
                          toPress={toPressButtonGroup}/>
+            {/*<TouchableOpacity onPress={toPress1}>*/}
+            {/*<Text>*/}
+            {/*    +*/}
+            {/*</Text>*/}
+            {/*</TouchableOpacity>*/}
+            {/*<TouchableOpacity onPress={toPress2}>*/}
+            {/*    <Text>*/}
+            {/*        -*/}
+            {/*    </Text>*/}
+            {/*</TouchableOpacity>*/}
             <Svg>
                 <VictoryChart
                     theme={VictoryTheme.material}
-                    padding={{top: 10, left: 50, right: 50, bottom: 30}}
                     animate={{
-                        duration: 2000,
-                        onLoad: {duration: 1000}
-                    }}>
+                        duration : 10000
+                    }}
+                    containerComponent={
+                        <VictoryZoomContainer responsive={false}
+                                              zoomDimension="x"
+                                              // zoomDomain={zoom}
+                                              // onZoomDomainChange={onDomainChange}
+                                              />
+                    }
+                >
                     <VictoryLine
                         style={{
                             data: {stroke: CARD_COLOR[0]},
                             parent: {border: "1px solid #ccc"}
                         }}
+                        labels={({ datum }) => datum.y}
+                        labelComponent={<VictoryLabel dy={-20}/>}
                         data={state.chartData}/>
                 </VictoryChart>
             </Svg>
