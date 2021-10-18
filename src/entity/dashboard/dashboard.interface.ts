@@ -57,7 +57,8 @@ export interface IFilterModalProps {
     toClose: () => void,
     startDate: string,
     endDate: string,
-    region: any
+    region: any,
+    transactionTypeData : any
 }
 
 export type AreaCodeData = {

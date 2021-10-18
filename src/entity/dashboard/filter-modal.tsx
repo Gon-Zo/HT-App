@@ -15,7 +15,7 @@ import { DATE_COLOR, getBySelectMarkers } from "./dashboard.service";
 
 const FilterModal = (props: IFilterModalProps) => {
 
-    const {region, isVisible, toClose, startDate, endDate} = props
+    const {region, isVisible, toClose, startDate, endDate, transactionTypeData} = props
 
     const [tab, setTab] = useState<string | any>(null)
     const [isPickerOpen, setPickerOpen] = useState<boolean>(false);
@@ -28,7 +28,6 @@ const FilterModal = (props: IFilterModalProps) => {
     const [typeValue, setTypeValue] = useState<string | any>(null)
     const [markedDates, setMarkedDates] = useState({})
     const [filterDate, setFilterDate] = useState<IFilterDate>({startDate: '', endDate: ''})
-    const [isMarkerAble, setMarkerAble] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -67,6 +66,8 @@ const FilterModal = (props: IFilterModalProps) => {
 
         const subPickerValue = typeof region.sub == "undefined" ? '' : region.sub.code
 
+        const typeValueStr =Object.keys(transactionTypeData).length == 0 ? '' : transactionTypeData.value
+        setTypeValue(typeValueStr)
         setPickerValue(pickerValue)
         setSubPickerValue(subPickerValue)
         setFilterDate({startDate: startDate, endDate: endDate})

@@ -3,37 +3,37 @@ export const transactionType =
         {
             id: 1,
             label: '토지 거래',
-            value: '01'
+            value: 'LAND_TRANSACTION'
         },
         {
             id: 2,
             label: '순수 토지 거래',
-            value: '02'
+            value: 'PURE_LAND_TRANSACTION'
         },
         {
             id: 3,
             label: '건축물 거래',
-            value: '03'
+            value: 'BUILDING_TRADE'
         },
         {
             id: 4,
             label: '주택 거래',
-            value: '04'
+            value: 'HOUSING_TRANSACTION'
         },
         {
             id: 5,
             label: '아파트 거래',
-            value: '05'
+            value: 'APARTMENT_TRANSACTION'
         },
         {
             id: 6,
             label: '주택 매매 거래',
-            value: '06'
+            value: 'HOUSING_SALE_TRANSACTION'
         },
         {
             id: 7,
             label: '아파트 매매 거래',
-            value: '07'
+            value: 'APARTMENT_SALE_TRANSACTION'
         },
     ]
 

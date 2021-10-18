@@ -10,12 +10,12 @@ import {
     getByRealEstateTradingCount,
     setByRegion,
     setBySelectDate,
-    setBySelectRegion
+    setBySelectRegion, setByTransactionType
 } from "./dashboard.reducer";
 import CardGroup from "./card-group";
 import moment from "moment";
 import FilterModal from "./filter-modal";
-import { areaCodes } from "../../shared/utils/data.utils";
+import { areaCodes, transactionType } from "../../shared/utils/data.utils";
 import RealEstateTradingCountChart from "./real-estate-trading-count.chart";
 
 const Dashboard = (props: IDashboardProps) => {
@@ -30,7 +30,7 @@ const Dashboard = (props: IDashboardProps) => {
     })
 
     const {
-        transactionType,
+        transactionTypeObj,
         region,
         selectDate,
         selectRegion,
@@ -38,12 +38,12 @@ const Dashboard = (props: IDashboardProps) => {
         realEstateTradingCount
     } = useSelector(({dashboard}: IRootState) => {
         return {
-            transactionType: dashboard.transactionType,
+            transactionTypeObj: dashboard.transactionType,
             region: dashboard.region,
             selectDate: dashboard.selectDate,
             jeonseMonthlyRentData: dashboard.jeonseMonthlyRentData,
             selectRegion: dashboard.selectRegion,
-            realEstateTradingCount : dashboard.realEstateTradingCount
+            realEstateTradingCount: dashboard.realEstateTradingCount
         }
     }, shallowEqual)
 
@@ -85,7 +85,7 @@ const Dashboard = (props: IDashboardProps) => {
                 name: areaCodes[0].name,
                 type: areaCodes[0].type,
             }
-
+            dispatch(setByTransactionType(transactionType[0]))
             dispatch(setByRegion(areaCode))
             dispatch(setBySelectRegion({main: areaCode}))
             dispatch(setBySelectDate(_selectDate))
@@ -106,6 +106,7 @@ const Dashboard = (props: IDashboardProps) => {
     return (
         <GlobalSafeAreaView>
             <FilterModal
+                transactionTypeData={transactionTypeObj}
                 region={selectRegion}
                 startDate={selectDate.startDate}
                 endDate={selectDate.endDate}
@@ -115,12 +116,22 @@ const Dashboard = (props: IDashboardProps) => {
                 <View style={styles.headerBox}>
                     {/*// @ts-ignore*/}
                     <H1 text={region.name}/>
-                    {
-                        state.isSelectDateAble &&
-                        (
-                            <Text style={styles.dateText}>{selectDate.startDate} ~ {selectDate.endDate}</Text>
-                        )
-                    }
+                    <View style={{
+                        flexDirection: 'column',
+                        paddingLeft: 10,
+                        justifyContent : "center"
+                    }}>
+                        <Text style={{
+                            color: '#989898',
+                            fontWeight : "600"
+                        }}>{transactionTypeObj.label}</Text>
+                        {
+                            state.isSelectDateAble &&
+                            (
+                                <Text style={styles.dateText}>{selectDate.startDate} ~ {selectDate.endDate}</Text>
+                            )
+                        }
+                    </View>
                 </View>
                 <TouchableOpacity
                     style={[styles.btn, styles.shadow]}
@@ -153,8 +164,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
     },
     dateText: {
-        paddingLeft: 10,
-        color: '#989898'
+        color: '#989898',
+        fontSize : 12
     },
     btn: {
         width: 35,

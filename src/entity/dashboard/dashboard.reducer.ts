@@ -146,7 +146,7 @@ export const setByRegion = (payload: any) => ({type: ACTION_TYPES.SET_REGION_DAT
 
 export const setBySelectDate = (payload: any) => ({type: ACTION_TYPES.SET_SELECT_DATE, payload: payload})
 
-const setByTransactionType = (payload: any) => ({type: ACTION_TYPES.SET_TRANSACTION_TYPE, payload: payload})
+export const setByTransactionType = (payload: any) => ({type: ACTION_TYPES.SET_TRANSACTION_TYPE, payload: payload})
 
 export const setBySelectRegion = (payload: any) => ({type: ACTION_TYPES.SET_SELECT_REGION, payload: payload})
 
@@ -221,7 +221,7 @@ export const getByRealEstateTradingCount = () => {
 
         const apiCode = 'RealEstateTradingCount'
 
-        const typeCode = 'BUILDING_TRADE'
+        const typeCode = dashboard.transactionType.value
 
         const region = dashboard.region.code
 
