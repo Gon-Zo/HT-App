@@ -12,7 +12,8 @@ const ACTION_TYPES = {
     SET_SELECT_DATE: 'dashboard/SET_SELECT_DATE',
     SET_TRANSACTION_TYPE: 'dashboard/SET_TRANSACTION_TYPE',
     SET_SELECT_REGION: 'dashboard/SET_SELECT_REGION',
-    SET_JEONSE_MONTHLY_RENT: 'dashboard/SET_JEONSE_MONTHLY_RENT'
+    SET_JEONSE_MONTHLY_RENT: 'dashboard/SET_JEONSE_MONTHLY_RENT',
+    SET_TRENDING_NUM: 'dashboard/SET_TRENDING_NUM'
 }
 
 interface IDashboardReducer extends IBaseReducer {
@@ -26,12 +27,19 @@ const initialState = {
     region: {} as any,
     transactionType: {} as any,
     selectRegion: {} as any,
+    trendingNum: 6 as number | any
 }
 
 export type DashboardState = Readonly<typeof initialState>
 
 export default (state = initialState, action: any): DashboardState => {
     switch (action.type) {
+        case ACTION_TYPES.SET_TRENDING_NUM: {
+            return {
+                ...state,
+                trendingNum: action.payload
+            }
+        }
         case SUCCESS(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT): {
             return {
                 ...state,
@@ -132,6 +140,8 @@ export default (state = initialState, action: any): DashboardState => {
     }
 }
 
+export const setByTrendingNum = (payload: number) => ({type: ACTION_TYPES.SET_TRENDING_NUM, payload: payload})
+
 export const setByRegion = (payload: any) => ({type: ACTION_TYPES.SET_REGION_DATA, payload: payload})
 
 export const setBySelectDate = (payload: any) => ({type: ACTION_TYPES.SET_SELECT_DATE, payload: payload})
@@ -215,6 +225,8 @@ export const getByRealEstateTradingCount = () => {
 
         const region = dashboard.region.code
 
+        const trending = dashboard.trendingNum
+
         const startDate = moment(dashboard.selectDate.startDate).format("YYYYMM")
 
         const endDate = moment(dashboard.selectDate.endDate).format("YYYYMM")
@@ -225,7 +237,7 @@ export const getByRealEstateTradingCount = () => {
             startDate,
             endDate,
             region,
-            trending : 20
+            trending
         }
 
         await dispatch({

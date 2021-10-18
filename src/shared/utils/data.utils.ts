@@ -2541,3 +2541,14 @@ export const areaCodes =
             "createDate": "2021-09-30T12:16:17Z"
         }
     ]
+
+
+export const ButtonGroupList =
+    [
+        {label: '6M', value: 6},
+        {label: '1Y', value: 12},
+        {label: '1.5Y', value: 18},
+        {label: '3Y', value: 24},
+        {label: '2.5Y', value: 32},
+        {label: '3Y', value: 38},
+    ]
