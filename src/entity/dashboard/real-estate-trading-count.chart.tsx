@@ -74,9 +74,10 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
 
     return (
         <View style={{marginTop: 10, padding: 5}}>
-            <H3 text={'부동산 거래 건수 추이'} styles={{
-                paddingLeft: 8
-            }}/>
+            <H3 text={'부동산 거래 건수 추이'}
+                styles={{
+                    paddingLeft: 8
+                }}/>
             <ButtonGroup data={ButtonGroupList}
                          pos={'flex-end'}
                          selectValue={trendingNum}
@@ -89,7 +90,7 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
                     }}
                     containerComponent={
                         <VictoryZoomContainer responsive={true}
-                                              zoomDimension="x"/>
+                                              zoomDimension="y"/>
                     }>
                     <VictoryLegend x={300} y={0}
                                    orientation="horizontal"
@@ -102,9 +103,6 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
                         style={{
                             data: {stroke: CARD_COLOR[0], strokeWidth: 3},
                             parent: {border: "1px solid #ccc"}
-                        }}
-                        categories={{
-                            x: state.xLabel
                         }}
                         data={state.chartData}/>
                 </VictoryChart>
