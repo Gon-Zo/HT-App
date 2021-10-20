@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { H3 } from "../../shared/component/component";
 import {
     VictoryAxis,
@@ -20,10 +20,8 @@ interface IRealEstateTradingCountChartProps {
 }
 
 type RealEstateTradingCountState = {
-    readonly xLabel: Array<String> | Array<any> | any
     readonly chartData: Array<any>
 }
-
 
 const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) => {
 
@@ -32,15 +30,12 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
     const dispatch = useDispatch()
 
     const [state, setState] = useState<RealEstateTradingCountState>({
-        xLabel: [],
         chartData: []
     })
 
-    const [brushDomain, setBrushDomain] = useState<any>(null)
-
-    const [zoomDomain, setZoomDomain] = useState<any>(null)
-
     const [trendingNum, setTrendingNum] = useState<number | any>(0)
+
+    const [splitNum, setSplitNum] = useState(0)
 
     useEffect(() => {
 
@@ -57,7 +52,6 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
             })
 
         const newState: RealEstateTradingCountState = {
-            xLabel: [],
             chartData
         }
 
@@ -67,8 +61,9 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
 
     const toPressButtonGroup = (num: number) => {
         setTrendingNum(num)
-        // setZoom({x: [0, 4]})
-        dispatch(setByTrendingNum(ButtonGroupList[num].value))
+        const btnData = ButtonGroupList[num]
+        setSplitNum(btnData.split)
+        dispatch(setByTrendingNum(btnData.value))
         dispatch(getByRealEstateTradingCount())
     }
 
@@ -86,18 +81,18 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
                 <VictoryChart
                     theme={VictoryTheme.material}
                     animate={{
-                        duration: 10000
-                    }}
-                    containerComponent={
-                        <VictoryZoomContainer responsive={true}
-                                              zoomDimension="y"/>
-                    }>
+                        duration: 5000
+                    }}>
                     <VictoryLegend x={300} y={0}
                                    orientation="horizontal"
                                    gutter={30}
                                    data={[
                                        {name: "거래건수", symbol: {fill: CARD_COLOR[0]}}
                                    ]}
+                    />
+                    <VictoryAxis dependentAxis={true}/>
+                    <VictoryAxis
+                        tickFormat={(x: any, index) => splitNum == 0 ? x : (index % splitNum == 0 ? x : '')}
                     />
                     <VictoryLine
                         style={{

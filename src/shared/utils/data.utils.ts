@@ -2545,10 +2545,10 @@ export const areaCodes =
 
 export const ButtonGroupList =
     [
-        {label: '6M', value: 6},
-        {label: '1Y', value: 12},
-        {label: '1.6Y', value: 18},
-        {label: '2Y', value: 24},
-        {label: '2.6Y', value: 32},
-        {label: '3Y', value: 38},
+        {label: '6M', value: 6, split: 0},
+        {label: '1Y', value: 12, split: 2},
+        {label: '1.6Y', value: 18, split: 4},
+        {label: '2Y', value: 24, split: 4},
+        {label: '2.6Y', value: 32, split: 6},
+        {label: '3Y', value: 38, split: 6},
     ]
