@@ -18,7 +18,9 @@ const CardGroup = (props: ICardGroupProps) => {
 
         const fetchData = data.data
 
-        if (typeof fetchData === 'undefined' || fetchData.length == 0) return
+        const isEmpty = typeof fetchData === 'undefined' || fetchData.length == 0
+
+        if (isEmpty) return
 
         const cardData = fetchData
             .sort((o1: any, o2: any) => {
@@ -43,39 +45,40 @@ const CardGroup = (props: ICardGroupProps) => {
 
     }, [data])
 
-    const baseCard = state.topData.map((data: any, index: number) => (
-        <View key={index}
-              style={[{backgroundColor: CARD_COLOR[index], padding: 5},
-                  styles.cardWrap,
-                  styles.shadow]}>
-            <View style={{
-                flex: 1,
-                paddingTop: 5,
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: 'flex-start'
-            }}>
-                <Text style={[styles.cardText, styles.cardColor]}>{data.title}</Text>
-            </View>
-
-            <View style={{
-                flex: 1,
-                flexDirection: "column",
-                alignItems: "flex-end",
-                justifyContent: "flex-end"
-            }}>
-                <Text style={[styles.cardColor]}>월세</Text>
+    const baseCard = state.topData
+        .map((data: any, index: number) => (
+            <View key={index}
+                  style={[{backgroundColor: CARD_COLOR[index], padding: 5},
+                      styles.cardWrap,
+                      styles.shadow]}>
                 <View style={{
-                    flexDirection: 'row',
-                    alignItems: "center"
+                    flex: 1,
+                    paddingTop: 5,
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: 'flex-start'
                 }}>
-                    <Text style={[styles.cardColor, styles.cardText, styles.cardSize]}>{data.count1 / 100}</Text>
-                    <Text style={[styles.cardColor]}> 백만원</Text>
+                    <Text style={[styles.cardText, styles.cardColor]}>{data.title}</Text>
                 </View>
-            </View>
 
-        </View>
-    ))
+                <View style={{
+                    flex: 1,
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                    justifyContent: "flex-end"
+                }}>
+                    <Text style={[styles.cardColor]}>월세</Text>
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: "center"
+                    }}>
+                        <Text style={[styles.cardColor, styles.cardText, styles.cardSize]}>{data.count1 / 100}</Text>
+                        <Text style={[styles.cardColor]}> 백만원</Text>
+                    </View>
+                </View>
+
+            </View>
+        ))
 
     const loader = () => {
         return (

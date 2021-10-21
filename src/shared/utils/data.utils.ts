@@ -2552,3 +2552,16 @@ export const ButtonGroupList =
         {label: '2.6Y', value: 32, split: 6},
         {label: '3Y', value: 38, split: 6},
     ]
+
+export const RealEstateTradingCountDealerMeta =
+    {
+        a: "개인->개인",
+        b: "개인->법인",
+        c: "개인->기타",
+        d: "법인->개인",
+        e: "법인->법인",
+        f: "법인->기타",
+        g: "기타->개인",
+        h: "기타->법인",
+        i: "기타->기타 부동산"
+    }

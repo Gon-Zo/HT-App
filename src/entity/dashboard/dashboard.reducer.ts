@@ -7,12 +7,12 @@ import { IFilterDate, SaveFilterData } from "./dashboard.interface";
 
 const ACTION_TYPES = {
     FETCH_REAL_ESTATE_TRADING_COUNT: 'dashboard/FETCH_REAL_ESTATE_TRADING_COUNT',
-    FETCH_JEONSE_MONTHLY_RENT: 'dashboard/FETCH_JEONSE_MONTHLY_RENT',
+    FETCH_APARTMENT_RENT: 'dashboard/FETCH_APARTMENT_RENT',
     SET_REGION_DATA: 'dashboard/SET_REGION_DATA',
     SET_SELECT_DATE: 'dashboard/SET_SELECT_DATE',
     SET_TRANSACTION_TYPE: 'dashboard/SET_TRANSACTION_TYPE',
     SET_SELECT_REGION: 'dashboard/SET_SELECT_REGION',
-    SET_JEONSE_MONTHLY_RENT: 'dashboard/SET_JEONSE_MONTHLY_RENT',
+    SET_APARTMENT_RENT: 'dashboard/SET_APARTMENT_RENT',
     SET_TRENDING_NUM: 'dashboard/SET_TRENDING_NUM'
 }
 
@@ -21,7 +21,7 @@ interface IDashboardReducer extends IBaseReducer {
 }
 
 const initialState = {
-    jeonseMonthlyRentData: {} as IDashboardReducer,
+    apartmentRent: {} as IDashboardReducer,
     realEstateTradingCount: {} as IDashboardReducer,
     selectDate: {} as IFilterDate,
     region: {} as any,
@@ -50,10 +50,10 @@ export default (state = initialState, action: any): DashboardState => {
                 }
             }
         }
-        case SUCCESS(ACTION_TYPES.FETCH_JEONSE_MONTHLY_RENT): {
+        case SUCCESS(ACTION_TYPES.FETCH_APARTMENT_RENT): {
             return {
                 ...state,
-                jeonseMonthlyRentData: {
+                apartmentRent: {
                     load: false,
                     error: null,
                     data: action.payload.data
@@ -70,13 +70,13 @@ export default (state = initialState, action: any): DashboardState => {
                 }
             }
         }
-        case REQUEST(ACTION_TYPES.FETCH_JEONSE_MONTHLY_RENT): {
+        case REQUEST(ACTION_TYPES.FETCH_APARTMENT_RENT): {
             return {
                 ...state,
-                jeonseMonthlyRentData: {
+                apartmentRent: {
                     load: true,
                     error: null,
-                    data: state.jeonseMonthlyRentData.data
+                    data: state.apartmentRent.data
                 }
             }
         }
@@ -90,10 +90,10 @@ export default (state = initialState, action: any): DashboardState => {
                 }
             }
         }
-        case FAILURE(ACTION_TYPES.FETCH_JEONSE_MONTHLY_RENT): {
+        case FAILURE(ACTION_TYPES.FETCH_APARTMENT_RENT): {
             return {
                 ...state,
-                jeonseMonthlyRentData: {
+                apartmentRent: {
                     load: false,
                     error: action.payload,
                     data: undefined
@@ -124,10 +124,10 @@ export default (state = initialState, action: any): DashboardState => {
                 selectRegion: action.payload
             }
         }
-        case ACTION_TYPES.SET_JEONSE_MONTHLY_RENT: {
+        case ACTION_TYPES.SET_APARTMENT_RENT: {
             return {
                 ...state,
-                jeonseMonthlyRentData: {
+                apartmentRent: {
                     load: false,
                     error: null,
                     data: []
@@ -150,9 +150,9 @@ export const setByTransactionType = (payload: any) => ({type: ACTION_TYPES.SET_T
 
 export const setBySelectRegion = (payload: any) => ({type: ACTION_TYPES.SET_SELECT_REGION, payload: payload})
 
-export const getByJeonseMonthlyRent = () => {
+export const getByApartmentRent = () => {
     return async (dispatch: any, getState: any) => {
-        const apiUrl = '/api/jeonse-monthly-rent'
+        const apiUrl = '/api/apartment-rent'
 
         const {dashboard}: IRootState = await getState()
 
@@ -163,7 +163,7 @@ export const getByJeonseMonthlyRent = () => {
         if (!endDate) return;
 
         if (dashboard.region.type == 'P') {
-            await dispatch({type: ACTION_TYPES.SET_JEONSE_MONTHLY_RENT})
+            await dispatch({type: ACTION_TYPES.SET_APARTMENT_RENT})
             return
         }
 
@@ -175,7 +175,7 @@ export const getByJeonseMonthlyRent = () => {
         }
 
         await dispatch({
-            type: ACTION_TYPES.FETCH_JEONSE_MONTHLY_RENT,
+            type: ACTION_TYPES.FETCH_APARTMENT_RENT,
             payload: axios.get(apiUrl, {
                 params
             })

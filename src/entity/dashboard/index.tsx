@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { IRootState } from "../../shared/reducer";
 import { GlobalSafeAreaView, H1 } from "../../shared/component/component";
 import {
-    getByJeonseMonthlyRent,
+    getByApartmentRent,
     getByRealEstateTradingCount,
     setByRegion,
     setBySelectDate,
@@ -17,6 +17,7 @@ import moment from "moment";
 import FilterModal from "./filter-modal";
 import { areaCodes, transactionType } from "../../shared/utils/data.utils";
 import RealEstateTradingCountChart from "./real-estate-trading-count.chart";
+import RealEstateTradingCountDealerChart from "./real-estate-trading-count-dealer.chart";
 
 const Dashboard = (props: IDashboardProps) => {
 
@@ -34,14 +35,14 @@ const Dashboard = (props: IDashboardProps) => {
         region,
         selectDate,
         selectRegion,
-        jeonseMonthlyRentData,
+        apartmentRent,
         realEstateTradingCount
     } = useSelector(({dashboard}: IRootState) => {
         return {
             transactionTypeObj: dashboard.transactionType,
             region: dashboard.region,
             selectDate: dashboard.selectDate,
-            jeonseMonthlyRentData: dashboard.jeonseMonthlyRentData,
+            apartmentRent: dashboard.apartmentRent,
             selectRegion: dashboard.selectRegion,
             realEstateTradingCount: dashboard.realEstateTradingCount
         }
@@ -71,6 +72,7 @@ const Dashboard = (props: IDashboardProps) => {
     }, [selectDate])
 
     const toCallDashboardData = (isInitAble: boolean = false) => {
+
         if (isInitAble) {
             const nowDate = moment(new Date()).format("YYYY-MM-DD")
 
@@ -91,7 +93,7 @@ const Dashboard = (props: IDashboardProps) => {
             dispatch(setBySelectDate(_selectDate))
         }
 
-        dispatch(getByJeonseMonthlyRent())
+        dispatch(getByApartmentRent())
         dispatch(getByRealEstateTradingCount())
     }
 
@@ -119,11 +121,11 @@ const Dashboard = (props: IDashboardProps) => {
                     <View style={{
                         flexDirection: 'column',
                         paddingLeft: 10,
-                        justifyContent : "center"
+                        justifyContent: "center"
                     }}>
                         <Text style={{
                             color: '#989898',
-                            fontWeight : "600"
+                            fontWeight: "600"
                         }}>{transactionTypeObj.label}</Text>
                         {
                             state.isSelectDateAble &&
@@ -142,9 +144,10 @@ const Dashboard = (props: IDashboardProps) => {
                 </TouchableOpacity>
             </View>
 
-            <ScrollView style={styles.scrolWrap}>
-                <CardGroup data={jeonseMonthlyRentData}/>
+            <ScrollView style={styles.scrollWrap}>
+                <CardGroup data={apartmentRent}/>
                 <RealEstateTradingCountChart data={realEstateTradingCount}/>
+                <RealEstateTradingCountDealerChart/>
             </ScrollView>
         </GlobalSafeAreaView>
     )
@@ -165,7 +168,7 @@ const styles = StyleSheet.create({
     },
     dateText: {
         color: '#989898',
-        fontSize : 12
+        fontSize: 12
     },
     btn: {
         width: 35,
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 5
     },
-    scrolWrap: {
+    scrollWrap: {
         flex: 1
     },
     shadow: {
