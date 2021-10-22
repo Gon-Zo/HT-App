@@ -7,7 +7,7 @@ import { IRootState } from "../../shared/reducer";
 import { GlobalSafeAreaView, H1 } from "../../shared/component/component";
 import {
     getByApartmentRent,
-    getByRealEstateTradingCount,
+    getByRealEstateTradingCount, getByRealEstateTradingCountDealer,
     setByRegion,
     setBySelectDate,
     setBySelectRegion, setByTransactionType
@@ -36,7 +36,6 @@ const Dashboard = (props: IDashboardProps) => {
         selectDate,
         selectRegion,
         apartmentRent,
-        realEstateTradingCount
     } = useSelector(({dashboard}: IRootState) => {
         return {
             transactionTypeObj: dashboard.transactionType,
@@ -44,7 +43,16 @@ const Dashboard = (props: IDashboardProps) => {
             selectDate: dashboard.selectDate,
             apartmentRent: dashboard.apartmentRent,
             selectRegion: dashboard.selectRegion,
-            realEstateTradingCount: dashboard.realEstateTradingCount
+        }
+    }, shallowEqual)
+
+    const {
+        realEstateTradingCountDealer,
+        realEstateTradingCount
+    } = useSelector(({dashboard}: IRootState) => {
+        return {
+            realEstateTradingCount: dashboard.realEstateTradingCount,
+            realEstateTradingCountDealer: dashboard.realEstateTradingCountDealer
         }
     }, shallowEqual)
 
@@ -87,6 +95,7 @@ const Dashboard = (props: IDashboardProps) => {
                 name: areaCodes[0].name,
                 type: areaCodes[0].type,
             }
+
             dispatch(setByTransactionType(transactionType[0]))
             dispatch(setByRegion(areaCode))
             dispatch(setBySelectRegion({main: areaCode}))
@@ -95,6 +104,7 @@ const Dashboard = (props: IDashboardProps) => {
 
         dispatch(getByApartmentRent())
         dispatch(getByRealEstateTradingCount())
+        dispatch(getByRealEstateTradingCountDealer())
     }
 
     const toToggleModal = () => {
@@ -147,10 +157,11 @@ const Dashboard = (props: IDashboardProps) => {
             <ScrollView style={styles.scrollWrap}>
                 <CardGroup data={apartmentRent}/>
                 <RealEstateTradingCountChart data={realEstateTradingCount}/>
-                <RealEstateTradingCountDealerChart/>
+                <RealEstateTradingCountDealerChart data={realEstateTradingCountDealer}/>
             </ScrollView>
         </GlobalSafeAreaView>
     )
+
 }
 
 const styles = StyleSheet.create({

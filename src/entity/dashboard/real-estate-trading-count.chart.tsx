@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { H3 } from "../../shared/component/component";
 import {
     VictoryAxis,
     VictoryChart,
-    VictoryLabel, VictoryLegend,
+    VictoryLegend,
     VictoryLine,
-    VictoryTheme, VictoryTooltip, VictoryZoomContainer,
+    VictoryTheme,
 } from "victory-native";
-import Svg from "react-native-svg";
 import { CARD_COLOR } from "../../shared/utils/color.utils";
 import ButtonGroup from "../../shared/component/button-group";
 import { useDispatch } from "react-redux";
@@ -77,31 +76,26 @@ const RealEstateTradingCountChart = (props: IRealEstateTradingCountChartProps) =
                          pos={'flex-end'}
                          selectValue={trendingNum}
                          toPress={toPressButtonGroup}/>
-            <Svg>
-                <VictoryChart
-                    theme={VictoryTheme.material}
-                    animate={{
-                        duration: 5000
-                    }}>
-                    <VictoryLegend x={300} y={0}
-                                   orientation="horizontal"
-                                   gutter={30}
-                                   data={[
-                                       {name: "거래건수", symbol: {fill: CARD_COLOR[0]}}
-                                   ]}
-                    />
-                    <VictoryAxis dependentAxis={true}/>
-                    <VictoryAxis
-                        tickFormat={(x: any, index) => splitNum == 0 ? x : (index % splitNum == 0 ? x : '')}
-                    />
-                    <VictoryLine
-                        style={{
-                            data: {stroke: CARD_COLOR[0], strokeWidth: 3},
-                            parent: {border: "1px solid #ccc"}
-                        }}
-                        data={state.chartData}/>
-                </VictoryChart>
-            </Svg>
+            <VictoryChart
+                theme={VictoryTheme.material}
+                animate={{
+                    duration: 5000
+                }}>
+                <VictoryLegend x={300} y={0}
+                               orientation="horizontal"
+                               gutter={30}
+                               data={[
+                                   {name: "거래건수", symbol: {fill: CARD_COLOR[0]}}
+                               ]}/>
+                <VictoryAxis dependentAxis={true}/>
+                <VictoryAxis tickFormat={(x: any, index) => splitNum == 0 ? x : (index % splitNum == 0 ? x : '')}/>
+                <VictoryLine
+                    data={state.chartData}
+                    style={{
+                        data: {stroke: CARD_COLOR[0], strokeWidth: 3},
+                        parent: {border: "1px solid #ccc"}
+                    }}/>
+            </VictoryChart>
         </View>
     )
 }

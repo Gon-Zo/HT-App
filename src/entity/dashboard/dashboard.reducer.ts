@@ -13,7 +13,8 @@ const ACTION_TYPES = {
     SET_TRANSACTION_TYPE: 'dashboard/SET_TRANSACTION_TYPE',
     SET_SELECT_REGION: 'dashboard/SET_SELECT_REGION',
     SET_APARTMENT_RENT: 'dashboard/SET_APARTMENT_RENT',
-    SET_TRENDING_NUM: 'dashboard/SET_TRENDING_NUM'
+    SET_TRENDING_NUM: 'dashboard/SET_TRENDING_NUM',
+    FETCH_REAL_ESTATE_TRADING_COUNT_DEALER: "dashboard/FETCH_REAL_ESTATE_TRADING_COUNT_DEALER"
 }
 
 interface IDashboardReducer extends IBaseReducer {
@@ -27,7 +28,8 @@ const initialState = {
     region: {} as any,
     transactionType: {} as any,
     selectRegion: {} as any,
-    trendingNum: 6 as number | any
+    trendingNum: 6 as number | any,
+    realEstateTradingCountDealer: {} as IDashboardReducer
 }
 
 export type DashboardState = Readonly<typeof initialState>
@@ -60,6 +62,16 @@ export default (state = initialState, action: any): DashboardState => {
                 }
             }
         }
+        case SUCCESS(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT_DEALER): {
+            return {
+                ...state,
+                realEstateTradingCountDealer: {
+                    load: false,
+                    error: null,
+                    data: action.payload.data
+                }
+            }
+        }
         case REQUEST(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT): {
             return {
                 ...state,
@@ -80,6 +92,16 @@ export default (state = initialState, action: any): DashboardState => {
                 }
             }
         }
+        case REQUEST(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT_DEALER): {
+            return {
+                ...state,
+                realEstateTradingCountDealer: {
+                    load: true,
+                    error: null,
+                    data: state.realEstateTradingCountDealer.data
+                }
+            }
+        }
         case FAILURE(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT): {
             return {
                 ...state,
@@ -94,6 +116,16 @@ export default (state = initialState, action: any): DashboardState => {
             return {
                 ...state,
                 apartmentRent: {
+                    load: false,
+                    error: action.payload,
+                    data: undefined
+                }
+            }
+        }
+        case FAILURE(ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT_DEALER): {
+            return {
+                ...state,
+                realEstateTradingCountDealer: {
                     load: false,
                     error: action.payload,
                     data: undefined
@@ -248,4 +280,41 @@ export const getByRealEstateTradingCount = () => {
             )
         })
     }
+}
+
+export const getByRealEstateTradingCountDealer = () => {
+
+    return async (dispatch: any, getState: any) => {
+
+        const apiUri = `/api/national-statistics/number-transactions`
+
+        const {dashboard}: IRootState = await getState()
+
+        const apiCode = 'RealEstateTradingCountDealer'
+
+        const typeCode = dashboard.transactionType.value
+
+        const region = dashboard.region.code
+
+        const startDate = moment(dashboard.selectDate.startDate).format("YYYYMM")
+
+        const endDate = moment(dashboard.selectDate.endDate).format("YYYYMM")
+
+        const params = {
+            apiCode,
+            typeCode,
+            region,
+            startDate,
+            endDate,
+            trending : 7
+        }
+
+        await dispatch({
+            type: ACTION_TYPES.FETCH_REAL_ESTATE_TRADING_COUNT_DEALER,
+            payload: axios.get(apiUri, {
+                params: params
+            })
+        })
+    }
+
 }
