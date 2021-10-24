@@ -8,6 +8,9 @@ export const styles = StyleSheet.create({
     modalBg: {
         flex: .5
     },
+    modalBg_l : {
+        flex : .15
+    },
     modalContent: {
         flex: 1,
         backgroundColor: "#fff",

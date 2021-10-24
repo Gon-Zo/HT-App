@@ -296,9 +296,11 @@ export const getByRealEstateTradingCountDealer = () => {
 
         const region = dashboard.region.code
 
-        const startDate = moment(dashboard.selectDate.startDate).format("YYYYMM")
+        const currentDate = moment(dashboard.selectDate.endDate);
 
-        const endDate = moment(dashboard.selectDate.endDate).format("YYYYMM")
+        const endDate = currentDate.format("YYYYMM")
+
+        const startDate = currentDate.month(0).day(1).format('YYYYMM')
 
         const params = {
             apiCode,
@@ -306,7 +308,6 @@ export const getByRealEstateTradingCountDealer = () => {
             region,
             startDate,
             endDate,
-            trending : 7
         }
 
         await dispatch({
